@@ -38,7 +38,7 @@
    <div class="text-center">
       <h1>Team Page</h1>
       <h2 id="text_event_name"></h2>
-       <div id="team_page_controller" ng-controller="TeamCtrl">
+       <div id="team_page_controller" ng-controller="TeamCtrl as vm">
 
          <div class="row">
 
@@ -59,15 +59,15 @@
 					 
 					 <div class="row">
 						 <div class="col-md-8 col-xs-8">
-							<input type="text" class="form-control" id="inputTeamName" placeholder="Enter your team name" ng-model="param.teamName">													
+							<input type="text" class="form-control" id="inputTeamName" placeholder="Enter your team name" ng-model="vm.param.teamName">													
 						 </div>
 						
 						<div class="col-md-1 col-xs-1">
-						   <button type="button" class="btn btn-primary" ng-click="saveFunc();" >Add</button>
+						   <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Add</button>
 						 </div>
 						 
 						 <div class="col-md-1 col-xs-1">
-							<button type="button" class="btn btn-primary" ng-click="loadFunc();" >Load</button>
+							<button type="button" class="btn btn-primary" ng-click="vm.loadFunc();" >Load</button>
 						</div>
 					</div>
 					
@@ -80,11 +80,11 @@
 					  <strong>Preferred Team Size: </strong> 					  
 					  <span>
 						 <span class="badge">
-						   {{param.currentTeamSize}}</span>
+						   {{vm.param.currentTeamSize}}</span>
 						  
-						 <button><span class="glyphicon glyphicon-plus" ng-click="changeCurrentTeamSize(1);"></span></button>
+						 <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeCurrentTeamSize(1);"></span></button>
 
-						  <button><span class="glyphicon glyphicon-minus" ng-click="changeCurrentTeamSize(-1);"></span></button>
+						  <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeCurrentTeamSize(-1);"></span></button>
 
 						  
 					   </span>
@@ -100,9 +100,9 @@
                      <h4>Team members</h4>
                      <!-- TODO: Show the current team member list -->
 					 
-					 <div ng-repeat="member in param.teamMembers">
-						<button type="button" class="btn" ng-click="removeMember(member);">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{member}}
+					 <div ng-repeat="member in vm.param.teamMembers">
+						<button type="button" class="btn" ng-click="vm.removeMember(member);">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{vm.member}}
 						</button>
 					 </div>
 					 
@@ -113,8 +113,8 @@
 
                      <!--TODO: Show the requests -->
 					 
-					 <div ng-repeat="r in requests">
-						<button type="button" class="btn" ng-click="processRequest(r);">
+					 <div ng-repeat="r in vm.requests">
+						<button type="button" class="btn" ng-click="vm.processRequest(r);">
 							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> {{r}}
 						</button>
 					 </div>
@@ -140,7 +140,7 @@
 					
 			 
 					<h3>All teams:</h3>
-					<ul ng-repeat="t in team">
+					<ul ng-repeat="t in vm.team">
 						<li>
 						
 							User ID: {{t.$id}}  <br>
