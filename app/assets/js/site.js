@@ -27,13 +27,13 @@ function getRandomIntInclusive(min, max) {
 //
 
 function initalizeFirebase() {
-	
+
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyDTXQFSuriwxpvJd0mZHElmLmhL8AIYmWE",
-    authDomain: "teamform-15bcb.firebaseapp.com",
-    databaseURL: "https://teamform-15bcb.firebaseio.com",
-    storageBucket: "teamform-15bcb.appspot.com",
+    apiKey: env.FB_API_KEY,
+    authDomain: env.FB_AUTH_DOMAIN,
+    databaseURL: env.FB_DATABASE_URL,
+    storageBucket: env.FB_STORAGE_BUCKET,
   };
   firebase.initializeApp(config);
 
