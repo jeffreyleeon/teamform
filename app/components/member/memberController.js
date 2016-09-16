@@ -1,54 +1,55 @@
 angular.module('teamform-member-app', ['firebase'])
-.controller('MemberCtrl', ['$scope', '$firebaseObject', '$firebaseArray', function($scope, $firebaseObject, $firebaseArray) {
-    
+.controller('MemberCtrl', ['$firebaseObject', '$firebaseArray', MemberCtrl]);
+
+function MemberCtrl($firebaseObject, $firebaseArray) {
+    var vm = this;
     // TODO: implementation of MemberCtrl
-    
     
     // Call Firebase initialization code defined in site.js
     initalizeFirebase();
     
-    $scope.userID = "";
-    $scope.userName = "";   
-    $scope.teams = {};
+    vm.userID = "";
+    vm.userName = "";   
+    vm.teams = {};
     
+    vm.loadFunc = loadFunc;
     
-    
-    $scope.loadFunc = function() {
-        var userID = $scope.userID;
+    vm.saveFunc = saveFunc;
+    vm.refreshTeams = refreshTeams;
+    vm.refreshTeams(); // call to refresh teams...
+
+    function loadFunc() {
+        var userID = vm.userID;
         if ( userID !== '' ) {
-            
             var refPath = getURLParameter("q") + "/member/" + userID;
             retrieveOnceFirebase(firebase, refPath, function(data) {
                                 
                 if ( data.child("name").val() != null ) {
-                    $scope.userName = data.child("name").val();
+                    vm.userName = data.child("name").val();
                 } else {
-                    $scope.userName = "";
+                    vm.userName = "";
                 }
                 
                 
                 if (data.child("selection").val() != null ) {
-                    $scope.selection = data.child("selection").val();
+                    vm.selection = data.child("selection").val();
                 }
                 else {
-                    $scope.selection = [];
+                    vm.selection = [];
                 }
-                $scope.$apply();
+                vm.$apply();
             });
         }
     }
-    
-    $scope.saveFunc = function() {
-        
-        
-        var userID = $.trim( $scope.userID );
-        var userName = $.trim( $scope.userName );
+
+    function saveFunc() {
+        var userID = $.trim( vm.userID );
+        var userName = $.trim( vm.userName );
         
         if ( userID !== '' && userName !== '' ) {
-                                    
             var newData = {             
                 'name': userName,
-                'selection': $scope.selection
+                'selection': vm.selection
             };
             
             var refPath = getURLParameter("q") + "/member/" + userID;   
@@ -61,46 +62,32 @@ angular.module('teamform-member-app', ['firebase'])
                 // Finally, go back to the front-end
                 window.location.href= "index.html";
             });
-            
-            
-        
-                    
         }
     }
-    
-    $scope.refreshTeams = function() {
+
+    function refreshTeams() {
         var refPath = getURLParameter("q") + "/team";   
         var ref = firebase.database().ref(refPath);
         
         // Link and sync a firebase object
-        $scope.selection = [];      
-        $scope.toggleSelection = function (item) {
-            var idx = $scope.selection.indexOf(item);    
+        vm.selection = [];      
+        vm.toggleSelection = function (item) {
+            var idx = vm.selection.indexOf(item);    
             if (idx > -1) {
-                $scope.selection.splice(idx, 1);
+                vm.selection.splice(idx, 1);
             }
             else {
-                $scope.selection.push(item);
+                vm.selection.push(item);
             }
         }
-    
-    
-        $scope.teams = $firebaseArray(ref);
-        $scope.teams.$loaded()
+        vm.teams = $firebaseArray(ref);
+        vm.teams.$loaded()
             .then( function(data) {
-                                
-                            
-                            
+
             }) 
             .catch(function(error) {
                 // Database connection error handling...
                 //console.error("Error:", error);
             });
-            
-        
-    }
-    
-    
-    $scope.refreshTeams(); // call to refresh teams...
-        
-}]);
+    }    
+}
