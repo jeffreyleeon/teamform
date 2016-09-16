@@ -12,6 +12,7 @@ module.exports = function(config) {
 	  'assets/lib/firebase.js',
 	  'assets/lib/angularfire.min.js',	  
 	  'assets/js/*.js',
+	  'config/*.js',
       'unit_tests/*.js'	  
     ],
 	exclude: [
@@ -21,7 +22,8 @@ module.exports = function(config) {
 		 'assets/js/index.js' : ['coverage'],
 		 'assets/js/admin.js' : ['coverage'],
 		 'assets/js/team.js' : ['coverage'],
-		 'assets/js/member.js' : ['coverage']
+		 'assets/js/member.js' : ['coverage'],
+		 'config/*.js': ['coverage']
 	},
 	reporters: ['progress', 'coverage'],
 	coverageReporter: {
