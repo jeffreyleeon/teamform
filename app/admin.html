@@ -43,7 +43,7 @@
 					 
       <h2 id="text_event_name"></h2>
 
-      <div id="admin_page_controller" ng-controller="AdminCtrl">
+      <div id="admin_page_controller" ng-controller="AdminCtrl as vm">
 
          <div class="row">
 
@@ -56,26 +56,26 @@
              <strong>Minimum Team Size:</strong>  
 
                <span class="badge">
-                 {{param.minTeamSize}}</span>
+                 {{vm.param.minTeamSize}}</span>
                 
-               <button><span class="glyphicon glyphicon-plus" ng-click="changeMinTeamSize(1);"></span></button>
+               <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeMinTeamSize(1);"></span></button>
 
-                <button><span class="glyphicon glyphicon-minus" ng-click="changeMinTeamSize(-1);"></span></button>
+                <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeMinTeamSize(-1);"></span></button>
 
             <br><br>
 
              <strong>Maximum Team Size: </strong>  
 
                <span class="badge">
-                 {{param.maxTeamSize}}</span>
+                 {{vm.param.maxTeamSize}}</span>
                 
-               <button><span class="glyphicon glyphicon-plus" ng-click="changeMaxTeamSize(1);"></span></button>
+               <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeMaxTeamSize(1);"></span></button>
 
-                <button><span class="glyphicon glyphicon-minus" ng-click="changeMaxTeamSize(-1);"></span></button>
+                <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeMaxTeamSize(-1);"></span></button>
 
             <br><br>
 
-             <button type="button" class="btn btn-primary" ng-click="saveFunc();" >Create/Modify</button>
+             <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Create/Modify</button>
 
 
 

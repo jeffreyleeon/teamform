@@ -1,10 +1,12 @@
 angular.module('teamform-admin-app', ['firebase'])
-.controller('AdminCtrl', ['$scope', '$firebaseObject', '$firebaseArray', function($scope, $firebaseObject, $firebaseArray) {
-    
+.controller('AdminCtrl', ['$firebaseObject', '$firebaseArray', AdminCtrl]);
+
+function AdminCtrl($firebaseObject, $firebaseArray) {
+    var vm = this;
     // TODO: implementation of AdminCtrl
     
     // Initialize $scope.param as an empty JSON object
-    $scope.param = {};
+    vm.param = {};
             
     // Call Firebase initialization code defined in site.js
     initalizeFirebase();
@@ -16,17 +18,16 @@ angular.module('teamform-admin-app', ['firebase'])
     ref = firebase.database().ref(refPath);
         
     // Link and sync a firebase object
-    
-    $scope.param = $firebaseObject(ref);
-    $scope.param.$loaded()
+    vm.param = $firebaseObject(ref);
+    vm.param.$loaded()
         .then( function(data) {
             
             // Fill in some initial values when the DB entry doesn't exist          
-            if(typeof $scope.param.maxTeamSize == "undefined"){             
-                $scope.param.maxTeamSize = 10;
+            if(typeof vm.param.maxTeamSize == "undefined"){             
+                vm.param.maxTeamSize = 10;
             }           
-            if(typeof $scope.param.minTeamSize == "undefined"){             
-                $scope.param.minTeamSize = 1;
+            if(typeof vm.param.minTeamSize == "undefined"){             
+                vm.param.minTeamSize = 1;
             }
             
             // Enable the UI when the data is successfully loaded and synchornized
@@ -36,48 +37,39 @@ angular.module('teamform-admin-app', ['firebase'])
             // Database connection error handling...
             //console.error("Error:", error);
         });
-        
-    
+
     refPath = eventName + "/team";  
-    $scope.team = [];
-    $scope.team = $firebaseArray(firebase.database().ref(refPath));
+    vm.team = [];
+    vm.team = $firebaseArray(firebase.database().ref(refPath));
     
     
     refPath = eventName + "/member";
-    $scope.member = [];
-    $scope.member = $firebaseArray(firebase.database().ref(refPath));
+    vm.member = [];
+    vm.member = $firebaseArray(firebase.database().ref(refPath));
     
-    
+    vm.changeMinTeamSize = changeMinTeamSize;
+    vm.changeMaxTeamSize = changeMaxTeamSize;
+    vm.saveFunc = saveFunc;
 
-    $scope.changeMinTeamSize = function(delta) {
-        var newVal = $scope.param.minTeamSize + delta;
-        if (newVal >=1 && newVal <= $scope.param.maxTeamSize ) {
-            $scope.param.minTeamSize = newVal;
+    function changeMinTeamSize(delta) {
+        var newVal = vm.param.minTeamSize + delta;
+        if (newVal >=1 && newVal <= vm.param.maxTeamSize ) {
+            vm.param.minTeamSize = newVal;
         } 
-        
-        $scope.param.$save();
-
-        
+        vm.param.$save();
     }
 
-    $scope.changeMaxTeamSize = function(delta) {
-        var newVal = $scope.param.maxTeamSize + delta;
-        if (newVal >=1 && newVal >= $scope.param.minTeamSize ) {
-            $scope.param.maxTeamSize = newVal;
+    function changeMaxTeamSize(delta) {
+        var newVal = vm.param.maxTeamSize + delta;
+        if (newVal >=1 && newVal >= vm.param.minTeamSize ) {
+            vm.param.maxTeamSize = newVal;
         } 
-        
-        $scope.param.$save();
-        
-        
+        vm.param.$save();
     }
-
-    $scope.saveFunc = function() {
-
-        $scope.param.$save();
-        
+    
+    function saveFunc() {
+        vm.param.$save();
         // Finally, go back to the front-end
         window.location.href= "index.html";
     }
-    
-        
-}]);
+}
