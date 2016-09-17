@@ -13,7 +13,8 @@ module.exports = function(config) {
 	  'assets/lib/angularfire.min.js',	  
 	  'assets/js/*.js',
 	  'config/*.js',
-      'unit_tests/*.js'	  
+      'unit_tests/*.js',
+      'components/*/*.spec.js'
     ],
 	exclude: [
 	],
