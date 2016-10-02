@@ -1,7 +1,7 @@
-angular.module('teamform-admin-app', ['teamform-db', 'firebase'])
-.controller('AdminCtrl', ['$firebaseObject', '$firebaseArray', 'teamformDb', AdminCtrl]);
+angular.module('teamform-admin-app', ['app-models', 'teamform-db', 'firebase'])
+.controller('AdminCtrl', ['$firebaseObject', '$firebaseArray', 'teamformDb', 'Event', AdminCtrl]);
 
-function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
+function AdminCtrl($firebaseObject, $firebaseArray, teamformDb, Event) {
     var vm = this;
     // TODO: implementation of AdminCtrl
 
@@ -14,6 +14,8 @@ function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
     refPath = eventName + "/admin/param";   
     ref = firebase.database().ref(refPath);
         
+    var test = new Event();
+
     // Link and sync a firebase object
     vm.param = $firebaseObject(ref);
     vm.param.$loaded()
