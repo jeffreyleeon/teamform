@@ -1,7 +1,7 @@
-angular.module('teamform-db', ['app-models', 'firebase'])
-.factory('teamformDb', ['$firebaseObject', '$firebaseArray', 'modelsFactory', TeamformDb]);
+angular.module('teamform-db', ['firebase'])
+.factory('teamformDb', ['$firebaseObject', '$firebaseArray', TeamformDb]);
 
-function TeamformDb($firebaseObject, $firebaseArray, modelsFactory) {
+function TeamformDb($firebaseObject, $firebaseArray) {
 	initalizeFirebase();
   var service = {
     getEvent: getEvent,
@@ -16,10 +16,8 @@ function TeamformDb($firebaseObject, $firebaseArray, modelsFactory) {
   function getEvent(eventName) {
   	var refPath = eventName + "/admin/param";
   	ref = firebase.database().ref(refPath);
-  	var event = new modelsFactory.Event();
-  	param = $firebaseObject(ref);
-  	event.setFirebaseObject(param);
-  	return event;
+  	var param = $firebaseObject(ref);
+  	return param;
   }
 
   function getEventAdminData(eventName, callback) {

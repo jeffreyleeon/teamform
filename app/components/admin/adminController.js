@@ -6,7 +6,7 @@ function AdminCtrl(teamformDb) {
     // TODO: implementation of AdminCtrl
     var eventName = getURLParameter("q");
     vm.event = teamformDb.getEvent(eventName);
-    vm.event.loaded()
+    vm.event.$loaded()
         .then(function(data) {
             // Fill in some initial values when the DB entry doesn't exist          
             if(typeof vm.event.maxTeamSize == "undefined"){             
@@ -35,7 +35,7 @@ function AdminCtrl(teamformDb) {
         if (newVal >=1 && newVal <= vm.event.maxTeamSize ) {
             vm.event.minTeamSize = newVal;
         } 
-        vm.event.save();
+        vm.event.$save();
     }
 
     function changeMaxTeamSize(delta) {
@@ -43,11 +43,11 @@ function AdminCtrl(teamformDb) {
         if (newVal >=1 && newVal >= vm.event.minTeamSize ) {
             vm.event.maxTeamSize = newVal;
         } 
-        vm.event.save();
+        vm.event.$save();
     }
     
     function saveFunc() {
-        vm.event.save();
+        vm.event.$save();
         // Finally, go back to the front-end
         window.location.href= "index.html";
     }
