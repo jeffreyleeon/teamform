@@ -1,7 +1,7 @@
-angular.module('teamform-admin-app', ['teamform-db', 'firebase'])
-.controller('AdminCtrl', ['$firebaseObject', '$firebaseArray', 'teamformDb', AdminCtrl]);
+angular.module('teamform-admin-app', ['teamform-db'])
+.controller('AdminCtrl', ['teamformDb', AdminCtrl]);
 
-function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
+function AdminCtrl(teamformDb) {
     var vm = this;
     // TODO: implementation of AdminCtrl
     var eventName = getURLParameter("q");

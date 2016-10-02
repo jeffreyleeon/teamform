@@ -1,4 +1,4 @@
-angular.module('teamform-db', ['app-models'])
+angular.module('teamform-db', ['app-models', 'firebase'])
 .factory('teamformDb', ['$firebaseObject', '$firebaseArray', 'modelsFactory', TeamformDb]);
 
 function TeamformDb($firebaseObject, $firebaseArray, modelsFactory) {
