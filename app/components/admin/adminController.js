@@ -35,7 +35,7 @@ function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
         if (newVal >=1 && newVal <= vm.event.maxTeamSize ) {
             vm.event.minTeamSize = newVal;
         } 
-        vm.event.$save();
+        vm.event.save();
     }
 
     function changeMaxTeamSize(delta) {
@@ -43,11 +43,11 @@ function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
         if (newVal >=1 && newVal >= vm.event.minTeamSize ) {
             vm.event.maxTeamSize = newVal;
         } 
-        vm.event.$save();
+        vm.event.save();
     }
     
     function saveFunc() {
-        vm.event.$save();
+        vm.event.save();
         // Finally, go back to the front-end
         window.location.href= "index.html";
     }

@@ -29,6 +29,10 @@ function ModelsFactory() {
     loaded: function() {
       return this.fbObject.$loaded();
     },
+
+    save: function() {
+      return this.fbObject.$save();
+    }
   }
   /**
    * Return the constructor function
