@@ -1,10 +1,10 @@
-angular.module('teamform-admin-app', ['firebase'])
-.controller('AdminCtrl', ['$firebaseObject', '$firebaseArray', AdminCtrl]);
+angular.module('teamform-admin-app', ['teamform-db', 'firebase'])
+.controller('AdminCtrl', ['$firebaseObject', '$firebaseArray', 'teamformDb', AdminCtrl]);
 
-function AdminCtrl($firebaseObject, $firebaseArray) {
+function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
     var vm = this;
     // TODO: implementation of AdminCtrl
-    
+
     // Initialize $scope.param as an empty JSON object
     vm.param = {};
             
