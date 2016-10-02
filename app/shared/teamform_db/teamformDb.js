@@ -2,14 +2,20 @@ angular.module('teamform-db', [])
 .factory('teamformDb', ['$firebaseObject', '$firebaseArray', TeamformDb]);
 
 function TeamformDb($firebaseObject, $firebaseArray) {
-  var someValue = 'this is the value';
+	initalizeFirebase();
   var service = {
-    talk: talk,
-    someValue: someValue,
+    getAllTeams: getAllTeams,
+    getAllMembers: getAllMembers,
   };
   return service;
 
-  function talk() {
-      console.log('=======talking');
+  function getAllTeams(eventName) {
+  	var refPath = eventName + '/team';
+    return $firebaseArray(firebase.database().ref(refPath));
+  };
+
+  function getAllMembers(eventName) {
+  	var refPath = eventName + "/member";
+    return $firebaseArray(firebase.database().ref(refPath));
   };
 }

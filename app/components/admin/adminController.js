@@ -7,9 +7,6 @@ function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
 
     // Initialize $scope.param as an empty JSON object
     vm.param = {};
-            
-    // Call Firebase initialization code defined in site.js
-    initalizeFirebase();
     
     var refPath, ref, eventName;
 
@@ -38,14 +35,8 @@ function AdminCtrl($firebaseObject, $firebaseArray, teamformDb) {
             //console.error("Error:", error);
         });
 
-    refPath = eventName + "/team";  
-    vm.team = [];
-    vm.team = $firebaseArray(firebase.database().ref(refPath));
-    
-    
-    refPath = eventName + "/member";
-    vm.member = [];
-    vm.member = $firebaseArray(firebase.database().ref(refPath));
+    vm.team = teamformDb.getAllTeams(eventName);
+    vm.member = teamformDb.getAllMembers(eventName);
     
     vm.changeMinTeamSize = changeMinTeamSize;
     vm.changeMaxTeamSize = changeMaxTeamSize;
