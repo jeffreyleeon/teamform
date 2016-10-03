@@ -14,7 +14,8 @@ module.exports = function(config) {
 	  'assets/js/*.js',
 	  'config/*.js',
       'unit_tests/*.js',
-      'components/*/*.spec.js'
+      'components/*/*.js',
+      'shared/*/*.js',
     ],
 	exclude: [
 	],
@@ -24,7 +25,8 @@ module.exports = function(config) {
 		 'assets/js/admin.js' : ['coverage'],
 		 'assets/js/team.js' : ['coverage'],
 		 'assets/js/member.js' : ['coverage'],
-		 'config/*.js': ['coverage']
+		 'config/*.js': ['coverage'],
+		 'components/*/*.js': ['coverage'],
 	},
 	reporters: ['progress', 'coverage'],
 	coverageReporter: {
@@ -34,7 +36,7 @@ module.exports = function(config) {
 	},
 	port: 8080,
 	colors: true,
-    browsers: ['Firefox'],
+    browsers: ['Chrome'],
 	singleRun: true,
     plugins: [
       'karma-chrome-launcher',     
