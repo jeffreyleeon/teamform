@@ -4,6 +4,10 @@ describe('teamform-admin-app module', function() {
 
   var $controller;
 
+  beforeAll(function() {
+    window.onbeforeunload = () => 'Oh no!';
+  });
+
   beforeEach(inject(function(_$controller_) {
     // The injector unwraps the underscores (_) from around the parameter names when matching
     $controller = _$controller_;
@@ -39,7 +43,10 @@ describe('teamform-admin-app module', function() {
         getAllTeams: getAllTeams,
         getAllMembers: getAllMembers,
       };
-      controller = $controller('AdminCtrl', { teamformDb: teamformDb });
+
+      controller = $controller('AdminCtrl', {
+        teamformDb: teamformDb,
+       });
     });
 
     it('change min team size correctly', function() {
