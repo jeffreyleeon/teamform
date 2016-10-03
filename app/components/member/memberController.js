@@ -1,12 +1,9 @@
-angular.module('teamform-member-app', ['firebase'])
-.controller('MemberCtrl', ['$firebaseObject', '$firebaseArray', MemberCtrl]);
+angular.module('teamform-member-app', ['teamform-db'])
+.controller('MemberCtrl', ['teamformDb', MemberCtrl]);
 
-function MemberCtrl($firebaseObject, $firebaseArray) {
+function MemberCtrl(teamformDb) {
     var vm = this;
     // TODO: implementation of MemberCtrl
-    
-    // Call Firebase initialization code defined in site.js
-    initalizeFirebase();
     
     vm.userID = "";
     vm.userName = "";   
@@ -21,16 +18,13 @@ function MemberCtrl($firebaseObject, $firebaseArray) {
     function loadFunc() {
         var userID = vm.userID;
         if ( userID !== '' ) {
-            var refPath = getURLParameter("q") + "/member/" + userID;
-            retrieveOnceFirebase(firebase, refPath, function(data) {
-                                
+            var eventName = getURLParameter("q");
+            teamformDb.getMember(eventName, userID, function(data) {
                 if ( data.child("name").val() != null ) {
                     vm.userName = data.child("name").val();
                 } else {
                     vm.userName = "";
                 }
-                
-                
                 if (data.child("selection").val() != null ) {
                     vm.selection = data.child("selection").val();
                 }
@@ -51,11 +45,8 @@ function MemberCtrl($firebaseObject, $firebaseArray) {
                 'name': userName,
                 'selection': vm.selection
             };
-            
-            var refPath = getURLParameter("q") + "/member/" + userID;   
-            var ref = firebase.database().ref(refPath);
-            
-            ref.set(newData, function(){
+            var eventName = getURLParameter("q");
+            teamformDb.setMemberData(eventName, userID, newData, function(){
                 // complete call back
                 //alert("data pushed...");
                 
@@ -66,8 +57,6 @@ function MemberCtrl($firebaseObject, $firebaseArray) {
     }
 
     function refreshTeams() {
-        var refPath = getURLParameter("q") + "/team";   
-        var ref = firebase.database().ref(refPath);
         
         // Link and sync a firebase object
         vm.selection = [];      
@@ -80,7 +69,9 @@ function MemberCtrl($firebaseObject, $firebaseArray) {
                 vm.selection.push(item);
             }
         }
-        vm.teams = $firebaseArray(ref);
+
+        var eventName = getURLParameter("q");
+        vm.teams = teamformDb.getAllTeams(eventName);
         vm.teams.$loaded()
             .then( function(data) {
 

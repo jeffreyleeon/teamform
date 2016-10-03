@@ -10,6 +10,8 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     getTeam: getTeam,
     setTeamData: setTeamData,
     getAllMembers: getAllMembers,
+    getMember: getMember,
+    setMemberData: setMemberData,
   };
   return service;
 
@@ -45,4 +47,15 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   	var refPath = eventName + "/member";
     return $firebaseArray(firebase.database().ref(refPath));
   };
+
+  function getMember(eventName, userID, callback) {
+  	var refPath = eventName + "/member/" + userID;
+    retrieveOnceFirebase(firebase, refPath, callback);
+  }
+
+  function setMemberData(eventName, userID, data, callback) {
+  	var refPath = eventName + "/member/" + userID;   
+    var ref = firebase.database().ref(refPath);
+    ref.set(data, callback);
+  }
 }
