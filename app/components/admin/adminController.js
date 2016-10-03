@@ -8,15 +8,10 @@ function AdminCtrl(teamformDb) {
     vm.event = teamformDb.getEvent(eventName);
     vm.event.$loaded()
         .then(function(data) {
-            // Fill in some initial values when the DB entry doesn't exist          
-            if(typeof vm.event.maxTeamSize == "undefined"){             
-                vm.event.maxTeamSize = 10;
-            }           
-            if(typeof vm.event.minTeamSize == "undefined"){             
-                vm.event.minTeamSize = 1;
-            }
             // Enable the UI when the data is successfully loaded and synchornized
-            $('#admin_page_controller').show();                 
+            vm.event.maxTeamSize |= 10;
+            vm.event.minTeamSize |= 1;
+            $('#admin_page_controller').show();               
         }) 
         .catch(function(error) {
             // Database connection error handling...
