@@ -37,6 +37,7 @@ module.exports = function(config) {
 	port: 8080,
 	colors: true,
     browsers: ['Firefox'],
+	browserNoActivityTimeout: 100000,
 	singleRun: true,
     plugins: [
       'karma-chrome-launcher',     
