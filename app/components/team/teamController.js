@@ -1,10 +1,8 @@
-angular.module('teamform-team-app', ['firebase'])
-.controller('TeamCtrl', ['$scope', '$firebaseObject', '$firebaseArray', TeamCtrl]);
+angular.module('teamform-team-app', ['teamform-db'])
+.controller('TeamCtrl', ['$scope', 'teamformDb', TeamCtrl]);
 
-function TeamCtrl($scope, $firebaseObject, $firebaseArray) {
+function TeamCtrl($scope, teamformDb) {
     var vm = this;
-    // Call Firebase initialization code defined in site.js
-    initalizeFirebase();
 
     var refPath = "";
     var eventName = getURLParameter("q");   
@@ -16,8 +14,7 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray) {
         "teamMembers" : []
     };
 
-    refPath =  eventName + "/admin";
-    retrieveOnceFirebase(firebase, refPath, function(data) {    
+    teamformDb.getEventAdminData(eventName, function(data) {    
         if ( data.child("param").val() != null ) {
             vm.range = data.child("param").val();
             vm.param.currentTeamSize = parseInt((vm.range.minTeamSize + vm.range.maxTeamSize)/2);
@@ -26,15 +23,8 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray) {
         } 
     });
     
-    
-    refPath = eventName + "/member";    
-    vm.member = [];
-    vm.member = $firebaseArray(firebase.database().ref(refPath));
-    
-    refPath = eventName + "/team";  
-    vm.team = [];
-    vm.team = $firebaseArray(firebase.database().ref(refPath));
-    
+    vm.team = teamformDb.getAllTeams(eventName);
+    vm.member = teamformDb.getAllMembers(eventName);
     
     vm.requests = [];
     vm.refreshViewRequestsReceived = refreshViewRequestsReceived;
@@ -75,18 +65,16 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray) {
             var newData = {             
                 'size': vm.param.currentTeamSize,
                 'teamMembers': vm.param.teamMembers
-            };      
-            var refPath = getURLParameter("q") + "/team/" + teamID; 
-            var ref = firebase.database().ref(refPath);
+            };
+            var eventName = getURLParameter("q");
             // for each team members, clear the selection in /[eventName]/team/
-            
             $.each(vm.param.teamMembers, function(i,obj){
                 //vm.test += obj;
                 var rec = vm.member.$getRecord(obj);
                 rec.selection = [];
                 vm.member.$save(rec);
             });
-            ref.set(newData, function(){            
+            teamformDb.setTeamData(eventName, teamID, newData, function(){            
                 // console.log("Success..");
                 // Finally, go back to the front-end
                 // window.location.href= "index.html";
@@ -97,8 +85,8 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray) {
     function loadFunc() {
         var teamID = $.trim( vm.param.teamName );       
         var eventName = getURLParameter("q");
-        var refPath = eventName + "/team/" + teamID ;
-        retrieveOnceFirebase(firebase, refPath, function(data) {    
+
+        teamformDb.getTeam(eventName, teamID, function(data) {    
             if ( data.child("size").val() != null ) {
                 vm.param.currentTeamSize = data.child("size").val();
                 vm.refreshViewRequestsReceived();

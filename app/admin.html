@@ -56,7 +56,7 @@
              <strong>Minimum Team Size:</strong>  
 
                <span class="badge">
-                 {{vm.param.minTeamSize}}</span>
+                 {{vm.event.minTeamSize}}</span>
                 
                <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeMinTeamSize(1);"></span></button>
 
@@ -67,7 +67,7 @@
              <strong>Maximum Team Size: </strong>  
 
                <span class="badge">
-                 {{vm.param.maxTeamSize}}</span>
+                 {{vm.event.maxTeamSize}}</span>
                 
                <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeMaxTeamSize(1);"></span></button>
 
@@ -135,6 +135,7 @@
    <script src="assets/lib/angularfire.min.js"></script>
 
    <script src="assets/js/admin.js"></script>
+   <script src="shared/teamform_db/teamformDb.js"></script>
    <script src="components/admin/adminController.js"></script>
 
    </body>
