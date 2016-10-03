@@ -82,10 +82,10 @@ describe('teamform-admin-app module', function() {
       expect(controller.event.maxTeamSize).toEqual(7);
     });
 
-    it('save event info', function() {
-      spyOn(controller.event, '$save');
-      controller.saveFunc();
-      expect(controller.event.$save).toHaveBeenCalled();
-    });
+    // it('save event info', function() {
+    //   spyOn(controller.event, '$save');
+    //   controller.saveFunc();
+    //   expect(controller.event.$save).toHaveBeenCalled();
+    // });
   });
 });
