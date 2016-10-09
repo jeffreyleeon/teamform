@@ -1,11 +1,13 @@
 angular.module('teamform-login-app', ['teamform-db', 'firebase'])
-.controller('LoginCtrl', ['teamformDb', LoginCtrl]);
+.controller('LoginCtrl', ['$scope', 'teamformDb', LoginCtrl]);
 
-function LoginCtrl(teamformDb) {
+function LoginCtrl($scope, teamformDb) {
     var vm = this;
+    vm.errorMsg = '';
     vm.login = login;
     
     function login() {
+        vm.errorMsg = '';
         var provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().signInWithPopup(provider).then(function(result) {
           // This gives you a Facebook Access Token. You can use it to access the Facebook API.
@@ -13,8 +15,9 @@ function LoginCtrl(teamformDb) {
           // The signed-in user info.
           var user = result.user;
           console.log('=====success ', token , user);
-          // ...
+          // window.location.href= "index.html";
         }).catch(function(error) {
+
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
@@ -24,8 +27,12 @@ function LoginCtrl(teamformDb) {
           var credential = error.credential;
           console.log('=====failed ', errorCode , errorMessage);
           // ...
+          setMessage(errorMessage);
+          $scope.$apply();
         });
-        // return;
-        // window.location.href= "index.html";
+    }
+
+    function setMessage(msg) {
+      vm.errorMsg = msg;
     }
 }

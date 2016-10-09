@@ -12,8 +12,7 @@
       <script src="assets/lib/bootstrap.min.js"></script>
       	  
 	    <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
-      <link rel="stylesheet" href="assets/css/site.css" >
-
+      <link rel="stylesheet" href="assets/css/site.css">
 
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
@@ -30,8 +29,10 @@
    <br>
 
    <div class="text-center">
-      <h1>Login Page</h1>
+      <h1>Login</h1>
+      </br>
       <div id="login_page_controller" ng-controller="LoginCtrl as vm">
+        <h4 class="error_msg">{{vm.errorMsg}}</h4>
         <button ng-click="vm.login();">Login with Facebook</button>
       </div>
    </div>
