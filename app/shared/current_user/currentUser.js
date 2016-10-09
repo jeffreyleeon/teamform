@@ -1,8 +1,7 @@
-angular.module('current-user', [])
+angular.module('current-user', ['ngStorage'])
 .factory('currentUser', CurrentUser);
 
-function CurrentUser() {
-  var _user = {};
+function CurrentUser($localStorage) {
   var service = {
     getCurrentUser: getCurrentUser,
     setCurrentUser: setCurrentUser,
@@ -10,11 +9,11 @@ function CurrentUser() {
   return service;
 
   function getCurrentUser() {
-    return _user;
+    return $localStorage.user || {};
   }
 
   function setCurrentUser(user) {
     console.log('====update current user: ', user);
-    _user = user;
+    $localStorage.user = user;
   }
 }
