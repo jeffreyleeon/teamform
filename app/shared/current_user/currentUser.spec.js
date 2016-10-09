@@ -1,26 +1,29 @@
 describe('current-user module', function() {
 
-  // beforeEach(module('current-user'));
+  var currentUser;
+  beforeEach(module('current-user'));
 
-  // describe('currentUser', function() {
-  //   var factory = null;
+  beforeEach(inject(function(_currentUser_) {
+    currentUser = _currentUser_;
+  }));
 
-  //   beforeEach(inject(function(currentUser) {
-  //     factory = currentUser;
-  //   }));
+  describe('currentUser', function() {
+    it("should be a resource", function() {
+      expect(currentUser).toBeDefined();
+    });
 
-  //   it('should default as empty', function() {
-  //     expect(factory.getCurrentUser()).toEqual({});
-  //   });
+    it('should default as empty', function() {
+      expect(currentUser.getCurrentUser()).toEqual({});
+    });
 
-  //   it('should update user with setter', function() {
-  //     expect(factory.getCurrentUser()).toEqual({});
-  //     factory.setCurrentUser({
-  //       'name': 'tester',
-  //     });
-  //     expect(factory.getCurrentUser()).toEqual({
-  //       'name': 'tester',
-  //     });
-  //   });
-  // });
+    it('should update user with setter', function() {
+      expect(currentUser.getCurrentUser()).toEqual({});
+      currentUser.setCurrentUser({
+        'name': 'tester',
+      });
+      expect(currentUser.getCurrentUser()).toEqual({
+        'name': 'tester',
+      });
+    });
+  });
 });
