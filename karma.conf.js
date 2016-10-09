@@ -27,6 +27,7 @@ module.exports = function(config) {
 		 'assets/js/member.js' : ['coverage'],
 		 'config/*.js': ['coverage'],
 		 'components/*/*.js': ['coverage'],
+		 'shared/*/*.js': ['coverage'],
 	},
 	reporters: ['progress', 'coverage'],
 	coverageReporter: {
