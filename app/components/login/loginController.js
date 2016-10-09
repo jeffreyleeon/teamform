@@ -1,7 +1,7 @@
-angular.module('teamform-login-app', ['teamform-db'])
-.controller('LoginCtrl', ['$scope', 'teamformDb', LoginCtrl]);
+angular.module('teamform-login-app', ['teamform-db', 'current-user'])
+.controller('LoginCtrl', ['$scope', 'teamformDb', 'currentUser', LoginCtrl]);
 
-function LoginCtrl($scope, teamformDb) {
+function LoginCtrl($scope, teamformDb, currentUser) {
     var vm = this;
     vm.errorMsg = '';
     vm.login = login;
@@ -33,9 +33,9 @@ function LoginCtrl($scope, teamformDb) {
         token,
         user.refreshToken,
         function() {
-          console.log('=====ok wor ');
-          
-          // window.location.href= "index.html";
+          var savedUser = teamformDb.getUser(user.uid);
+          currentUser.setCurrentUser(savedUser);
+          window.location.href= "index.html";
         }
         );
     }

@@ -6,6 +6,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   var service = {
     loginWithFacebook: loginWithFacebook,
     saveNewFBUser: saveNewFBUser,
+    getUser: getUser,
     getEvent: getEvent,
     getEventAdminData: getEventAdminData,
     getAllTeams: getAllTeams,
@@ -43,6 +44,13 @@ function TeamformDb($firebaseObject, $firebaseArray) {
         'created_at': Date.now(),
     };
     ref.set(data, callback);
+  }
+
+  function getUser(userID) {
+    var refPath =  'user/' + userID;
+    ref = firebase.database().ref(refPath);
+    var param = $firebaseObject(ref);
+    return param;
   }
 
   function getEvent(eventName) {
