@@ -11,10 +11,8 @@ function LoginCtrl($scope, teamformDb) {
         teamformDb.loginWithFacebook().then(function(result) {
           // This gives you a Facebook Access Token. You can use it to access the Facebook API.
           var token = result.credential.accessToken;
-          // The signed-in user info.
           var user = result.user;
-          console.log('=====success ', token , user);
-          // window.location.href= "index.html";
+          saveNewFBUser(user, token);
         }).catch(function(error) {
           // Handle Errors here.
           // var errorCode = error.code;
@@ -24,6 +22,22 @@ function LoginCtrl($scope, teamformDb) {
           setMessage(errorMessage);
           $scope.$apply();
         });
+    }
+
+    function saveNewFBUser(user, token) {
+      teamformDb.saveNewFBUser(
+        user.uid,
+        user.displayName,
+        user.email,
+        user.photoURL,
+        token,
+        user.refreshToken,
+        function() {
+          console.log('=====ok wor ');
+          
+          // window.location.href= "index.html";
+        }
+        );
     }
 
     function setMessage(msg) {

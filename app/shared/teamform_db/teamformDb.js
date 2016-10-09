@@ -5,6 +5,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 	initalizeFirebase();
   var service = {
     loginWithFacebook: loginWithFacebook,
+    saveNewFBUser: saveNewFBUser,
     getEvent: getEvent,
     getEventAdminData: getEventAdminData,
     getAllTeams: getAllTeams,
@@ -19,6 +20,29 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   function loginWithFacebook() {
     var provider = new firebase.auth.FacebookAuthProvider();
     return firebase.auth().signInWithPopup(provider);
+  }
+
+  function saveNewFBUser(
+    fbID,
+    name,
+    email,
+    profilePicUrl,
+    token,
+    refreshToken,
+    callback) {
+    var refPath = "user/" + fbID;
+    var ref = firebase.database().ref(refPath);
+    var data = {             
+        'fb_id': fbID,
+        'fb_name': name,
+        'display_name': name,
+        'email': email,
+        'profile_pic_url': profilePicUrl,
+        'token': token,
+        'refresh_token': refreshToken,
+        'created_at': Date.now(),
+    };
+    ref.set(data, callback);
   }
 
   function getEvent(eventName) {
