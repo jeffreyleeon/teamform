@@ -4,6 +4,7 @@ angular.module('teamform-db', ['firebase'])
 function TeamformDb($firebaseObject, $firebaseArray) {
 	initalizeFirebase();
   var service = {
+    loginWithFacebook: loginWithFacebook,
     getEvent: getEvent,
     getEventAdminData: getEventAdminData,
     getAllTeams: getAllTeams,
@@ -14,6 +15,11 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     setMemberData: setMemberData,
   };
   return service;
+
+  function loginWithFacebook() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    return firebase.auth().signInWithPopup(provider);
+  }
 
   function getEvent(eventName) {
   	var refPath = eventName + "/admin/param";
