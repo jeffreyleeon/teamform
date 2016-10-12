@@ -28,7 +28,7 @@ module.exports = function(config) {
 		 'config/*.js': ['coverage'],
 		 'components/*/*.js': ['coverage'],
 	},
-	reporters: ['progress', 'coverage'],
+	reporters: ['dots', 'coverage'],
 	coverageReporter: {
 			type: 'html',
 			dir: 'coverage/',
