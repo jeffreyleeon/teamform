@@ -4,6 +4,9 @@ angular.module('teamform-db', ['firebase'])
 function TeamformDb($firebaseObject, $firebaseArray) {
 	initalizeFirebase();
   var service = {
+    loginWithFacebook: loginWithFacebook,
+    saveNewFBUser: saveNewFBUser,
+    getUser: getUser,
     getEvent: getEvent,
     getEventAdminData: getEventAdminData,
     getAllTeams: getAllTeams,
@@ -14,6 +17,41 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     setMemberData: setMemberData,
   };
   return service;
+
+  function loginWithFacebook() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    return firebase.auth().signInWithPopup(provider);
+  }
+
+  function saveNewFBUser(
+    fbID,
+    name,
+    email,
+    profilePicUrl,
+    token,
+    refreshToken,
+    callback) {
+    var refPath = "user/" + fbID;
+    var ref = firebase.database().ref(refPath);
+    var data = {             
+        'fb_id': fbID,
+        'fb_name': name,
+        'display_name': name,
+        'email': email,
+        'profile_pic_url': profilePicUrl,
+        'token': token,
+        'refresh_token': refreshToken,
+        'created_at': Date.now(),
+    };
+    ref.set(data, callback);
+  }
+
+  function getUser(userID) {
+    var refPath =  'user/' + userID;
+    ref = firebase.database().ref(refPath);
+    var param = $firebaseObject(ref);
+    return param;
+  }
 
   function getEvent(eventName) {
   	var refPath = eventName + "/admin/param";

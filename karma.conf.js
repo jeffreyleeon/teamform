@@ -16,6 +16,7 @@ module.exports = function(config) {
       'unit_tests/*.js',
       'components/*/*.js',
       'shared/*/*.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js',
     ],
 	exclude: [
 	],
@@ -27,6 +28,7 @@ module.exports = function(config) {
 		 'assets/js/member.js' : ['coverage'],
 		 'config/*.js': ['coverage'],
 		 'components/*/*.js': ['coverage'],
+		 'shared/*/*.js': ['coverage'],
 	},
 	reporters: ['dots', 'coverage'],
 	coverageReporter: {

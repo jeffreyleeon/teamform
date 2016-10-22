@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="teamform-login-app">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="keywords" content="teamform, team">
+      <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>teamform - login page</title>
+	        
+      <script src="assets/lib/jquery.min.js"></script>
+      <script src="assets/lib/bootstrap.min.js"></script>
+      	  
+	    <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
+      <link rel="stylesheet" href="assets/css/site.css">
+
+      <!-- Customized libraries shared by pages -->
+      <script src="config/env.js"></script>
+      <script src="assets/js/site.js"></script>
+	  	  
+   </head>
+   <body>
+
+   <a href="index.html"
+   <button id="btn_admin" type="button" class="btn btn-primary" >
+   <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+   Back</button></a>
+
+   <br>
+
+   <div class="text-center">
+      <h1>Login</h1>
+      </br>
+      <div id="login_page_controller" ng-controller="LoginCtrl as vm">
+        <h4 class="error_msg">{{vm.errorMsg}}</h4>
+        <button ng-click="vm.login();">Login with Facebook</button>
+      </div>
+   </div>
+
+
+   <!-- JavaScript of this page -->
+
+   <!-- Angular and Angular-route libraries (v1.5.7) -->
+   <script src="assets/lib/angular.min.js"></script>
+   <script src="assets/lib/angular-route.min.js"></script>
+     
+   <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
+   <script src="assets/lib/firebase.js"></script>
+   <script src="assets/lib/angularfire.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+
+   <script src="shared/current_user/currentUser.js"></script>
+   <script src="shared/teamform_db/teamformDb.js"></script>
+   <script src="components/login/loginController.js"></script>
+
+   </body>
+</html>
+
