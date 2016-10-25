@@ -3,9 +3,27 @@ angular.module('teamform-app', ['current-user', 'teamform-db'])
 
 function MainCtrl(currentUser, teamformDb) {
     var vm = this;
+
+    vm.isLoggedIn = isLoggedIn;
+    vm.logout = logout;
+    vm.events = teamformDb.getAllEvents();
+    
     vm.currentUser = currentUser.getCurrentUser();
     console.log('=======current User ', vm.currentUser);
     vm.email = vm.currentUser.email;
 
-    vm.events = teamformDb.getAllEvents();
+    function isLoggedIn() {
+    	if (!vm.currentUser) {
+    		return false;
+    	}
+    	return !angular.equals(vm.currentUser, {});
+    }
+
+    function logout() {
+    	currentUser.deleteCurrentUser();
+    	vm.currentUser = currentUser.getCurrentUser();
+    	setTimeout(function() {
+            window.location.href= "index.html";
+      	}, 100);
+    }
 }

@@ -73,8 +73,12 @@
                         </ul>
                       </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" ng-if="!vm.isLoggedIn()">
                       <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                      <li><a href="#"><span class="glyphicon"></span></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" ng-if="vm.isLoggedIn()">
+                      <li><a href="#" ng-click="vm.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                       <li><a href="#"><span class="glyphicon"></span></a></li>
                     </ul>
                   </div>

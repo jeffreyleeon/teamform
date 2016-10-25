@@ -24,6 +24,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function loginWithFacebook() {
     var provider = new firebase.auth.FacebookAuthProvider();
+    // firebase.auth().signOut();
     return firebase.auth().signInWithPopup(provider);
   }
 
