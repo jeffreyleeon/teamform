@@ -17,44 +17,15 @@ describe('teamform-app module', function() {
     var controller;
 
     beforeEach(function() {
-      var getEvent = function() {
-        return {
-          '$loaded': function() {
-            return new Promise(function(resolve, reject) {
-              return resolve();
-            });
-          },
-          '$save': function() {
-          },
-          maxTeamSize: undefined,
-          minTeamSize: undefined,
-        };
-      };
-
-      var getAllTeams = function(eventName) {
-        return {
-          'hihi': 'hihi'
-        };
-      };
 
       var getAllMembers = function() {};
       var teamformDb = {
         getEvent: getEvent,
-        getAllTeams: getAllTeams,
-        getAllMembers: getAllMembers,
       };
 
       controller = $controller('MainCtrl', {
         teamformDb: teamformDb,
        });
-    });
-
-    it('', function() {
-      
-    });
-
-    it('', function() {
-
     });
   });
 });
