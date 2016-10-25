@@ -3,6 +3,9 @@ angular.module('teamform-db', ['firebase'])
 
 function TeamformDb($firebaseObject, $firebaseArray) {
 	initalizeFirebase();
+
+  var eventScope = 'events/';
+
   var service = {
     loginWithFacebook: loginWithFacebook,
     saveNewFBUser: saveNewFBUser,
@@ -54,45 +57,45 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   }
 
   function getEvent(eventName) {
-  	var refPath = eventName + "/admin/param";
+  	var refPath = eventScope + eventName + "/admin/param";
   	ref = firebase.database().ref(refPath);
   	var param = $firebaseObject(ref);
   	return param;
   }
 
   function getEventAdminData(eventName, callback) {
-  	var refPath =  eventName + "/admin";
+  	var refPath =  eventScope + eventName + "/admin";
   	retrieveOnceFirebase(firebase, refPath, callback);
   }
 
   function getAllTeams(eventName) {
-  	var refPath = eventName + '/team';
+  	var refPath = eventScope + eventName + '/team';
     return $firebaseArray(firebase.database().ref(refPath));
   };
 
   function getTeam(eventName, teamID, callback) {
-		var refPath = eventName + "/team/" + teamID;
+		var refPath = eventScope + eventName + "/team/" + teamID;
 		retrieveOnceFirebase(firebase, refPath, callback);
   };
 
   function setTeamData(eventName, teamID, data, callback) {
-    var refPath = eventName + "/team/" + teamID; 
+    var refPath = eventScope + eventName + "/team/" + teamID; 
     var ref = firebase.database().ref(refPath);
     ref.set(data, callback);
   };
 
   function getAllMembers(eventName) {
-  	var refPath = eventName + "/member";
+  	var refPath = eventScope + eventName + "/member";
     return $firebaseArray(firebase.database().ref(refPath));
   };
 
   function getMember(eventName, userID, callback) {
-  	var refPath = eventName + "/member/" + userID;
+  	var refPath = eventScope + eventName + "/member/" + userID;
     retrieveOnceFirebase(firebase, refPath, callback);
   }
 
   function setMemberData(eventName, userID, data, callback) {
-  	var refPath = eventName + "/member/" + userID;   
+  	var refPath = eventScope + eventName + "/member/" + userID;   
     var ref = firebase.database().ref(refPath);
     ref.set(data, callback);
   }
