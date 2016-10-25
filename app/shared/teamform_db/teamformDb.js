@@ -11,6 +11,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     saveNewFBUser: saveNewFBUser,
     getUser: getUser,
     getEvent: getEvent,
+    getAllEvents: getAllEvents,
     getEventAdminData: getEventAdminData,
     getAllTeams: getAllTeams,
     getTeam: getTeam,
@@ -61,6 +62,11 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   	ref = firebase.database().ref(refPath);
   	var param = $firebaseObject(ref);
   	return param;
+  }
+
+  function getAllEvents() {
+    var refPath = eventScope;
+    return $firebaseArray(firebase.database().ref(refPath));
   }
 
   function getEventAdminData(eventName, callback) {

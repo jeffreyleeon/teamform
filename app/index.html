@@ -130,6 +130,12 @@
             </div>
          </div>
       </div>
+
+      <div>
+        <ul ng-repeat="e in vm.events">
+          <li>{{e.$id}}</li>
+        </ul>
+      </div>
       <!-- Marketing messaging and featurettes
          ================================================== -->
       <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -240,6 +246,7 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
 
        <script src="assets/js/index.js"></script>
+       <script src="shared/teamform_db/teamformDb.js"></script>
        <script src="shared/current_user/currentUser.js"></script>
        <script src="components/main/mainController.js"></script>
 
