@@ -32,6 +32,9 @@ function CreateEventCtrl(teamformDb) {
         // vm.event.$save();
         // Finally, go back to the front-end
         // window.location.href= "index.html";
-        console.log('=======save ', vm.eventName, vm.event);
+        var callback = function() {
+            window.location.href= "index.html";
+        };
+        teamformDb.saveNewEvent(vm.eventName, vm.event, callback);
     }
 }

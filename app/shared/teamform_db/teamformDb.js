@@ -10,6 +10,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     loginWithFacebook: loginWithFacebook,
     saveNewFBUser: saveNewFBUser,
     getUser: getUser,
+    saveNewEvent: saveNewEvent,
     getEvent: getEvent,
     getAllEvents: getAllEvents,
     getEventAdminData: getEventAdminData,
@@ -58,8 +59,14 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     return param;
   }
 
+  function saveNewEvent(eventName, payload, callback) {
+    var refPath = _getEventParamsPath(eventName);
+    var ref = firebase.database().ref(refPath);
+    ref.set(payload, callback);
+  }
+
   function getEvent(eventName) {
-  	var refPath = eventScope + eventName + "/admin/param";
+  	var refPath = _getEventParamsPath(eventName);
   	ref = firebase.database().ref(refPath);
   	var param = $firebaseObject(ref);
   	return param;
@@ -105,5 +112,9 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   	var refPath = eventScope + eventName + "/member/" + userID;   
     var ref = firebase.database().ref(refPath);
     ref.set(data, callback);
+  }
+
+  function _getEventParamsPath(eventName) {
+    return eventScope + eventName + "/admin/param";
   }
 }

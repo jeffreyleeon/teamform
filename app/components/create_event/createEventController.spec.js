@@ -38,7 +38,9 @@ describe('teamform-admin-app module', function() {
       };
 
       var getAllMembers = function() {};
+      var saveNewEvent = function() {};
       var teamformDb = {
+        saveNewEvent: saveNewEvent,
         getEvent: getEvent,
         getAllTeams: getAllTeams,
         getAllMembers: getAllMembers,
@@ -78,11 +80,5 @@ describe('teamform-admin-app module', function() {
       controller.changeMaxTeamSize(-8);
       expect(controller.event.maxTeamSize).toEqual(7);
     });
-
-    // it('save event info', function() {
-    //   spyOn(controller.event, '$save');
-    //   controller.saveFunc();
-    //   expect(controller.event.$save).toHaveBeenCalled();
-    // });
   });
 });
