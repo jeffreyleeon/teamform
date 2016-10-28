@@ -1,4 +1,4 @@
-angular.module('teamform-admin-app', ['teamform-db'])
+angular.module('teamform-admin-app')
 .controller('AdminCtrl', ['teamformDb', AdminCtrl]);
 
 function AdminCtrl(teamformDb) {
