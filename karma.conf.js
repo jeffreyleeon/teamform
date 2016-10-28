@@ -24,7 +24,6 @@ module.exports = function(config) {
 	preprocessors: {	 	
 		 'assets/js/site.js' : ['coverage'],		
 		 'assets/js/index.js' : ['coverage'],
-		 'assets/js/admin.js' : ['coverage'],
 		 'assets/js/team.js' : ['coverage'],
 		 'assets/js/member.js' : ['coverage'],
 		 'config/*.js': ['coverage'],
