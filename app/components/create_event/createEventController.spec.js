@@ -47,12 +47,14 @@ describe('teamform-admin-app module', function() {
       };
 
       controller = $controller('CreateEventCtrl', {
+        $scope: {},
         teamformDb: teamformDb,
        });
     });
 
     it('should initialize with correct default values', function() {
       expect(controller.eventName).toEqual('');
+      expect(controller.eventNameError).toEqual('');
       expect(controller.event.minTeamSize).toEqual(1);
       expect(controller.event.maxTeamSize).toEqual(10);
     });

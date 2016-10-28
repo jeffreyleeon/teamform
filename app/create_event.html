@@ -54,7 +54,8 @@
               <form>
                 <div class="form-group">
                   <label>Event Name</label>
-                  <input class="form-control"placeholder="Input the event name" ng-model="vm.eventName">
+                  <input class="form-control" placeholder="Input the event name" ng-change="vm.onEventNameChanged()" ng-model="vm.eventName">
+                  <p class="error_msg">{{vm.eventNameError}}</p>
                 </div>
               </form>
 

@@ -12,6 +12,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     getUser: getUser,
     saveNewEvent: saveNewEvent,
     getEvent: getEvent,
+    isEventExist: isEventExist,
     getAllEvents: getAllEvents,
     getEventAdminData: getEventAdminData,
     getAllTeams: getAllTeams,
@@ -63,6 +64,22 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     var refPath = _getEventParamsPath(eventName);
     var ref = firebase.database().ref(refPath);
     ref.set(payload, callback);
+  }
+
+  function isEventExist(eventName) {
+    var refPath = _getEventParamsPath(eventName);
+    var arr = $firebaseArray(firebase.database().ref(refPath));
+    return new Promise(function (resolve, reject) {
+        arr.$loaded().then(function(data) {
+          if (data.length > 0) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }, function(error) {
+          resolve(false);
+        });
+    });
   }
 
   function getEvent(eventName) {

@@ -1,18 +1,38 @@
 angular.module('teamform-admin-app')
-.controller('CreateEventCtrl', ['teamformDb', CreateEventCtrl]);
+.controller('CreateEventCtrl', ['$scope', 'teamformDb', CreateEventCtrl]);
 
-function CreateEventCtrl(teamformDb) {
+function CreateEventCtrl($scope, teamformDb) {
     var vm = this;
 
     vm.eventName = '';
+    vm.eventNameError = '';
+    vm.eventValid = false;
     vm.event = {
         maxTeamSize: 10,
         minTeamSize: 1,
     };
     
+    vm.onEventNameChanged = onEventNameChanged;
     vm.changeMinTeamSize = changeMinTeamSize;
     vm.changeMaxTeamSize = changeMaxTeamSize;
     vm.saveFunc = saveFunc;
+
+    function onEventNameChanged() {
+        _checkIfEventExist();
+    }
+
+    function _checkIfEventExist() {
+      teamformDb.isEventExist(vm.eventName).then(function(isExist) {
+        vm.eventValid = !isExist;
+        if (isExist) {
+          vm.eventNameError = 'Event name already exist';
+          $scope.$apply();
+        } else {
+          vm.eventNameError = '';
+          $scope.$apply();
+        }
+      });
+    }
 
     function changeMinTeamSize(delta) {
         var newVal = vm.event.minTeamSize + delta;
