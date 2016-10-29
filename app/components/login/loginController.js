@@ -35,7 +35,9 @@ function LoginCtrl($scope, teamformDb, currentUser) {
         function() {
           var savedUser = teamformDb.getUser(user.uid);
           currentUser.setCurrentUser(savedUser);
-          window.location.href= "index.html";
+          setTimeout(function() {
+            window.location.href= "index.html";
+          }, 1000);
         }
         );
     }

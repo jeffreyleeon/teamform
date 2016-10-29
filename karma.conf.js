@@ -14,6 +14,7 @@ module.exports = function(config) {
 	  'assets/js/*.js',
 	  'config/*.js',
       'unit_tests/*.js',
+      'components/*.js',
       'components/*/*.js',
       'shared/*/*.js',
       'https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js',
@@ -23,7 +24,6 @@ module.exports = function(config) {
 	preprocessors: {	 	
 		 'assets/js/site.js' : ['coverage'],		
 		 'assets/js/index.js' : ['coverage'],
-		 'assets/js/admin.js' : ['coverage'],
 		 'assets/js/team.js' : ['coverage'],
 		 'assets/js/member.js' : ['coverage'],
 		 'config/*.js': ['coverage'],

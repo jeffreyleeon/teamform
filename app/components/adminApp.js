@@ -1,0 +1,1 @@
+angular.module('teamform-admin-app', ['teamform-db']);
