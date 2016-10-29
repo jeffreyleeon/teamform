@@ -1,0 +1,1 @@
+angular.module('teamform-app', ['current-user', 'teamform-db']);
