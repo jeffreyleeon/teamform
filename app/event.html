@@ -22,7 +22,7 @@
    <body>
 
    <a href="index.html">
-   <button id="btn_admin" type="button" class="btn btn-primary" >Back to the front-end</button></a>
+   <button id="btn_admin" type="button" class="btn btn-primary" >Back</button></a>
 
    <br>
 
@@ -47,6 +47,10 @@
                     <b>Minimum Team Size: </b>{{vm.event.minTeamSize}}
                   </p>
                 </div>
+              </div>
+              <div class="text-center">
+                <a href="team.html?q={{vm.eventName}}"><button id="btn_leader" type="button" class="btn btn-primary">Create a Team</button></a>
+                <a href="member.html?q={{vm.eventName}}"><button id="btn_member" type="button" class="btn btn-primary">Join a Team</button></a>
               </div>
             </div>
           <div class="col-md-2 col-xs-2"></div>
