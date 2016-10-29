@@ -12,13 +12,15 @@ function CreateEventCtrl($scope, teamformDb) {
         minTeamSize: 1,
     };
     
+    vm._checkIfEventExist = _checkIfEventExist;
+
     vm.onEventNameChanged = onEventNameChanged;
     vm.changeMinTeamSize = changeMinTeamSize;
     vm.changeMaxTeamSize = changeMaxTeamSize;
     vm.saveFunc = saveFunc;
 
     function onEventNameChanged() {
-        _checkIfEventExist();
+        vm._checkIfEventExist();
     }
 
     function _checkIfEventExist() {

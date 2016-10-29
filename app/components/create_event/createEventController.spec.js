@@ -17,33 +17,15 @@ describe('teamform-admin-app module', function() {
     var controller;
 
     beforeEach(function() {
-      var getEvent = function() {
+      var isEventExist = function(eventName) { 
         return {
-          '$loaded': function() {
-            return new Promise(function(resolve, reject) {
-              return resolve();
-            });
-          },
-          '$save': function() {
-          },
-          maxTeamSize: undefined,
-          minTeamSize: undefined,
+          'then': function() {},
         };
       };
-
-      var getAllTeams = function(eventName) {
-        return {
-          'hihi': 'hihi'
-        };
-      };
-
-      var getAllMembers = function() {};
       var saveNewEvent = function() {};
       var teamformDb = {
+        isEventExist: isEventExist,
         saveNewEvent: saveNewEvent,
-        getEvent: getEvent,
-        getAllTeams: getAllTeams,
-        getAllMembers: getAllMembers,
       };
 
       controller = $controller('CreateEventCtrl', {
@@ -55,6 +37,7 @@ describe('teamform-admin-app module', function() {
     it('should initialize with correct default values', function() {
       expect(controller.eventName).toEqual('');
       expect(controller.eventNameError).toEqual('');
+      expect(controller.eventValid).toEqual(false);
       expect(controller.event.minTeamSize).toEqual(1);
       expect(controller.event.maxTeamSize).toEqual(10);
     });
@@ -81,6 +64,12 @@ describe('teamform-admin-app module', function() {
       expect(controller.event.maxTeamSize).toEqual(7);
       controller.changeMaxTeamSize(-8);
       expect(controller.event.maxTeamSize).toEqual(7);
+    });
+
+    it('check if event name exist whenever name changed', function() {
+      spyOn(controller, '_checkIfEventExist');
+      controller.onEventNameChanged();
+      expect(controller._checkIfEventExist).toHaveBeenCalled();
     });
   });
 });
