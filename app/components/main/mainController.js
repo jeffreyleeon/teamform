@@ -1,4 +1,4 @@
-angular.module('teamform-app', ['current-user', 'teamform-db'])
+angular.module('teamform-app')
 .controller('MainCtrl', ['currentUser', 'teamformDb', MainCtrl]);
 
 function MainCtrl(currentUser, teamformDb) {
