@@ -76,5 +76,9 @@ describe('teamform-app module', function() {
         members: 'member1'
       });
     });
+
+    it('should format team required skills correctly', function() {
+      expect(controller.displaySkills(['a', 'b', 'c'])).toEqual('a, b, c');
+    });
   });
 });
