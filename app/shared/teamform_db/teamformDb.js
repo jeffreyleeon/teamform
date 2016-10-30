@@ -104,9 +104,12 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     return $firebaseArray(firebase.database().ref(refPath));
   };
 
-  function getTeam(eventName, teamID, callback) {
+  function getTeam(eventName, teamID) {
 		var refPath = eventScope + eventName + "/team/" + teamID;
-		retrieveOnceFirebase(firebase, refPath, callback);
+    ref = firebase.database().ref(refPath);
+    var param = $firebaseObject(ref);
+    return param;
+		// retrieveOnceFirebase(firebase, refPath, callback);
   };
 
   function setTeamData(eventName, teamID, data, callback) {

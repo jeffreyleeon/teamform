@@ -15,6 +15,9 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
     vm.isMyTeam = isMyTeam;
 
     function displaySkills(skills) {
+    	if (!skills) {
+    		return '';
+    	}
     	return skills.join(', ');
     }
 

@@ -80,6 +80,7 @@ describe('teamform-app module', function() {
     });
 
     it('should format team required skills correctly', function() {
+      expect(controller.displaySkills(null)).toEqual('');
       expect(controller.displaySkills(['a', 'b', 'c'])).toEqual('a, b, c');
     });
 

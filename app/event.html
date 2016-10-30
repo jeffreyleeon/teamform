@@ -67,7 +67,7 @@
                   <p>no op</p>
                   <!-- Manage team button -->
                   <div class="text-center" ng-if="vm.isMyTeam(team)">
-                    <a href="#"><button id="btn_member" type="button" class="btn btn-primary">Manage my team</button></a>
+                    <a href="team.html?q={{vm.eventName}}&team={{team.$id}}"><button id="btn_member" type="button" class="btn btn-primary">Manage my team</button></a>
                   </div>
                 </div>
               </div>
