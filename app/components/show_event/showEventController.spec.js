@@ -50,6 +50,7 @@ describe('teamform-app module', function() {
         getCurrentUser: function() {
           return {
             user: 'user1',
+            $id: '123',
           };
         },
       };
@@ -68,6 +69,7 @@ describe('teamform-app module', function() {
       });
       expect(controller.currentUser).toEqual({
         user: 'user1',
+        $id: '123',
       });
       expect(controller.teams).toEqual({
         teams: 'team1'
@@ -79,6 +81,15 @@ describe('teamform-app module', function() {
 
     it('should format team required skills correctly', function() {
       expect(controller.displaySkills(['a', 'b', 'c'])).toEqual('a, b, c');
+    });
+
+    it('should check if the team is my team correctly', function() {
+      expect(controller.isMyTeam({
+        teamOwner: '123'
+      })).toEqual(true);
+      expect(controller.isMyTeam({
+        teamOwner: '234'
+      })).toEqual(false);
     });
   });
 });
