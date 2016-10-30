@@ -10,13 +10,13 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
     vm.skills = '';
     vm.currentUser = currentUser.getCurrentUser();
     
-    // TODO: implementation of MemberCtrl   
     vm.param = {
         "teamName" : '',
         "currentTeamSize" : 0,
         "teamMembers" : [],
         "skills": vm.skills,
     };
+    vm.range = {};
 
     teamformDb.getEventAdminData(eventName, function(data) {    
         if ( data.child("param").val() != null ) {
@@ -28,31 +28,8 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
     });
     
     vm._parseSkills = _parseSkills;
-    // vm.requests = [];
-    // vm.refreshViewRequestsReceived = refreshViewRequestsReceived;
     vm.changeCurrentTeamSize = changeCurrentTeamSize;
     vm.saveFunc = saveFunc;
-    // vm.loadFunc = loadFunc;
-    // vm.processRequest = processRequest;
-    // vm.removeMember = removeMember;
-
-    // function refreshViewRequestsReceived() {
-    //     //vm.test = "";
-    //     vm.requests = [];
-    //     var teamID = $.trim( vm.param.teamName );   
-    //     $.each(vm.member, function(i,obj) {         
-    //         //vm.test += i + " " + val;
-    //         //vm.test += obj.$id + " " ;
-            
-    //         var userID = obj.$id;
-    //         if ( typeof obj.selection != "undefined"  && obj.selection.indexOf(teamID) > -1 ) {
-    //             //vm.test += userID + " " ;
-                
-    //             vm.requests.push(userID);
-    //         }
-    //     });
-    //     $scope.$apply();
-    // }
 
     function changeCurrentTeamSize(delta) {
         var newVal = vm.param.currentTeamSize + delta;
@@ -93,38 +70,4 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
         }
         return arr;
     }
-
-    // function loadFunc() {
-    //     var teamID = $.trim( vm.param.teamName );       
-    //     var eventName = getURLParameter("q");
-
-    //     teamformDb.getTeam(eventName, teamID, function(data) {    
-    //         if ( data.child("size").val() != null ) {
-    //             vm.param.currentTeamSize = data.child("size").val();
-    //             vm.refreshViewRequestsReceived();
-    //         } 
-    //         if ( data.child("teamMembers").val() != null ) {
-    //             vm.param.teamMembers = data.child("teamMembers").val();
-    //         }
-    //         $scope.$apply(); // force to refresh
-    //     });
-    // }
-
-    // function processRequest(r) {
-    //     //vm.test = "processRequest: " + r;
-    //     if (vm.param.teamMembers.indexOf(r) < 0 && 
-    //         vm.param.teamMembers.length < vm.param.currentTeamSize) {
-    //         // Not exists, and the current number of team member is less than the preferred team size
-    //         vm.param.teamMembers.push(r);
-    //         vm.saveFunc();
-    //     }
-    // }
-
-    // function removeMember(member) {
-    //     var index = vm.param.teamMembers.indexOf(member);
-    //     if ( index > -1 ) {
-    //         vm.param.teamMembers.splice(index, 1); // remove that item
-    //         vm.saveFunc();
-    //     }
-    // }
 }
