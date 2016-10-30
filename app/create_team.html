@@ -38,120 +38,67 @@
    <div class="text-center">
       <h1>Team Page</h1>
       <h2 id="text_event_name"></h2>
-       <div id="team_page_controller" ng-controller="TeamCtrl as vm">
+       <div id="team_page_controller" ng-controller="CreateTeamCtrl as vm">
 
          <div class="row">
 
             <div class="col-md-2 col-xs-2"></div>
 
-            <div class="col-md-6 col-xs-6 text-left panel">
+            <div class="col-md-8 col-xs-8 text-center panel">
 			
-			 
-
-
                <!-- Controls go here.. -->
-                <form class="form-horizontal text-left">
+                <form class="form-horizontal text-center">
 				
                   <div class="form-group">
 				  
                      <label for="inputTeamName" class="control-label">Team Name</label>
 					 <br>
 					 
-					 <div class="row">
-						 <div class="col-md-8 col-xs-8">
+					<div class="row">
+						<div class="col-md-2 col-xs-2"></div>
+						<div class="col-md-8 col-xs-8">
 							<input type="text" class="form-control" id="inputTeamName" placeholder="Enter your team name" ng-model="vm.param.teamName">													
-						 </div>
-						
-						<div class="col-md-1 col-xs-1">
-						   <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Add</button>
-						 </div>
-						 
-						 <div class="col-md-1 col-xs-1">
-							<button type="button" class="btn btn-primary" ng-click="vm.loadFunc();" >Load</button>
 						</div>
+					<div class="col-md-2 col-xs-2"></div>
 					</div>
-					
-										 
-					 
-                  </div>
-
-                
+					</br>
+			    <!-- Set team skills requirements -->
+				 	<label for="inputTeamSkills" class="control-label">Required skills (comma separated)</label>
+			    <div class="row">
+					  <div class="col-md-2 col-xs-2"></div>
+						<div class="col-md-8 col-xs-8">
+						  <input type="text" class="form-control" id="inputTeamSkills" placeholder="Enter skill requirements" ng-model="vm.param.skills">		  
+						</div>
+						<div class="col-md-2 col-xs-2"></div>
+					  <span>
+					  </span>
+			    </div>
+			    </br>
+					<!-- Set team size --> 
 				  <div class="row">
 					  <strong>Preferred Team Size: </strong> 					  
 					  <span>
-						 <span class="badge">
-						   {{vm.param.currentTeamSize}}</span>
-						  
-						 <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeCurrentTeamSize(1);"></span></button>
+						<span class="badge">
+						  {{vm.param.currentTeamSize}}
+						</span>
+						<button><span class="glyphicon glyphicon-plus" ng-click="vm.changeCurrentTeamSize(1);"></span></button>
+						<button><span class="glyphicon glyphicon-minus" ng-click="vm.changeCurrentTeamSize(-1);"></span></button>
+					  </span>
+			    </div>
+			    </br>
+        </div>
 
-						  <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeCurrentTeamSize(-1);"></span></button>
+          
 
-						  
-					   </span>
-				   </div>
+
+					</br>
+					<div>
+					   <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Add</button>
+					</div>
 				   
-				   
+          </form>
 
-                  </form>
-
-
-				<div class="row">
-                  <div class="col-sm-6">
-                     <h4>Team members</h4>
-                     <!-- TODO: Show the current team member list -->
-					 
-					 <div ng-repeat="member in vm.param.teamMembers">
-						<button type="button" class="btn" ng-click="vm.removeMember(member);">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{vm.member}}
-						</button>
-					 </div>
-					 
-                  </div>
-
-                  <div class="col-sm-6">
-                     <h4>Requests received:</h4>
-
-                     <!--TODO: Show the requests -->
-					 
-					 <div ng-repeat="r in vm.requests">
-						<button type="button" class="btn" ng-click="vm.processRequest(r);">
-							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> {{r}}
-						</button>
-					 </div>
-					 
-                  </div>
-				</div>
-				  
-				  
-
-                  				  
-					
-                   
-                  
-
-
-            </div>
-
-
-
-
-            <div class="col-md-4 col-xs-4 text-left">
-			
-					
-			 
-					<h3>All teams:</h3>
-					<ul ng-repeat="t in vm.team">
-						<li>
-						
-							User ID: {{t.$id}}  <br>
-							Preferred team size: <span class="badge">{{t.size}}</span> <br>
-							Current team members: {{t.teamMembers}}
-						
-						</li>
-						
-					</ul>			
-			
-			</div>
+            <div class="col-md-2 col-xs-2"></div>
          </div>
 
 
@@ -170,7 +117,7 @@
    <script src="assets/lib/angularfire.min.js"></script>
 
    <script src="shared/teamform_db/teamformDb.js"></script>
-   <script src="components/team/teamController.js"></script>
+   <script src="components/create_team/createTeamController.js"></script>
    <script src="assets/js/team.js"></script>
 
    </body>

@@ -49,8 +49,20 @@
                 </div>
               </div>
               <div class="text-center">
-                <a href="team.html?q={{vm.eventName}}"><button id="btn_leader" type="button" class="btn btn-primary">Create a Team</button></a>
+                <a href="create_team.html?q={{vm.eventName}}"><button id="btn_leader" type="button" class="btn btn-primary">Create a Team</button></a>
                 <a href="member.html?q={{vm.eventName}}"><button id="btn_member" type="button" class="btn btn-primary">Join a Team</button></a>
+              </div>
+              <!-- Display team info -->
+              </br>
+              <div class="panel panel-primary" ng-repeat="team in vm.teams">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{{team.$id}}</h3>
+                </div>
+                <div class="panel-body">
+                  <p><b>Required skills:</b></p>
+                  <p><b>Members:</b></p>
+                  <p>no op</p>
+                </div>
               </div>
             </div>
           <div class="col-md-2 col-xs-2"></div>
