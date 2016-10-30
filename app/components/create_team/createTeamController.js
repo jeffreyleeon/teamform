@@ -1,4 +1,4 @@
-angular.module('teamform-team-app', ['teamform-db'])
+angular.module('teamform-app')
 .controller('CreateTeamCtrl', ['$scope', 'teamformDb', CreateTeamCtrl]);
 
 function CreateTeamCtrl($scope, teamformDb) {
