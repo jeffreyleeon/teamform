@@ -1,13 +1,14 @@
 angular.module('teamform-app')
-.controller('CreateTeamCtrl', ['$scope', 'teamformDb', CreateTeamCtrl]);
+.controller('CreateTeamCtrl', ['$scope', 'currentUser', 'teamformDb', CreateTeamCtrl]);
 
-function CreateTeamCtrl($scope, teamformDb) {
+function CreateTeamCtrl($scope, currentUser, teamformDb) {
     var vm = this;
 
     var refPath = "";
     var eventName = getURLParameter("q"); 
 
-    vm.skills = '';  
+    vm.skills = '';
+    vm.currentUser = currentUser.getCurrentUser();
     
     // TODO: implementation of MemberCtrl   
     vm.param = {
@@ -68,6 +69,7 @@ function CreateTeamCtrl($scope, teamformDb) {
                 'size': vm.param.currentTeamSize,
                 'teamMembers': vm.param.teamMembers,
                 'skills': skills,
+                'eventOwner': vm.currentUser.$id || 'dummy',
             };
             var eventName = getURLParameter("q");
             // for each team members, clear the selection in /[eventName]/team/
