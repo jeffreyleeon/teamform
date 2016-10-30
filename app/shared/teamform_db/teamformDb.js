@@ -96,7 +96,8 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function getEventAdminData(eventName, callback) {
   	var refPath =  eventScope + eventName + "/admin";
-  	retrieveOnceFirebase(firebase, refPath, callback);
+  	// retrieveOnceFirebase(firebase, refPath, callback);
+    firebase.database().ref(refPath).once("value").then(callback);
   }
 
   function getAllTeams(eventName) {
@@ -109,7 +110,6 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     ref = firebase.database().ref(refPath);
     var param = $firebaseObject(ref);
     return param;
-		// retrieveOnceFirebase(firebase, refPath, callback);
   };
 
   function setTeamData(eventName, teamID, data, callback) {
@@ -125,7 +125,8 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function getMember(eventName, userID, callback) {
   	var refPath = eventScope + eventName + "/member/" + userID;
-    retrieveOnceFirebase(firebase, refPath, callback);
+    // retrieveOnceFirebase(firebase, refPath, callback);
+    firebase.database().ref(refPath).once("value").then(callback);
   }
 
   function setMemberData(eventName, userID, data, callback) {

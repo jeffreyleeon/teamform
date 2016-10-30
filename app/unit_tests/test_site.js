@@ -12,5 +12,13 @@ describe('Test site.js', function() {
 
    });
 
+   describe('initalizeFirebase Coverage Test', function() {
+	  it('should initalize Firebase', function() {
+	  	spyOn(firebase, 'initializeApp');
+	  	initalizeFirebase();
+	  	expect(firebase.initializeApp).toHaveBeenCalled();
+	  });
+   });
+
 
 });
