@@ -52,9 +52,9 @@
                      <h4>Team members</h4>
                      <!-- TODO: Show the current team member list -->
 					 
-					 <div ng-repeat="member in vm.param.teamMembers">
-						<button type="button" class="btn" ng-click="vm.removeMember(member);">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{member}}
+					 <div ng-repeat="teamMemberID in vm.param.teamMembers">
+						<button type="button" class="btn" ng-click="vm.removeMember(teamMemberID);">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{vm.getMemberName(teamMemberID)}}
 						</button>
 					 </div>
 					 
@@ -65,9 +65,9 @@
 
                      <!--TODO: Show the requests -->
 					 
-					 <div ng-repeat="r in vm.requests">
-						<button type="button" class="btn" ng-click="vm.processRequest(r);">
-							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> {{r}}
+					 <div ng-repeat="requestMemberID in vm.requests">
+						<button type="button" class="btn" ng-click="vm.processRequest(requestMemberID);">
+							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> {{vm.getMemberName(requestMemberID)}}
 						</button>
 					 </div>
 					 

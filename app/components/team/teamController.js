@@ -40,6 +40,7 @@ function TeamCtrl($scope, teamformDb) {
     vm.saveFunc = saveFunc;
     vm.processRequest = processRequest;
     vm.removeMember = removeMember;
+    vm.getMemberName = getMemberName;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -90,5 +91,15 @@ function TeamCtrl($scope, teamformDb) {
             vm.param.teamMembers.splice(index, 1); // remove that item
             vm.saveFunc();
         }
+    }
+
+    function getMemberName(memberID) {
+      for (var i = 0; i < vm.member.length; i++) {
+        var member = vm.member[i];
+        if (member.$id === memberID) {
+          return member.name;
+        }
+      }
+      return '';
     }
 }
