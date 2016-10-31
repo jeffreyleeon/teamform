@@ -1,15 +1,17 @@
 angular.module('teamform-admin-app')
-.controller('CreateEventCtrl', ['$scope', 'teamformDb', CreateEventCtrl]);
+.controller('CreateEventCtrl', ['$scope', 'currentUser', 'teamformDb', CreateEventCtrl]);
 
-function CreateEventCtrl($scope, teamformDb) {
+function CreateEventCtrl($scope, currentUser, teamformDb) {
     var vm = this;
 
     vm.eventName = '';
     vm.eventNameError = '';
+    vm.currentUser = currentUser.getCurrentUser();
     vm.eventValid = false;
     vm.event = {
         maxTeamSize: 10,
         minTeamSize: 1,
+        eventOwner: vm.currentUser.$id || 'dummy',
     };
     
     vm._checkIfEventExist = _checkIfEventExist;

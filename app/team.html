@@ -27,7 +27,7 @@
       <script src="assets/js/site.js"></script>
 	  	  
    </head>
-   <body>
+   <body ng-controller="TeamCtrl as vm">
 
     <a href="javascript:history.back()"
    <button id="btn_admin" type="button" class="btn btn-primary" >
@@ -36,63 +36,15 @@
    <br>
 
    <div class="text-center">
-      <h1>Team Page</h1>
+      <h1>Team Page {{vm.param.teamName}}</h1>
       <h2 id="text_event_name"></h2>
-       <div id="team_page_controller" ng-controller="TeamCtrl as vm">
+       <div id="team_page_controller">
 
          <div class="row">
 
             <div class="col-md-2 col-xs-2"></div>
 
             <div class="col-md-6 col-xs-6 text-left panel">
-			
-			 
-
-
-               <!-- Controls go here.. -->
-                <form class="form-horizontal text-left">
-				
-                  <div class="form-group">
-				  
-                     <label for="inputTeamName" class="control-label">Team Name</label>
-					 <br>
-					 
-					 <div class="row">
-						 <div class="col-md-8 col-xs-8">
-							<input type="text" class="form-control" id="inputTeamName" placeholder="Enter your team name" ng-model="vm.param.teamName">													
-						 </div>
-						
-						<div class="col-md-1 col-xs-1">
-						   <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Add</button>
-						 </div>
-						 
-						 <div class="col-md-1 col-xs-1">
-							<button type="button" class="btn btn-primary" ng-click="vm.loadFunc();" >Load</button>
-						</div>
-					</div>
-					
-										 
-					 
-                  </div>
-
-                
-				  <div class="row">
-					  <strong>Preferred Team Size: </strong> 					  
-					  <span>
-						 <span class="badge">
-						   {{vm.param.currentTeamSize}}</span>
-						  
-						 <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeCurrentTeamSize(1);"></span></button>
-
-						  <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeCurrentTeamSize(-1);"></span></button>
-
-						  
-					   </span>
-				   </div>
-				   
-				   
-
-                  </form>
 
 
 				<div class="row">
@@ -102,7 +54,7 @@
 					 
 					 <div ng-repeat="member in vm.param.teamMembers">
 						<button type="button" class="btn" ng-click="vm.removeMember(member);">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{vm.member}}
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{member}}
 						</button>
 					 </div>
 					 
@@ -122,36 +74,7 @@
                   </div>
 				</div>
 				  
-				  
-
-                  				  
-					
-                   
-                  
-
-
             </div>
-
-
-
-
-            <div class="col-md-4 col-xs-4 text-left">
-			
-					
-			 
-					<h3>All teams:</h3>
-					<ul ng-repeat="t in vm.team">
-						<li>
-						
-							User ID: {{t.$id}}  <br>
-							Preferred team size: <span class="badge">{{t.size}}</span> <br>
-							Current team members: {{t.teamMembers}}
-						
-						</li>
-						
-					</ul>			
-			
-			</div>
          </div>
 
 
@@ -162,7 +85,7 @@
    <!-- JavaScript of this page -->
 
    <!-- Angular and Angular-route libraries (v1.5.7) -->
-   <script src="assets/lib/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
    <script src="assets/lib/angular-route.min.js"></script>        
      
    <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->

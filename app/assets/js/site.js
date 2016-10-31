@@ -37,14 +37,4 @@ function initalizeFirebase() {
   };
   firebase.initializeApp(config);
 
-}    
-
-//
-// User-defined function - Useful for retrieving an object once, without 3-way sync 
-// For 3-way sync, use $firebaseObject or $firebaseArray provided by AngularFire
-//
-
-function retrieveOnceFirebase(firebase, refPath, callbackFunc) {
-	firebase.database().ref(refPath).once("value").then(callbackFunc);
 }
-

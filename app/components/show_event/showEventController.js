@@ -10,4 +10,18 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
 
     vm.teams = teamformDb.getAllTeams(vm.eventName);
     vm.members = teamformDb.getAllMembers(vm.eventName);
+
+    vm.displaySkills = displaySkills;
+    vm.isMyTeam = isMyTeam;
+
+    function displaySkills(skills) {
+    	if (!skills) {
+    		return '';
+    	}
+    	return skills.join(', ');
+    }
+
+    function isMyTeam(team) {
+    	return team.teamOwner === vm.currentUser.$id;
+    }
 }
