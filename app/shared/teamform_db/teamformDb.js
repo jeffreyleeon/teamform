@@ -130,7 +130,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   }
 
   function setMemberData(eventName, userID, data, callback) {
-  	var refPath = eventScope + eventName + "/member/" + userID;   
+  	var refPath = eventScope + eventName + "/member/" + userID; 
     var ref = firebase.database().ref(refPath);
     ref.set(data, callback);
   }
