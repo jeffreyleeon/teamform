@@ -13,7 +13,7 @@ describe('teamform-app module', function() {
     $controller = _$controller_;
   }));
 
-  describe('CreateTeamCtrl', function() {
+  describe('JoinTeamCtrl', function() {
     var controller;
 
     beforeEach(function() {
@@ -44,46 +44,43 @@ describe('teamform-app module', function() {
         },
       };
 
-      controller = $controller('CreateTeamCtrl', {
-        $scope: {
-          $apply: function() {},
-        },
+      controller = $controller('JoinTeamCtrl', {
         currentUser: currentUser,
         teamformDb: teamformDb,
        });
     });
 
-    it('should initialize with correct default values', function() {
-      expect(controller.skills).toEqual('');
-      expect(controller.currentUser).toEqual({
-        user: 'user1',
-        $id: '123',
-      });
-      expect(controller.param).toEqual({
-        "teamName" : '',
-        "currentTeamSize" : 6,
-        "teamMembers" : [],
-        "skills": '',
-      });
-    });
+    // it('should initialize with correct default values', function() {
+    //   expect(controller.skills).toEqual('');
+    //   expect(controller.currentUser).toEqual({
+    //     user: 'user1',
+    //     $id: '123',
+    //   });
+    //   expect(controller.param).toEqual({
+    //     "teamName" : '',
+    //     "currentTeamSize" : 6,
+    //     "teamMembers" : [],
+    //     "skills": '',
+    //   });
+    // });
 
-    it('change team size correctly', function() {
-      controller.param.currentTeamSize = 5;
-      controller.range.minTeamSize = 1;
-      controller.range.maxTeamSize = 10;
-      controller.changeCurrentTeamSize(1);
-      expect(controller.param.currentTeamSize).toEqual(6);
-      controller.changeCurrentTeamSize(-3);
-      expect(controller.param.currentTeamSize).toEqual(3);
-      controller.changeCurrentTeamSize(-4);
-      expect(controller.param.currentTeamSize).toEqual(3);
-      controller.changeCurrentTeamSize(10);
-      expect(controller.param.currentTeamSize).toEqual(3);
-    });
+    // it('change team size correctly', function() {
+    //   controller.param.currentTeamSize = 5;
+    //   controller.range.minTeamSize = 1;
+    //   controller.range.maxTeamSize = 10;
+    //   controller.changeCurrentTeamSize(1);
+    //   expect(controller.param.currentTeamSize).toEqual(6);
+    //   controller.changeCurrentTeamSize(-3);
+    //   expect(controller.param.currentTeamSize).toEqual(3);
+    //   controller.changeCurrentTeamSize(-4);
+    //   expect(controller.param.currentTeamSize).toEqual(3);
+    //   controller.changeCurrentTeamSize(10);
+    //   expect(controller.param.currentTeamSize).toEqual(3);
+    // });
 
-    it('should format skills correctly', function() {
-      expect(controller._parseSkills('a, b, c')).toEqual(['a', 'b', 'c']);
-      expect(controller._parseSkills('')).toEqual(['']);
-    });
+    // it('should format skills correctly', function() {
+    //   expect(controller._parseSkills('a, b, c')).toEqual(['a', 'b', 'c']);
+    //   expect(controller._parseSkills('')).toEqual(['']);
+    // });
   });
 });

@@ -1,63 +1,42 @@
-angular.module('teamform-member-app', ['teamform-db'])
-.controller('MemberCtrl', ['teamformDb', MemberCtrl]);
+angular.module('teamform-app')
+.controller('JoinTeamCtrl', ['currentUser', 'teamformDb', JoinTeamCtrl]);
 
-function MemberCtrl(teamformDb) {
+function JoinTeamCtrl(currentUser, teamformDb) {
     var vm = this;
-    // TODO: implementation of MemberCtrl
-    
-    vm.userID = "";
-    vm.userName = "";   
+
+    vm.eventName = getURLParameter("q");
+    vm.currentUser = currentUser.getCurrentUser();
+    vm.selection = [];
     vm.teams = {};
-    
-    vm.loadFunc = loadFunc;
+
+    teamformDb.getMember(vm.eventName, vm.currentUser.$id, function(data) {
+      if (data.child("selection").val() != null ) {
+        vm.selection = data.child("selection").val();
+      }
+      else {
+        vm.selection = [];
+      }
+    });
     
     vm.saveFunc = saveFunc;
     vm.refreshTeams = refreshTeams;
     vm.refreshTeams(); // call to refresh teams...
 
-    function loadFunc() {
-        var userID = vm.userID;
-        if ( userID !== '' ) {
-            var eventName = getURLParameter("q");
-            teamformDb.getMember(eventName, userID, function(data) {
-                if ( data.child("name").val() != null ) {
-                    vm.userName = data.child("name").val();
-                } else {
-                    vm.userName = "";
-                }
-                if (data.child("selection").val() != null ) {
-                    vm.selection = data.child("selection").val();
-                }
-                else {
-                    vm.selection = [];
-                }
-                vm.$apply();
-            });
-        }
-    }
-
     function saveFunc() {
-        var userID = $.trim( vm.userID );
-        var userName = $.trim( vm.userName );
-        
+        var userID = vm.currentUser.$id;
+        var userName = vm.currentUser.display_name;
         if ( userID !== '' && userName !== '' ) {
-            var newData = {             
-                'name': userName,
-                'selection': vm.selection
-            };
-            var eventName = getURLParameter("q");
-            teamformDb.setMemberData(eventName, userID, newData, function(){
-                // complete call back
-                //alert("data pushed...");
-                
-                // Finally, go back to the front-end
-                window.location.href= "index.html";
-            });
+          var newData = {             
+              'name': userName,
+              'selection': vm.selection
+          };
+          teamformDb.setMemberData(vm.eventName, userID, newData, function(){
+            window.history.back();
+          });
         }
     }
 
     function refreshTeams() {
-        
         // Link and sync a firebase object
         vm.selection = [];      
         vm.toggleSelection = function (item) {
@@ -69,16 +48,6 @@ function MemberCtrl(teamformDb) {
                 vm.selection.push(item);
             }
         }
-
-        var eventName = getURLParameter("q");
-        vm.teams = teamformDb.getAllTeams(eventName);
-        vm.teams.$loaded()
-            .then( function(data) {
-
-            }) 
-            .catch(function(error) {
-                // Database connection error handling...
-                //console.error("Error:", error);
-            });
+        vm.teams = teamformDb.getAllTeams(vm.eventName);
     }    
 }
