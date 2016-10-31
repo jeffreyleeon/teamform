@@ -17,7 +17,7 @@ describe('teamform-app module', function() {
     var controller;
 
     beforeEach(function() {
-      var getEventAdminData = function(eventName, callback) {
+      var getMember = function(eventName, userID, callback) {
         callback({
           child: function() {
             return {
@@ -31,8 +31,14 @@ describe('teamform-app module', function() {
           }
         });
       };
+      var getAllTeams = function(eventName) {
+        return {};
+      };
+      var setMemberData = function() {};
       var teamformDb = {
-        getEventAdminData: getEventAdminData,
+        getMember: getMember,
+        getAllTeams: getAllTeams,
+        setMemberData: setMemberData,
       };
 
       var currentUser = {
@@ -40,6 +46,7 @@ describe('teamform-app module', function() {
           return {
             user: 'user1',
             $id: '123',
+            display_name: 'display_name',
           };
         },
       };
@@ -48,39 +55,30 @@ describe('teamform-app module', function() {
         currentUser: currentUser,
         teamformDb: teamformDb,
        });
+      controller.eventName = 'eventName';
+      controller.teamformDb = teamformDb;
     });
 
-    // it('should initialize with correct default values', function() {
-    //   expect(controller.skills).toEqual('');
-    //   expect(controller.currentUser).toEqual({
-    //     user: 'user1',
-    //     $id: '123',
-    //   });
-    //   expect(controller.param).toEqual({
-    //     "teamName" : '',
-    //     "currentTeamSize" : 6,
-    //     "teamMembers" : [],
-    //     "skills": '',
-    //   });
-    // });
+    it('should initialize with correct default values', function() {
+      expect(controller.selection).toEqual([]);
+      expect(controller.teams).toEqual({});
+      expect(controller.eventName).toEqual('eventName');
+    });
 
-    // it('change team size correctly', function() {
-    //   controller.param.currentTeamSize = 5;
-    //   controller.range.minTeamSize = 1;
-    //   controller.range.maxTeamSize = 10;
-    //   controller.changeCurrentTeamSize(1);
-    //   expect(controller.param.currentTeamSize).toEqual(6);
-    //   controller.changeCurrentTeamSize(-3);
-    //   expect(controller.param.currentTeamSize).toEqual(3);
-    //   controller.changeCurrentTeamSize(-4);
-    //   expect(controller.param.currentTeamSize).toEqual(3);
-    //   controller.changeCurrentTeamSize(10);
-    //   expect(controller.param.currentTeamSize).toEqual(3);
-    // });
+    it('should toggle selection correctly', function() {
+      controller.selection = [];
+      controller.toggleSelection(1);
+      expect(controller.selection).toEqual([1]);
+      controller.toggleSelection(2);
+      expect(controller.selection).toEqual([1, 2]);
+      controller.toggleSelection(1);
+      expect(controller.selection).toEqual([2]);
+    });
 
-    // it('should format skills correctly', function() {
-    //   expect(controller._parseSkills('a, b, c')).toEqual(['a', 'b', 'c']);
-    //   expect(controller._parseSkills('')).toEqual(['']);
-    // });
+    it('should save users selection', function() {
+      spyOn(controller.teamformDb, 'setMemberData');
+      controller.saveFunc();
+      expect(controller.teamformDb.setMemberData).toHaveBeenCalled();
+    });
   });
 });
