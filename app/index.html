@@ -210,26 +210,26 @@
 
       <!-- JavaScript of this page -->
 
+      <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDw589yX87seI4NR54tJdUdE47j6PgpIEo",
+          authDomain: "project-c9559.firebaseapp.com",
+          databaseURL: "https://project-c9559.firebaseio.com",
+          storageBucket: "project-c9559.appspot.com",
+          messagingSenderId: "1020891521246"
+        };
+        firebase.initializeApp(config);
+      </script>
+      
        <!-- Angular and Angular-route libraries (v1.5.7) -->
        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
        <!-- <script src="assets/lib/angular.min.js"></script> -->
        <script src="assets/lib/angular-route.min.js"></script>
 
        <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
-
-       <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
-       <script>
-         // Initialize Firebase
-         var config = {
-           apiKey: "AIzaSyDw589yX87seI4NR54tJdUdE47j6PgpIEo",
-           authDomain: "project-c9559.firebaseapp.com",
-           databaseURL: "https://project-c9559.firebaseio.com",
-           storageBucket: "project-c9559.appspot.com",
-           messagingSenderId: "1020891521246"
-         };
-         firebase.initializeApp(config);
-       </script>
-
+       <script src="assets/lib/firebase.js"></script>
        <script src="assets/lib/angularfire.min.js"></script>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
 
