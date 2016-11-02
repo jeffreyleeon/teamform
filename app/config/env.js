@@ -4,3 +4,16 @@ env = {
   FB_DATABASE_URL: 'https://teamform-15bcb.firebaseio.com',
   FB_STORAGE_BUCKET: 'teamform-15bcb.appspot.com'
 }
+
+<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDULfYNZxcZgu5OYtI3aOjDuVLU_8ngYvU",
+    authDomain: "comp3111project-88170.firebaseapp.com",
+    databaseURL: "https://comp3111project-88170.firebaseio.com",
+    storageBucket: "comp3111project-88170.appspot.com",
+    messagingSenderId: "975041094299"
+  };
+  firebase.initializeApp(config);
+</script>
