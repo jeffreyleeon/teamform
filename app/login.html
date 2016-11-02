@@ -37,7 +37,10 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
      
-     
+     <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet" >
+
+    <link href="assets/css/bootstrap-social.css" rel="stylesheet" >
 
       
   </head>
@@ -67,17 +70,16 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           
-      </form>
-       <br>
+          </br>
+          <div class="social-buttons" id="login_page_controller" ng-controller="LoginCtrl as vm">
+            
+             <a class="btn btn-block btn-social btn-facebook" ng-click="vm.login();">
+                <span class="fa fa-facebook"></span> Sign in with Facebook
+              </a>
+            <h4 class="error_msg">{{vm.errorMsg}}</h4>
+          </div>
 
-   <div class="text-center">
-      </br>
-      <div id="login_page_controller" ng-controller="LoginCtrl as vm">
-        
-        <button ng-click="vm.login();">Login with Facebook</button>
-        <h4 class="error_msg">{{vm.errorMsg}}</h4>
-      </div>
-   </div>
+      </form>
 
     </div> <!-- /container -->
 
@@ -96,6 +98,7 @@
    <script src="shared/current_user/currentUser.js"></script>
    <script src="shared/teamform_db/teamformDb.js"></script>
    <script src="components/login/loginController.js"></script>
+   <script src="assets/js/docs.js"></script>
   
 
 </body></html>
