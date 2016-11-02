@@ -19,6 +19,7 @@
       <script src="assets/lib/bootstrap.min.js"></script>
           
       <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
+      <link rel="stylesheet" href="assets/css/site.css">
       
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
@@ -79,6 +80,8 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right" ng-if="vm.isLoggedIn()">
                       <li><a href="create_event.html"><span class="glyphicon glyphicon-plus"></span> Create event</a></li>
+                      <li><img ng-if="!!vm.currentUser.profile_pic_url" src="{{vm.currentUser.profile_pic_url}}" class="nav_profile_img profile_img"></li>
+                      <li><a href="#">{{vm.currentUser.display_name}}</a></li>
                       <li><a href="#" ng-click="vm.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                       <li><a href="#"><span class="glyphicon"></span></a></li>
                     </ul>
@@ -107,8 +110,19 @@
       </div>
 
       <div>
+        <h3>Events</h3>
         <ul ng-repeat="e in vm.events">
           <li><a href='event.html?id={{e.$id}}'>{{e.$id}}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Users</h3>
+        <ul ng-repeat="user in vm.users">
+          <li>
+            <img ng-if="!!user.profile_pic_url" src="{{user.profile_pic_url}}" class="profile_img">
+            <a href='#?id={{user.$id}}'>{{user.display_name}}</a>
+          </li>
         </ul>
       </div>
       <!-- Marketing messaging and featurettes
