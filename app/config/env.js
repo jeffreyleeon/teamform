@@ -5,8 +5,8 @@ env = {
   FB_STORAGE_BUCKET: 'teamform-15bcb.appspot.com'
 }
 
-<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
-<script>
+//<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDULfYNZxcZgu5OYtI3aOjDuVLU_8ngYvU",
@@ -16,4 +16,3 @@ env = {
     messagingSenderId: "975041094299"
   };
   firebase.initializeApp(config);
-</script>
