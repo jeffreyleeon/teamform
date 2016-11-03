@@ -18,14 +18,15 @@ describe('teamform-app module', function() {
 
     beforeEach(function() {
       var getMember = function(eventName, userID, callback) {
+        var returnVal = [1, 2, 3];
+        if (eventName === 'a') {
+          returnVal = null;
+        }
         callback({
           child: function() {
             return {
               val: function() {
-                return {
-                  minTeamSize: 2,
-                  maxTeamSize: 10,
-                };
+                return returnVal;
               }
             }
           }
@@ -65,6 +66,13 @@ describe('teamform-app module', function() {
       expect(controller.eventName).toEqual('eventName');
     });
 
+    it('should get memeber selection correctly', function() {
+      controller.getMember('b', controller.currentUser.$id);
+      expect(controller.selection).toEqual([1, 2, 3]);
+      controller.getMember('a', controller.currentUser.$id);
+      expect(controller.selection).toEqual([]);
+    });
+
     it('should toggle selection correctly', function() {
       controller.selection = [];
       controller.toggleSelection(1);
@@ -77,6 +85,13 @@ describe('teamform-app module', function() {
 
     it('should save users selection', function() {
       spyOn(controller.teamformDb, 'setMemberData');
+      controller.saveFunc();
+      expect(controller.teamformDb.setMemberData).toHaveBeenCalled();
+      controller.currentUser = {
+        user: '',
+        $id: '123',
+        display_name: '',
+      };
       controller.saveFunc();
       expect(controller.teamformDb.setMemberData).toHaveBeenCalled();
     });
