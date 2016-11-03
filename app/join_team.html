@@ -45,6 +45,11 @@
             <div class="col-md-2 col-xs-2"></div>
             <div class="col-md-8 col-xs-8 panel">
               <div class="row text-left">
+                <img ng-if="!!vm.currentUser.profile_pic_url" src="{{vm.currentUser.profile_pic_url}}" class="profile_img">
+                <h3>Name:</h3>
+                <p>{{vm.currentUser.display_name}}</p>
+                <h3>Email:</h3>
+                <p>{{vm.currentUser.email}}</p>
                 <h3>Your team preference:</h3>
                 <div ng-repeat="team in vm.teams">
                   <div class="checkbox">
