@@ -9,18 +9,22 @@ function JoinTeamCtrl(currentUser, teamformDb) {
     vm.selection = [];
     vm.teams = {};
 
-    teamformDb.getMember(vm.eventName, vm.currentUser.$id, function(data) {
-      if (data.child("selection").val() != null ) {
-        vm.selection = data.child("selection").val();
-      }
-      else {
-        vm.selection = [];
-      }
-    });
-    
+    vm.getMember = getMember;
+    vm.getMember(vm.eventName, vm.currentUser.$id);
     vm.saveFunc = saveFunc;
     vm.refreshTeams = refreshTeams;
     vm.refreshTeams(); // call to refresh teams...
+
+    function getMember(eventName, userID) {
+      teamformDb.getMember(eventName, userID, function(data) {
+        if (data.child("selection").val() != null ) {
+          vm.selection = data.child("selection").val();
+        }
+        else {
+          vm.selection = [];
+        }
+      });
+    }
 
     function saveFunc() {
         var userID = vm.currentUser.$id;

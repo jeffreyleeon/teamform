@@ -5,6 +5,8 @@ function LoginCtrl($scope, teamformDb, currentUser) {
     var vm = this;
     vm.errorMsg = '';
     vm.login = login;
+    vm.saveNewFBUser = saveNewFBUser;
+    vm.setMessage = setMessage;
     
     function login() {
         vm.errorMsg = '';
