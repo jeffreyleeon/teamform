@@ -64,15 +64,17 @@ describe('teamform-app module', function() {
       expect(controller.selection).toEqual([]);
       expect(controller.teams).toEqual({});
       expect(controller.eventName).toEqual('eventName');
-      expect(controller.skillsString).toEqual('');
+      expect(controller.skillsString).toEqual('1,2,3');
       expect(controller.introduction).toEqual('');
     });
 
     it('should get memeber selection correctly', function() {
       controller.getMember('b', controller.currentUser.$id);
       expect(controller.selection).toEqual([1, 2, 3]);
+      expect(controller.skillsString).toEqual('1,2,3');
       controller.getMember('a', controller.currentUser.$id);
       expect(controller.selection).toEqual([]);
+      expect(controller.skillsString).toEqual('');
     });
 
     it('should toggle selection correctly', function() {
@@ -96,6 +98,11 @@ describe('teamform-app module', function() {
       };
       controller.saveFunc();
       expect(controller.teamformDb.setMemberData).toHaveBeenCalled();
+    });
+
+    it('should format skills correctly', function() {
+      expect(controller._parseSkills('a, b, c')).toEqual(['a', 'b', 'c']);
+      expect(controller._parseSkills('')).toEqual(['']);
     });
   });
 });
