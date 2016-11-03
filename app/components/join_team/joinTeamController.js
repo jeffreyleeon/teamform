@@ -8,6 +8,8 @@ function JoinTeamCtrl(currentUser, teamformDb) {
     vm.currentUser = currentUser.getCurrentUser();
     vm.selection = [];
     vm.teams = {};
+    vm.skillsString = '';
+    vm.introduction = '';
 
     vm.getMember = getMember;
     vm.getMember(vm.eventName, vm.currentUser.$id);

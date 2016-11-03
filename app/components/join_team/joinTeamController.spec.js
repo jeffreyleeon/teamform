@@ -64,6 +64,8 @@ describe('teamform-app module', function() {
       expect(controller.selection).toEqual([]);
       expect(controller.teams).toEqual({});
       expect(controller.eventName).toEqual('eventName');
+      expect(controller.skillsString).toEqual('');
+      expect(controller.introduction).toEqual('');
     });
 
     it('should get memeber selection correctly', function() {
