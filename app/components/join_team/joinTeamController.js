@@ -22,6 +22,7 @@ function JoinTeamCtrl(currentUser, teamformDb) {
       teamformDb.getMember(eventName, userID, function(data) {
         var selectionKey = 'selection';
         var skillsKey = 'skills';
+        var introKey = 'introduction';
         if (data.child(selectionKey).val() != null ) {
           vm.selection = data.child(selectionKey).val();
         } else {
@@ -33,6 +34,11 @@ function JoinTeamCtrl(currentUser, teamformDb) {
         } else {
           vm.skillsString = '';
         }
+        if (data.child(introKey).val() != null) {
+          vm.introduction = String(data.child(introKey).val());
+        } else {
+          vm.introduction = '';
+        }
       });
     }
 
@@ -40,11 +46,13 @@ function JoinTeamCtrl(currentUser, teamformDb) {
         var userID = vm.currentUser.$id;
         var userName = vm.currentUser.display_name;
         var skills = vm._parseSkills(vm.skillsString);
+        var introduction = vm.introduction;
         if ( userID !== '' && userName !== '' ) {
           var newData = {             
               'name': userName,
               'selection': vm.selection,
               'skills': skills,
+              'introduction': introduction,
           };
           teamformDb.setMemberData(vm.eventName, userID, newData, function(){
             window.history.back();
