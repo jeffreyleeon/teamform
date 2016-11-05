@@ -1,7 +1,7 @@
-angular.module('teamform-team-app', ['teamform-db'])
-.controller('TeamCtrl', ['$scope', 'teamformDb', TeamCtrl]);
+angular.module('teamform-app')
+.controller('TeamCtrl', ['$scope', 'currentUser', 'teamformDb', TeamCtrl]);
 
-function TeamCtrl($scope, teamformDb) {
+function TeamCtrl($scope, currentUser, teamformDb) {
     var vm = this;
 
     var refPath = "";
@@ -24,6 +24,7 @@ function TeamCtrl($scope, teamformDb) {
         } 
     });
     
+    vm.currentUser = currentUser.getCurrentUser();
     vm.team = teamformDb.getTeam(vm.param.eventName, vm.param.teamName);
     vm.member = teamformDb.getAllMembers(vm.param.eventName);
     vm.member.$loaded()
@@ -40,6 +41,8 @@ function TeamCtrl($scope, teamformDb) {
     vm.processRequest = processRequest;
     vm.removeMember = removeMember;
     vm.getMemberData = getMemberData;
+    vm.isTeamLeader = isTeamLeader;
+    vm.isLoggedIn = isLoggedIn;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -107,5 +110,17 @@ function TeamCtrl($scope, teamformDb) {
         }
       }
       return payload;
+    }
+
+    function isTeamLeader() {
+      if (!isLoggedIn()) {
+        console.log('1113project/teamController/isTeamLeader: You are not logged in');
+        return false;
+      }
+      return vm.team.teamOwner === vm.currentUser.$id;
+    }
+
+    function isLoggedIn() {
+      return currentUser.isLoggedIn();
     }
 }
