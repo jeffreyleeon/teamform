@@ -48,40 +48,41 @@
 
 
 				<div class="row">
-                  <div class="col-sm-6">
-                     <h4>Team members</h4>
-                     <!-- TODO: Show the current team member list -->
+          <div class="col-sm-6">
+            <h4>Team members</h4>
+					  <div ng-repeat="teamMemberID in vm.param.teamMembers" ng-init="teamMemberData = vm.getMemberData(teamMemberID)">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{{teamMemberData.name}}</h3>
+                </div>
+                <div class="panel-body">
+                  <p><b>Introduction: </b>{{teamMemberData.introduction}}</p>
+                  <p><b>Skills: </b>{{teamMemberData.skills.join()}}</p>
+                  <a class="btn btn-danger" ng-click="vm.removeMember(teamMemberID);">DELETE</a>
+                </div>
+              </div>
+					  </div>
+          </div>
+          <div class="col-sm-6">
+            <h4>Requests received:</h4>
+					  <div ng-repeat="requestMemberID in vm.requests" ng-init="requestMemberData = vm.getMemberData(requestMemberID)">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{{requestMemberData.name}}</h3>
+                </div>
+                <div class="panel-body">
+                  <p><b>Introduction: </b>{{requestMemberData.introduction}}</p>
+                  <p><b>Skills: </b>{{requestMemberData.skills.join()}}</p>
+                  <a class="btn btn-primary" ng-click="vm.processRequest(requestMemberID);">ACCEPT</a>
+                </div>
+              </div>
+					  </div>
 					 
-					 <div ng-repeat="teamMemberID in vm.param.teamMembers">
-						<button type="button" class="btn"
-                     ng-click="vm.removeMember(teamMemberID);"
-                     ng-init="teamMemberData = vm.getMemberData(teamMemberID)">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{teamMemberData.name}}
-						</button>
-					 </div>
-					 
-                  </div>
-
-                  <div class="col-sm-6">
-                     <h4>Requests received:</h4>
-
-                     <!--TODO: Show the requests -->
-					 
-					 <div ng-repeat="requestMemberID in vm.requests">
-						<button type="button" class="btn"
-                     ng-click="vm.processRequest(requestMemberID);"
-                     ng-init="requestMemberData = vm.getMemberData(requestMemberID)">
-							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> {{requestMemberData.name}}
-						</button>
-					 </div>
-					 
-                  </div>
+          </div>
 				</div>
 				  
             </div>
          </div>
-
-
        </div>
    </div>
 
