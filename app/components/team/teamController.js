@@ -21,7 +21,6 @@ function TeamCtrl($scope, teamformDb) {
             vm.range = data.child("param").val();
             vm.param.currentTeamSize = parseInt((vm.range.minTeamSize + vm.range.maxTeamSize)/2);
             $scope.$apply(); // force to refresh
-            $('#team_page_controller').show(); // show UI
         } 
     });
     
@@ -40,7 +39,7 @@ function TeamCtrl($scope, teamformDb) {
     vm.saveFunc = saveFunc;
     vm.processRequest = processRequest;
     vm.removeMember = removeMember;
-    vm.getMemberName = getMemberName;
+    vm.getMemberData = getMemberData;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -76,30 +75,37 @@ function TeamCtrl($scope, teamformDb) {
       vm.refreshViewRequestsReceived();
     }
 
-    function processRequest(r) {
-        if (vm.param.teamMembers.indexOf(r) < 0 && 
+    function processRequest(requestMemberID) {
+        if (vm.param.teamMembers.indexOf(requestMemberID) < 0 && 
             vm.param.teamMembers.length < vm.param.currentTeamSize) {
             // Not exists, and the current number of team member is less than the preferred team size
-            vm.param.teamMembers.push(r);
+            vm.param.teamMembers.push(requestMemberID);
             vm.saveFunc();
         }
     }
 
-    function removeMember(member) {
-        var index = vm.param.teamMembers.indexOf(member);
+    function removeMember(teamMemberID) {
+        var index = vm.param.teamMembers.indexOf(teamMemberID);
         if ( index > -1 ) {
             vm.param.teamMembers.splice(index, 1); // remove that item
             vm.saveFunc();
         }
     }
 
-    function getMemberName(memberID) {
+    function getMemberData(memberID) {
+      var payload = {
+        name: '',
+        introduction: '',
+        skills: [],
+      };
       for (var i = 0; i < vm.member.length; i++) {
         var member = vm.member[i];
         if (member.$id === memberID) {
-          return member.name;
+          payload.name = member.name;
+          payload.introduction = member.introduction;
+          payload.skills = member.skills;
         }
       }
-      return '';
+      return payload;
     }
 }
