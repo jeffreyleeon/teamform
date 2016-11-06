@@ -25,8 +25,8 @@ module.exports = function(config) {
 		 'assets/js/site.js' : ['coverage'],		
 		 'assets/js/team.js' : ['coverage'],
 		 'config/*.js': ['coverage'],
-		 'components/*/*.js': ['coverage'],
-		 'shared/*/*.js': ['coverage'],
+		 'components/**/!(*spec).js': ['coverage'],
+		 'shared/**/!(*spec).js': ['coverage'],
 	},
 	reporters: ['dots', 'coverage'],
 	coverageReporter: {
