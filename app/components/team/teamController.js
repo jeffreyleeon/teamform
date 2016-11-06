@@ -4,9 +4,6 @@ angular.module('teamform-app')
 function TeamCtrl($scope, currentUser, teamformDb) {
     var vm = this;
 
-    var refPath = "";
-    
-    // TODO: implementation of MemberCtrl   
     vm.param = {
       eventName: '',  
       teamName : '',
@@ -43,6 +40,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     vm.getMemberData = getMemberData;
     vm.isTeamLeader = isTeamLeader;
     vm.isLoggedIn = isLoggedIn;
+    vm.containsRequiredSkills = containsRequiredSkills;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -113,7 +111,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     }
 
     function isTeamLeader() {
-      if (!isLoggedIn()) {
+      if (!vm.isLoggedIn()) {
         console.log('1113project/teamController/isTeamLeader: You are not logged in');
         return false;
       }
@@ -122,5 +120,19 @@ function TeamCtrl($scope, currentUser, teamformDb) {
 
     function isLoggedIn() {
       return currentUser.isLoggedIn();
+    }
+
+    function containsRequiredSkills(skills) {
+      if (!skills && !Array.isArray(skills)) {
+        return false;
+      }
+      for (var i = 0; i < skills.length; i++) {
+        var userSkill = skills[i];
+        if (vm.team.skills.indexOf(userSkill) > -1) {
+          // Contains skill
+          return true;
+        }
+      }
+      return false;
     }
 }
