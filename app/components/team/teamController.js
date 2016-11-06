@@ -4,9 +4,6 @@ angular.module('teamform-app')
 function TeamCtrl($scope, currentUser, teamformDb) {
     var vm = this;
 
-    var refPath = "";
-    
-    // TODO: implementation of MemberCtrl   
     vm.param = {
       eventName: '',  
       teamName : '',
@@ -114,7 +111,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     }
 
     function isTeamLeader() {
-      if (!isLoggedIn()) {
+      if (!vm.isLoggedIn()) {
         console.log('1113project/teamController/isTeamLeader: You are not logged in');
         return false;
       }
