@@ -126,7 +126,16 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     }
 
     function containsRequiredSkills(skills) {
-      console.log('===========team skills ', vm.team.skills);
+      if (!skills && !Array.isArray(skills)) {
+        return false;
+      }
+      for (var i = 0; i < skills.length; i++) {
+        var userSkill = skills[i];
+        if (vm.team.skills.indexOf(userSkill) > -1) {
+          // Contains skill
+          return true;
+        }
+      }
       return false;
     }
 }
