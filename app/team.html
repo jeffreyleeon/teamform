@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="teamform-team-app">
+<html lang="en" ng-app="teamform-app">
    <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,36 +48,45 @@
 
 
 				<div class="row">
-                  <div class="col-sm-6">
-                     <h4>Team members</h4>
-                     <!-- TODO: Show the current team member list -->
+          <div ng-class="vm.isTeamLeader() ? 'col-md-6' : 'col-md-12'">
+            <h4>Team members</h4>
+					  <div ng-repeat="teamMemberID in vm.param.teamMembers" ng-init="teamMemberData = vm.getMemberData(teamMemberID)">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{{teamMemberData.name}}</h3>
+                </div>
+                <div class="panel-body">
+                  <p><b>Introduction: </b>{{teamMemberData.introduction}}</p>
+                  <p><b>Skills: </b>{{teamMemberData.skills.join()}}</p>
+                  <a
+                    class="btn btn-danger"
+                    ng-click="vm.removeMember(teamMemberID);">DELETE</a>
+                </div>
+              </div>
+					  </div>
+          </div>
+          <div class="col-sm-6" ng-if="vm.isTeamLeader()">
+            <h4>Requests received:</h4>
+					  <div ng-repeat="requestMemberID in vm.requests" ng-init="requestMemberData = vm.getMemberData(requestMemberID)">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">{{requestMemberData.name}}</h3>
+                </div>
+                <div class="panel-body">
+                  <p><b>Introduction: </b>{{requestMemberData.introduction}}</p>
+                  <p><b>Skills: </b>{{requestMemberData.skills.join()}}</p>
+                  <a
+                    class="btn btn-primary"
+                    ng-click="vm.processRequest(requestMemberID);">ACCEPT</a>
+                </div>
+              </div>
+					  </div>
 					 
-					 <div ng-repeat="teamMemberID in vm.param.teamMembers">
-						<button type="button" class="btn" ng-click="vm.removeMember(teamMemberID);">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{vm.getMemberName(teamMemberID)}}
-						</button>
-					 </div>
-					 
-                  </div>
-
-                  <div class="col-sm-6">
-                     <h4>Requests received:</h4>
-
-                     <!--TODO: Show the requests -->
-					 
-					 <div ng-repeat="requestMemberID in vm.requests">
-						<button type="button" class="btn" ng-click="vm.processRequest(requestMemberID);">
-							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> {{vm.getMemberName(requestMemberID)}}
-						</button>
-					 </div>
-					 
-                  </div>
+          </div>
 				</div>
 				  
             </div>
          </div>
-
-
        </div>
    </div>
 
@@ -91,8 +100,11 @@
    <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
    <script src="assets/lib/firebase.js"></script>     
    <script src="assets/lib/angularfire.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
 
    <script src="shared/teamform_db/teamformDb.js"></script>
+   <script src="shared/current_user/currentUser.js"></script>
+   <script src="components/mainApp.js"></script>
    <script src="components/team/teamController.js"></script>
 
    </body>

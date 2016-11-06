@@ -1,7 +1,7 @@
-angular.module('teamform-team-app', ['teamform-db'])
-.controller('TeamCtrl', ['$scope', 'teamformDb', TeamCtrl]);
+angular.module('teamform-app')
+.controller('TeamCtrl', ['$scope', 'currentUser', 'teamformDb', TeamCtrl]);
 
-function TeamCtrl($scope, teamformDb) {
+function TeamCtrl($scope, currentUser, teamformDb) {
     var vm = this;
 
     var refPath = "";
@@ -21,10 +21,10 @@ function TeamCtrl($scope, teamformDb) {
             vm.range = data.child("param").val();
             vm.param.currentTeamSize = parseInt((vm.range.minTeamSize + vm.range.maxTeamSize)/2);
             $scope.$apply(); // force to refresh
-            $('#team_page_controller').show(); // show UI
         } 
     });
     
+    vm.currentUser = currentUser.getCurrentUser();
     vm.team = teamformDb.getTeam(vm.param.eventName, vm.param.teamName);
     vm.member = teamformDb.getAllMembers(vm.param.eventName);
     vm.member.$loaded()
@@ -40,7 +40,9 @@ function TeamCtrl($scope, teamformDb) {
     vm.saveFunc = saveFunc;
     vm.processRequest = processRequest;
     vm.removeMember = removeMember;
-    vm.getMemberName = getMemberName;
+    vm.getMemberData = getMemberData;
+    vm.isTeamLeader = isTeamLeader;
+    vm.isLoggedIn = isLoggedIn;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -76,30 +78,49 @@ function TeamCtrl($scope, teamformDb) {
       vm.refreshViewRequestsReceived();
     }
 
-    function processRequest(r) {
-        if (vm.param.teamMembers.indexOf(r) < 0 && 
+    function processRequest(requestMemberID) {
+        if (vm.param.teamMembers.indexOf(requestMemberID) < 0 && 
             vm.param.teamMembers.length < vm.param.currentTeamSize) {
             // Not exists, and the current number of team member is less than the preferred team size
-            vm.param.teamMembers.push(r);
+            vm.param.teamMembers.push(requestMemberID);
             vm.saveFunc();
         }
     }
 
-    function removeMember(member) {
-        var index = vm.param.teamMembers.indexOf(member);
+    function removeMember(teamMemberID) {
+        var index = vm.param.teamMembers.indexOf(teamMemberID);
         if ( index > -1 ) {
             vm.param.teamMembers.splice(index, 1); // remove that item
             vm.saveFunc();
         }
     }
 
-    function getMemberName(memberID) {
+    function getMemberData(memberID) {
+      var payload = {
+        name: '',
+        introduction: '',
+        skills: [],
+      };
       for (var i = 0; i < vm.member.length; i++) {
         var member = vm.member[i];
         if (member.$id === memberID) {
-          return member.name;
+          payload.name = member.name;
+          payload.introduction = member.introduction;
+          payload.skills = member.skills;
         }
       }
-      return '';
+      return payload;
+    }
+
+    function isTeamLeader() {
+      if (!isLoggedIn()) {
+        console.log('1113project/teamController/isTeamLeader: You are not logged in');
+        return false;
+      }
+      return vm.team.teamOwner === vm.currentUser.$id;
+    }
+
+    function isLoggedIn() {
+      return currentUser.isLoggedIn();
     }
 }
