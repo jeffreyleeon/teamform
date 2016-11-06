@@ -68,7 +68,7 @@
           <div class="col-sm-6" ng-if="vm.isTeamLeader()">
             <h4>Requests received:</h4>
 					  <div ng-repeat="requestMemberID in vm.requests" ng-init="requestMemberData = vm.getMemberData(requestMemberID)">
-              <div class="panel panel-default">
+              <div class="panel" ng-class="vm.containsRequiredSkills(requestMemberData.skills) ? 'panel-success' : 'panel-danger'">
                 <div class="panel-heading">
                   <h3 class="panel-title">{{requestMemberData.name}}</h3>
                 </div>

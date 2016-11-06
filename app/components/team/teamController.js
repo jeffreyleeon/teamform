@@ -43,6 +43,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     vm.getMemberData = getMemberData;
     vm.isTeamLeader = isTeamLeader;
     vm.isLoggedIn = isLoggedIn;
+    vm.containsRequiredSkills = containsRequiredSkills;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -122,5 +123,10 @@ function TeamCtrl($scope, currentUser, teamformDb) {
 
     function isLoggedIn() {
       return currentUser.isLoggedIn();
+    }
+
+    function containsRequiredSkills(skills) {
+      console.log('===========team skills ', vm.team.skills);
+      return false;
     }
 }
