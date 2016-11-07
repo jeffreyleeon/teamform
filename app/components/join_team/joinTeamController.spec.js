@@ -106,5 +106,16 @@ describe('teamform-app module', function() {
       expect(controller._parseSkills('a, b, c')).toEqual(['a', 'b', 'c']);
       expect(controller._parseSkills('')).toEqual(['']);
     });
+
+    it('should check if a user joined team or not correctly', function() {
+      controller.joinedTeam = false;
+      expect(controller.isJoinedTeam()).toEqual(false);
+      controller.joinedTeam = true;
+      expect(controller.isJoinedTeam()).toEqual(true);
+      controller.joinedTeam = undefined;
+      expect(controller.isJoinedTeam()).toEqual(false);
+      controller.joinedTeam = null;
+      expect(controller.isJoinedTeam()).toEqual(false);
+    });
   });
 });

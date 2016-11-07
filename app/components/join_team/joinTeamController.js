@@ -10,11 +10,13 @@ function JoinTeamCtrl(currentUser, teamformDb) {
     vm.teams = {};
     vm.skillsString = '';
     vm.introduction = '';
+    vm.joinedTeam = false;
 
     vm.getMember = getMember;
     vm.getMember(vm.eventName, vm.currentUser.$id);
     vm._parseSkills = _parseSkills;
     vm.saveFunc = saveFunc;
+    vm.isJoinedTeam = isJoinedTeam;
     vm.refreshTeams = refreshTeams;
     vm.refreshTeams(); // call to refresh teams...
 
@@ -23,6 +25,7 @@ function JoinTeamCtrl(currentUser, teamformDb) {
         var selectionKey = 'selection';
         var skillsKey = 'skills';
         var introKey = 'introduction';
+        var joinedTeamKey = 'joinedTeam';
         if (data.child(selectionKey).val() != null ) {
           vm.selection = data.child(selectionKey).val();
         } else {
@@ -39,6 +42,7 @@ function JoinTeamCtrl(currentUser, teamformDb) {
         } else {
           vm.introduction = '';
         }
+        vm.joinedTeam = data.child(joinedTeamKey).val();
       });
     }
 
@@ -73,7 +77,11 @@ function JoinTeamCtrl(currentUser, teamformDb) {
             }
         }
         vm.teams = teamformDb.getAllTeams(vm.eventName);
-    } 
+    }
+
+    function isJoinedTeam() {
+      return !!vm.joinedTeam;
+    }
 
     function _parseSkills(skills) {
         var arr = skills.split(',');
