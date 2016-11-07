@@ -14,6 +14,17 @@ node -v
 npm -v
 ```
 
+#### Setup Firebase
+- In app/config/env.js, insert your firebase information to connect the application to your firebase project
+
+#### Setup Facebook login
+1. Enter [facebook developer console](https://developers.facebook.com), create a new facebook app
+2. In Firebase console, <b>Authentication->Login Methods->Facebook</b>, enable facebook authentication
+3. In Facebook app dashboard, copy the AppID and App Secret to Firebase console <b>Authentication->Login Methods->Facebook</b>
+4. In Facebook app dashboard, <b>+Add Product</b>, add Facebook Login product
+5. Copy the OAuth redirect URI in Firebase console, <b>Authentication->Login Methods->Facebook</b>, to Facebook app dashboard <b>Facebook Login->Settings->Client OAuth Settings->Valid OAuth redirect URIs</b>, the uri should be in the format of <b>https://[YOUR-FIREBASE-PROJECT-NAME].firebaseapp.com/__/auth/handler</b>
+6. In Facebook app dashboard, <b>App Review</b>, make sure you make the facebook app public
+
 ### Clone the project
 
 Please clone the repository at GitHub using `git clone` command:

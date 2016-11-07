@@ -25,5 +25,28 @@ describe('current-user module', function() {
         'name': 'tester',
       });
     });
+
+    it('should delete user cache', function() {
+      currentUser.setCurrentUser({
+        $id: 123,
+        name: '123',
+      });
+      expect(currentUser.getCurrentUser()).toEqual({
+        $id: 123,
+        name: '123',
+      });
+      currentUser.deleteCurrentUser();
+      expect(currentUser.getCurrentUser()).toEqual({});
+    });
+
+    it('should check if user logged in correctly', function() {
+      currentUser.setCurrentUser({
+        $id: 123,
+        name: '123',
+      });
+      expect(currentUser.isLoggedIn()).toEqual(true);
+      currentUser.deleteCurrentUser();
+      expect(currentUser.isLoggedIn()).toEqual(false);
+    });
   });
 });

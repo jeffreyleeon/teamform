@@ -5,6 +5,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 	initalizeFirebase();
 
   var eventScope = 'events/';
+  var userScope = 'user/';
 
   var service = {
     loginWithFacebook: loginWithFacebook,
@@ -21,6 +22,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     getAllMembers: getAllMembers,
     getMember: getMember,
     setMemberData: setMemberData,
+    getAllUsers: getAllUsers,
   };
   return service;
 
@@ -133,6 +135,11 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   	var refPath = eventScope + eventName + "/member/" + userID; 
     var ref = firebase.database().ref(refPath);
     ref.set(data, callback);
+  }
+
+  function getAllUsers() {
+    var refPath = userScope;
+    return $firebaseArray(firebase.database().ref(refPath));
   }
 
   function _getEventParamsPath(eventName) {

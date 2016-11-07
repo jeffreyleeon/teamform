@@ -6,6 +6,7 @@ function CurrentUser($localStorage) {
     getCurrentUser: getCurrentUser,
     setCurrentUser: setCurrentUser,
     deleteCurrentUser: deleteCurrentUser,
+    isLoggedIn: isLoggedIn,
   };
   return service;
 
@@ -20,5 +21,10 @@ function CurrentUser($localStorage) {
 
   function deleteCurrentUser() {
     setCurrentUser({});
+  }
+
+  function isLoggedIn() {
+    var user = getCurrentUser();
+    return !angular.equals(user, {});
   }
 }
