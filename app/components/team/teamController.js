@@ -37,6 +37,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     vm.saveFunc = saveFunc;
     vm.processRequest = processRequest;
     vm.removeMember = removeMember;
+    vm.updateRemovedMember = updateRemovedMember;
     vm.getMemberData = getMemberData;
     vm.isTeamLeader = isTeamLeader;
     vm.isLoggedIn = isLoggedIn;
@@ -68,6 +69,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
       $.each(vm.param.teamMembers, function(i,obj){
           var rec = vm.member.$getRecord(obj);
           rec.selection = [];
+          rec.joinedTeam = true;
           vm.member.$save(rec);
       });
       vm.team.size = vm.param.currentTeamSize;
@@ -89,8 +91,15 @@ function TeamCtrl($scope, currentUser, teamformDb) {
         var index = vm.param.teamMembers.indexOf(teamMemberID);
         if ( index > -1 ) {
             vm.param.teamMembers.splice(index, 1); // remove that item
+            vm.updateRemovedMember(teamMemberID);
             vm.saveFunc();
         }
+    }
+
+    function updateRemovedMember(teamMemberID) {
+      var rec = vm.member.$getRecord(teamMemberID);
+      rec.joinedTeam = false;
+      vm.member.$save(rec);
     }
 
     function getMemberData(memberID) {
