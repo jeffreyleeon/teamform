@@ -24,10 +24,9 @@ module.exports = function(config) {
 	preprocessors: {	 	
 		 'assets/js/site.js' : ['coverage'],		
 		 'assets/js/team.js' : ['coverage'],
-		 'assets/js/member.js' : ['coverage'],
 		 'config/*.js': ['coverage'],
-		 'components/*/*.js': ['coverage'],
-		 'shared/*/*.js': ['coverage'],
+		 'components/**/!(*spec).js': ['coverage'],
+		 'shared/**/!(*spec).js': ['coverage'],
 	},
 	reporters: ['dots', 'coverage'],
 	coverageReporter: {

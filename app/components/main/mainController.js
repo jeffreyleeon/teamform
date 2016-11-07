@@ -11,12 +11,10 @@ function MainCtrl(currentUser, teamformDb) {
     vm.currentUser = currentUser.getCurrentUser();
     console.log('=======current User ', vm.currentUser);
     vm.email = vm.currentUser.email;
+    vm.users = teamformDb.getAllUsers();
 
     function isLoggedIn() {
-    	if (!vm.currentUser) {
-    		return false;
-    	}
-    	return !angular.equals(vm.currentUser, {});
+    	return currentUser.isLoggedIn();
     }
 
     function logout() {

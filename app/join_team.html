@@ -29,8 +29,7 @@
    </head>
    <body>
 
-   <a href="javascript:history.back()"
-   <button id="btn_admin" type="button" class="btn btn-primary" >Back</button></a>
+   <a href="javascript:history.back()"><button id="btn_admin" type="button" class="btn btn-primary" >Back</button></a>
 
    <br>
 
@@ -45,6 +44,7 @@
             <div class="col-md-2 col-xs-2"></div>
             <div class="col-md-8 col-xs-8 panel">
               <div class="row text-left">
+<<<<<<< HEAD
                 <h3>Your team preference:</h3>
                 <div ng-repeat="team in vm.teams">
                   <div class="checkbox">
@@ -53,9 +53,33 @@
                       ng-click="vm.toggleSelection(team.$id)">
                       {{team.$id}}
                     </label>
+=======
+                <img ng-if="!!vm.currentUser.profile_pic_url" src="{{vm.currentUser.profile_pic_url}}" class="profile_img">
+                <h3>Name:</h3>
+                <p>{{vm.currentUser.display_name}}</p>
+                <h3>Email:</h3>
+                <p>{{vm.currentUser.email}}</p>
+                <h3>Your Skills:</h3>
+                <input type="text" class="form-control" id="inputMemberSkills" placeholder="Skills you acquired, comma separated. (i.e. C++, Java, JS)" ng-model="vm.skillsString">
+                <h3>Self introduction</h3>
+                <textarea type="text" class="form-control" id="inputMemberIntroduction" placeholder="(Optional) Introduce yourself to others~" ng-model="vm.introduction"></textarea>
+                <div ng-if="vm.isJoinedTeam() === false">
+                  <h3>Your team preference:</h3>
+                  <div ng-repeat="team in vm.teams">
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="{{team.$id}}" 
+                        ng-checked="vm.selection.indexOf(team.$id) > -1"
+                        ng-click="vm.toggleSelection(team.$id)">
+                        {{team.$id}}
+                      </label>
+                    </div>
+>>>>>>> 1113pmoc/master
                   </div>
+                  <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Save</button>
                 </div>
-                <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Save</button>
+                <div ng-if="vm.isJoinedTeam() === true">
+                  <h3>Your have joined a team!</h3>
+                </div>
               </div>
             </div>
           <div class="col-md-2 col-xs-2"></div>
@@ -79,7 +103,6 @@
    <script src="shared/current_user/currentUser.js"></script>
    <script src="components/mainApp.js"></script>
    <script src="components/join_team/joinTeamController.js"></script>
-   <script src="assets/js/member.js"></script>
 
    </body>
 </html>
