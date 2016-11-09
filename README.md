@@ -1,5 +1,4 @@
 # teamform-seed
-## The seed project for the team forming web application
 
 ### Pre-requisites
 
@@ -13,6 +12,11 @@ git --version
 node -v
 npm -v
 ```
+Read the book - [Clean Code](http://ricardogeek.com/docs/clean_code.pdf)
+
+Read the [article](https://scotch.io/tutorials/angularjs-best-practices-directory-structure) about Angularjs file system best practice
+
+Read the [article](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) about Angularjs language style best practice
 
 #### Setup Firebase
 - In app/config/env.js, insert your firebase information to connect the application to your firebase project
