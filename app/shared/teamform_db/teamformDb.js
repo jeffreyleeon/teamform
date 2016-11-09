@@ -42,7 +42,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     refreshToken,
     callback) {
     var refPath = "user/" + fbID;
-    var data = {             
+    var data = {
         'fb_id': fbID,
         'fb_name': name,
         'display_name': name,
@@ -110,7 +110,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   };
 
   function setTeamData(eventName, teamID, data, callback) {
-    var refPath = eventScope + eventName + "/team/" + teamID; 
+    var refPath = eventScope + eventName + "/team/" + teamID;
     service.updateFirebase(refPath, data, callback);
   };
 
@@ -126,7 +126,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
   }
 
   function setMemberData(eventName, userID, data, callback) {
-  	var refPath = eventScope + eventName + "/member/" + userID; 
+  	var refPath = eventScope + eventName + "/member/" + userID;
     service.updateFirebase(refPath, data, callback);
   }
 

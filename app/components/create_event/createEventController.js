@@ -6,14 +6,16 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
 
     vm.eventName = '';
     vm.eventNameError = '';
+    // vm.eventDescription = '';
     vm.currentUser = currentUser.getCurrentUser();
     vm.eventValid = false;
     vm.event = {
+        eventDescription: '',
         maxTeamSize: 10,
         minTeamSize: 1,
         eventOwner: vm.currentUser.$id || 'dummy',
     };
-    
+
     vm._checkIfEventExist = _checkIfEventExist;
 
     vm.onEventNameChanged = onEventNameChanged;
@@ -51,7 +53,7 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
             vm.event.maxTeamSize = newVal;
         }
     }
-    
+
     function saveFunc() {
         // vm.event.$save();
         // Finally, go back to the front-end
@@ -60,5 +62,8 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
             window.location.href= "index.html";
         };
         teamformDb.saveNewEvent(vm.eventName, vm.event, callback);
+
+        // Check description
+        // window.alert(vm.event.eventDescription);
     }
 }
