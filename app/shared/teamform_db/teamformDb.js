@@ -5,6 +5,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 	initalizeFirebase();
 
   var eventScope = 'events/';
+  var userScope = 'user/';
 
   var service = {
     loginWithFacebook: loginWithFacebook,
@@ -21,6 +22,8 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     getAllMembers: getAllMembers,
     getMember: getMember,
     setMemberData: setMemberData,
+    getAllUsers: getAllUsers,
+    updateFirebase: updateFirebase,
   };
   return service;
 
@@ -39,7 +42,6 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     refreshToken,
     callback) {
     var refPath = "user/" + fbID;
-    var ref = firebase.database().ref(refPath);
     var data = {             
         'fb_id': fbID,
         'fb_name': name,
@@ -50,7 +52,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
         'refresh_token': refreshToken,
         'created_at': Date.now(),
     };
-    ref.set(data, callback);
+    service.updateFirebase(refPath, data, callback);
   }
 
   function getUser(userID) {
@@ -62,8 +64,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function saveNewEvent(eventName, payload, callback) {
     var refPath = _getEventParamsPath(eventName);
-    var ref = firebase.database().ref(refPath);
-    ref.set(payload, callback);
+    service.updateFirebase(refPath, payload, callback);
   }
 
   function isEventExist(eventName) {
@@ -71,11 +72,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     var arr = $firebaseArray(firebase.database().ref(refPath));
     return new Promise(function (resolve, reject) {
         arr.$loaded().then(function(data) {
-          if (data.length > 0) {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
+          resolve(data.length > 0);
         }, function(error) {
           resolve(false);
         });
@@ -114,8 +111,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function setTeamData(eventName, teamID, data, callback) {
     var refPath = eventScope + eventName + "/team/" + teamID; 
-    var ref = firebase.database().ref(refPath);
-    ref.set(data, callback);
+    service.updateFirebase(refPath, data, callback);
   };
 
   function getAllMembers(eventName) {
@@ -131,8 +127,17 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function setMemberData(eventName, userID, data, callback) {
   	var refPath = eventScope + eventName + "/member/" + userID; 
+    service.updateFirebase(refPath, data, callback);
+  }
+
+  function getAllUsers() {
+    var refPath = userScope;
+    return $firebaseArray(firebase.database().ref(refPath));
+  }
+
+  function updateFirebase(refPath, payload, callback) {
     var ref = firebase.database().ref(refPath);
-    ref.set(data, callback);
+    ref.set(payload, callback);
   }
 
   function _getEventParamsPath(eventName) {
