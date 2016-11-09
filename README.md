@@ -82,6 +82,22 @@ app/                    --> all of the source files for the application
   
 ```
 
+## APIs
+### Sending email
+```
+$http.post(
+      'https://software-engineering-server.herokuapp.com/',
+        {
+            email: 'colee@ust.hk',
+            subject: 'Hello jeffreyleeon',
+            text: 'Congratulations jeffreyleeon, you just sent an email with Mailgun!  You are truly awesome from POSTMAN!',
+        }
+    )
+    .then(function(response) {
+    // What ever you need to do
+    });
+```
+
 ## Testing
 
 ### Running Unit Tests
