@@ -13,6 +13,8 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
 
     vm.displaySkills = displaySkills;
     vm.isMyTeam = isMyTeam;
+    vm.isMyEvent = isMyEvent;
+    vm.getMemberData = getMemberData;
 
     function displaySkills(skills) {
     	if (!skills) {
@@ -23,5 +25,26 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
 
     function isMyTeam(team) {
     	return team.teamOwner === vm.currentUser.$id;
+    }
+
+    function isMyEvent(event) {
+      return event.eventOwner === vm.currentUser.$id;
+    }
+
+    function getMemberData(memberID) {
+      var payload = {
+        name: '',
+        introduction: '',
+        skills: [],
+      };
+      for (var i = 0; i < vm.members.length; i++) {
+        var member = vm.members[i];
+        if (member.$id === memberID) {
+          payload.name = member.name;
+          payload.introduction = member.introduction;
+          payload.skills = member.skills;
+        }
+      }
+      return payload;
     }
 }
