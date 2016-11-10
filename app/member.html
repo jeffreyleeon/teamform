@@ -61,7 +61,7 @@
               <br>
               <div ng-if="vm.isMyProfile()">
                 <h4> Add new skill: {{vm.newSkill}}</h4>
-                <input type="text" placeholder="type skill here.." ng-model = "vm.newSkill">
+                <input type="text" placeholder="type skill(s) here" ng-model = "vm.newSkill">
                 <input type="button" value="Add" ng-click="vm.addNewSkill(vm.newSkill);">
               </div>
 
