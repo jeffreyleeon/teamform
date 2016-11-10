@@ -72,23 +72,54 @@
        Back</button></a>
 
        <br>
+       <div class="container" ng-controller="LoginCtrl as vm">
+        <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-6">
+                <a href="#" class="active" id="login-form-link">Login</a>
+              </div>
+              <div class="col-xs-6">
+                <a href="#" id="register-form-link">Register</a>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <form id="login-form" style="display: block;">
+                  <div class="form-group">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                  </div>
+                  <div class="form-group text-center">
+                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                    <label for="remember"> Remember Me</label>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="text-center">
+                          <a tabindex="5" class="forgot-password">Forgot Password?</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" type="email">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input id="inputPassword" class="form-control" placeholder="Password" required="" type="password">
-        <div class="checkbox">
-          <label>
-            <input value="remember-me" type="checkbox"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          
-          </br>
-          <div class="social-buttons" id="login_page_controller" ng-controller="LoginCtrl as vm">
+                            </br>
+          <div class="col-md-12 social-buttons" id="login_page_controller" >
             
              <a class="btn btn-block btn-social btn-facebook" ng-click="vm.login();">
                 <span class="fa fa-facebook"></span> Sign in with Facebook
@@ -96,7 +127,62 @@
             <h4 class="error_msg">{{vm.errorMsg}}</h4>
           </div>
 
-      </form>
+                </form>
+
+              <div id="login_page_controller">
+                <form id="register-form"  method="post" role="form" style="display: none;">
+                  <div class="form-group">
+                    <input type="text" id="username" class="form-control" placeholder="Username" >
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="email" class="form-control" placeholder="Email Address" >
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="pass" class="form-control" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="confirmpass" class="form-control" placeholder="Confirm Password">
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" class="form-control btn btn-register" onclick="register();" value="Register Now">
+                      </div>
+                      <script>
+                        function register(){
+                          if(pass.value == confirmpass.value && username.value!=''){
+                            window.open('email_confirmation.html','_self');
+                          }
+                        }
+                        //set an email confirmation on email_confirmation.html
+                        //set a redirect button in the email to registersuccessful_page.html
+                        //value are decided to pass to firebase on registersuccessful_page.html
+
+                      </script>
+                    </div>
+                  </div>
+                  <h4 class="error_msg">{{newerrorMsg}}</h4>
+                  <pre>{{user.username}}</pre>
+                  <pre>{{user.email}}</pre>
+                  <pre>{{user.pass}}</pre>
+                  <pre>{{user.confirmpass}}</pre>
+                </form>
+                
+              </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      
+          
+
+
+      
 
     </div> <!-- /container -->
 
@@ -116,6 +202,7 @@
    <script src="shared/current_user/currentUser.js"></script>
    <script src="shared/teamform_db/teamformDb.js"></script>
    <script src="components/login/loginController.js"></script>
+<<<<<<< HEAD
    <script src="assets/lib/docs.js"></script>
   
 
@@ -123,5 +210,9 @@
    </body>
 </html>
 =======
+</body></html>
+>>>>>>> 1113pmoc/master
+=======
+   <script src="assets/js/docs.js"></script>
 </body></html>
 >>>>>>> 1113pmoc/master

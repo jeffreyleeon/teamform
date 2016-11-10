@@ -23,7 +23,7 @@
 
 =======
       <link rel="stylesheet" href="assets/css/site.css">
-      
+
 >>>>>>> 1113pmoc/master
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
@@ -125,7 +125,7 @@
         <ul ng-repeat="user in vm.users">
           <li>
             <img ng-if="!!user.profile_pic_url" src="{{user.profile_pic_url}}" class="profile_img">
-            <a href='#?id={{user.$id}}'>{{user.display_name}}</a>
+            <a href='member.html?id={{user.$id}}'>{{user.display_name}}</a>
           </li>
         </ul>
       </div>
