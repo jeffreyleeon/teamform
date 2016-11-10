@@ -92,5 +92,32 @@ describe('teamform-app module', function() {
         teamOwner: '234'
       })).toEqual(false);
     });
+
+    it('should get member data correctly', function() {
+      controller.members = [
+        {
+          $id: 123,
+          name: 'Name123',
+          introduction: 'Intro123',
+          skills: ['123', 's123', 'ss123'],
+        },
+        {
+          $id: 456,
+          name: 'Name456',
+          introduction: 'Intro456',
+          skills: ['456', 's456', 'ss456'],
+        },
+      ];
+      expect(controller.getMemberData(123)).toEqual({
+        name: 'Name123',
+        introduction: 'Intro123',
+        skills: ['123', 's123', 'ss123'],
+      });
+      expect(controller.getMemberData(789)).toEqual({
+        name: '',
+        introduction: '',
+        skills: [],
+      });
+    });
   });
 });
