@@ -53,7 +53,9 @@
 					  <div ng-repeat="teamMemberID in vm.param.teamMembers" ng-init="teamMemberData = vm.getMemberData(teamMemberID)">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">{{teamMemberData.name}}</h3>
+                  <h3 class="panel-title">
+                    <a href='member.html?id={{teamMemberID}}'>{{teamMemberData.name}}</a>
+                  </h3>
                 </div>
                 <div class="panel-body">
                   <p><b>Introduction: </b>{{teamMemberData.introduction}}</p>
@@ -71,7 +73,9 @@
 					  <div ng-repeat="requestMemberID in vm.requests" ng-init="requestMemberData = vm.getMemberData(requestMemberID)">
               <div class="panel" ng-class="vm.containsRequiredSkills(requestMemberData.skills) ? 'panel-success' : 'panel-danger'">
                 <div class="panel-heading">
-                  <h3 class="panel-title">{{requestMemberData.name}}</h3>
+                  <h3 class="panel-title">
+                    <a href='member.html?id={{requestMemberID}}'>{{requestMemberData.name}}</a>
+                  </h3>
                 </div>
                 <div class="panel-body">
                   <p><b>Introduction: </b>{{requestMemberData.introduction}}</p>
