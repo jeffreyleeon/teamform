@@ -51,6 +51,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
         'token': token,
         'refresh_token': refreshToken,
         'created_at': Date.now(),
+				'skills': ["skilltest",],
     };
     service.updateFirebase(refPath, data, callback);
   }

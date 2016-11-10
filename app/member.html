@@ -33,20 +33,19 @@
        <!--SIDEBAR-->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
           <img src="{{vm.user.profile_pic_url}}"  style="padding: 10px; width:180px; height:180px">
-          <ul>
-            <li>NAME:  {{vm.user.display_name}}</li>
+          <div>
             <!--<li>ID: {{vm.userID}}</li>-->
-            <li>EMAIL:  {{vm.user.email}}</li>
-            <li>DATE JOINED: {{vm.user.created_at | date:'shortDate'}} </li>
-          </ul>
-
+            <p>NAME:  {{vm.user.display_name}}</p>
+            <p>EMAIL:  {{vm.user.email}}</p>
+            <p>DATE JOINED: {{vm.user.created_at | date:'shortDate'}} </p>
+          </div>
 
         </div>
 
 
         <!-- MAIN PAGE CONTENT-->
         <div class="col-xs-12 col-sm-9">
-            <h2> {{vm.user.display_name}} </h2>
+            <h2><u> {{vm.user.display_name}} </u></h2>
             <br>
             <br>
 
@@ -54,9 +53,15 @@
             <div>
               <h3>SKILLS</h3>
               <br>
+
               <ul ng-repeat ="skill in vm.user.skills">
-                <li>{{skill}} </li>
+                <li>{{skill}}</li>
               </ul>
+
+              <br>
+              <h4> Add new skill: {{vm.newSkill}}</h4>
+              <input type="text" placeholder="type skill here.." ng-model = "vm.newSkill">
+              <input type="button" value="Add" ng-click="vm.addNewSkill(vm.newSkill);">
 
             </div>
 

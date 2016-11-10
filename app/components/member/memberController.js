@@ -7,7 +7,15 @@ function MemberCtrl($scope, currentUser, teamformDb){
   vm.userID = getURLParameter("id");
   vm.user = teamformDb.getUser(vm.userID);
 
-  vm.user.skills = ["skill1", "skill2", "skill3"];
 
+  vm.newSkill = "";
+  vm.addNewSkill = addNewSkill;
+
+  function addNewSkill(newSkill){
+      if(newSkill != ""){
+  	   vm.user.skills.push(newSkill);
+       vm.user.$save();
+      }
+	}
 
 }
