@@ -46,7 +46,9 @@
                   <p>
                     <b>Minimum Team Size: </b>{{vm.event.minTeamSize}}
                   </p>
-                  <a ng-if="vm.isMyEvent(vm.event)">Edit event</a>
+                  <a
+                    ng-if="vm.isMyEvent(vm.event)"
+                    href="edit_event.html?q={{vm.eventName}}">Edit event</a>
                 </div>
               </div>
               <div class="text-center">
