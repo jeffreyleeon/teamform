@@ -17,35 +17,64 @@ describe('teamform-admin-app module', function() {
     var controller;
 
     beforeEach(function() {
-      var isEventExist = function(eventName) { 
+      var getEvent = function(eventName) {
         return {
-          'then': function() {},
+          event: 'event1',
         };
-      };
+      }
       var saveNewEvent = function() {};
       var teamformDb = {
-        isEventExist: isEventExist,
+        getEvent: getEvent,
         saveNewEvent: saveNewEvent,
       };
 
+      var currentUser = {
+        getCurrentUser: function() {
+          return {
+            user: 'user1',
+            $id: '123',
+          };
+        },
+      };
+
       controller = $controller('EditEventCtrl', {
-        $scope: {},
+        currentUser: currentUser,
         teamformDb: teamformDb,
        });
     });
 
     it('should initialize with correct default values', function() {
-      expect(controller.eventName).toEqual('');
-      expect(controller.eventNameError).toEqual('');
-      expect(controller.eventValid).toEqual(false);
-      expect(controller.event.minTeamSize).toEqual(1);
-      expect(controller.event.maxTeamSize).toEqual(10);
+      expect(controller.event).toEqual({
+        event: 'event1',
+      });
+      expect(controller.currentUser).toEqual({
+        user: 'user1',
+        $id: '123',
+      });
     });
 
-    it('check if event name exist whenever name changed', function() {
-      spyOn(controller, '_checkIfEventExist');
-      controller.onEventNameChanged();
-      expect(controller._checkIfEventExist).toHaveBeenCalled();
+    it('change min team size correctly', function() {
+      controller.event.minTeamSize = 1;
+      controller.event.maxTeamSize = 10;
+      controller.changeMinTeamSize(1);
+      expect(controller.event.minTeamSize).toEqual(2);
+      controller.changeMinTeamSize(-4);
+      expect(controller.event.minTeamSize).toEqual(2);
+      controller.changeMinTeamSize(7);
+      expect(controller.event.minTeamSize).toEqual(9);
+      controller.changeMinTeamSize(2);
+      expect(controller.event.minTeamSize).toEqual(9);
+    });
+
+    it('change max team size correctly', function() {
+      controller.event.minTeamSize = 1;
+      controller.event.maxTeamSize = 10;
+      controller.changeMaxTeamSize(1);
+      expect(controller.event.maxTeamSize).toEqual(11);
+      controller.changeMaxTeamSize(-4);
+      expect(controller.event.maxTeamSize).toEqual(7);
+      controller.changeMaxTeamSize(-8);
+      expect(controller.event.maxTeamSize).toEqual(7);
     });
   });
 });

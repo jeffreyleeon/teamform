@@ -54,8 +54,7 @@
               <form>
                 <div class="form-group">
                   <label>Event Name</label>
-                  <input class="form-control" placeholder="Input the event name" ng-change="vm.onEventNameChanged()" ng-model="vm.eventName">
-                  <p class="error_msg">{{vm.eventNameError}}</p>
+                  <p>{{vm.eventName}}</p>
                 </div>
                 <div class="form-group">
                   <label>Event Description</label>
@@ -68,6 +67,11 @@
 
                <span class="badge">
                  {{vm.event.minTeamSize}}</span>
+
+               <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeMinTeamSize(1);"></span></button>
+
+                <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeMinTeamSize(-1);"></span></button>
+
             <br><br>
 
              <strong>Maximum Team Size: </strong>
@@ -75,9 +79,13 @@
                <span class="badge">
                  {{vm.event.maxTeamSize}}</span>
 
+               <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeMaxTeamSize(1);"></span></button>
+
+                <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeMaxTeamSize(-1);"></span></button>
+
             <br><br>
 
-             <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" ng-if="vm.eventValid === true" >Update event</button>
+             <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();">Update event</button>
 
 
             </div>
