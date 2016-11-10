@@ -44,16 +44,6 @@
             <div class="col-md-2 col-xs-2"></div>
             <div class="col-md-8 col-xs-8 panel">
               <div class="row text-left">
-<<<<<<< HEAD
-                <h3>Your team preference:</h3>
-                <div ng-repeat="team in vm.teams">
-                  <div class="checkbox">
-                    <label><input type="checkbox" value="{{team.$id}}"
-                      ng-checked="vm.selection.indexOf(team.$id) > -1"
-                      ng-click="vm.toggleSelection(team.$id)">
-                      {{team.$id}}
-                    </label>
-=======
                 <img ng-if="!!vm.currentUser.profile_pic_url" src="{{vm.currentUser.profile_pic_url}}" class="profile_img">
                 <h3>Name:</h3>
                 <p>{{vm.currentUser.display_name}}</p>
@@ -73,7 +63,6 @@
                         {{team.$id}}
                       </label>
                     </div>
->>>>>>> 1113pmoc/master
                   </div>
                   <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Save</button>
                 </div>
