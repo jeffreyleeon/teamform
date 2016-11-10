@@ -56,7 +56,9 @@
               </br>
               <div class="panel panel-primary" ng-repeat="team in vm.teams">
                 <div class="panel-heading">
-                  <h3 class="panel-title">{{team.$id}}</h3>
+                  <a href="team.html?q={{vm.eventName}}&team={{team.$id}}">
+                    <h3 class="panel-title" style="color:white;">{{team.$id}}</h3>
+                  </a>
                 </div>
                 <div class="panel-body">
                   <p>
@@ -66,9 +68,9 @@
                   <p><b>Members:</b></p>
                   <p>no op</p>
                   <!-- Manage team button -->
-                  <div class="text-center" ng-if="vm.isMyTeam(team)">
+                  <!-- <div class="text-center" ng-if="vm.isMyTeam(team)">
                     <a href="team.html?q={{vm.eventName}}&team={{team.$id}}"><button id="btn_member" type="button" class="btn btn-primary">Manage my team</button></a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
