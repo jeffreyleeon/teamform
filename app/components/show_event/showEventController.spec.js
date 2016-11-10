@@ -93,6 +93,15 @@ describe('teamform-app module', function() {
       })).toEqual(false);
     });
 
+    it('should check if the event is my event correctly', function() {
+      expect(controller.isMyEvent({
+        eventOwner: '123'
+      })).toEqual(true);
+      expect(controller.isMyEvent({
+        eventOwner: '234'
+      })).toEqual(false);
+    });
+
     it('should get member data correctly', function() {
       controller.members = [
         {
