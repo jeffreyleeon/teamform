@@ -36,7 +36,7 @@ module.exports = function(config) {
 	},
 	port: 8080,
 	colors: true,
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 	browserNoActivityTimeout: 100000,
 	singleRun: true,
 	autoWatch: false,

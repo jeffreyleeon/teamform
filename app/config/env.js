@@ -1,6 +1,6 @@
 env = {
-  FB_API_KEY: 'AIzaSyAuBXIoBMfyval-gh8HoG3LJXQVtLWdO0Q',
-  FB_AUTH_DOMAIN: 'comp3111firebaselab.firebaseapp.com',
-  FB_DATABASE_URL: 'https://comp3111firebaselab.firebaseio.com',
-  FB_STORAGE_BUCKET: 'comp3111firebaselab.appspot.com'
+  FB_API_KEY: 'AIzaSyDTXQFSuriwxpvJd0mZHElmLmhL8AIYmWE',
+  FB_AUTH_DOMAIN: 'teamform-15bcb.firebaseapp.com',
+  FB_DATABASE_URL: 'https://teamform-15bcb.firebaseio.com',
+  FB_STORAGE_BUCKET: 'teamform-15bcb.appspot.com'
 }
