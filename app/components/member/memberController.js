@@ -12,10 +12,10 @@ function MemberCtrl($scope, currentUser, teamformDb){
   vm.addNewSkill = addNewSkill;
 
   function addNewSkill(newSkill){
-      if(newSkill != ""){
-  	   vm.user.skills.push(newSkill);
-       vm.user.$save();
-      }
+    if(newSkill != ""){
+  	  vm.user.skills.push(newSkill);
+      vm.user.$save();
+    }
 	}
 
 }
