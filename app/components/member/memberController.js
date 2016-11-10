@@ -6,10 +6,11 @@ function MemberCtrl($scope, currentUser, teamformDb){
 
   vm.userID = getURLParameter("id");
   vm.user = teamformDb.getUser(vm.userID);
-
+  vm.currentUser = currentUser.getCurrentUser();
 
   vm.newSkill = "";
   vm.addNewSkill = addNewSkill;
+  vm.isMyProfile = isMyProfile;
 
   function addNewSkill(newSkill){
     if(newSkill != ""){
@@ -17,5 +18,9 @@ function MemberCtrl($scope, currentUser, teamformDb){
       vm.user.$save();
     }
 	}
+
+  function isMyProfile() {
+    return vm.userID === vm.currentUser.$id;
+  }
 
 }

@@ -59,9 +59,11 @@
               </ul>
 
               <br>
-              <h4> Add new skill: {{vm.newSkill}}</h4>
-              <input type="text" placeholder="type skill here.." ng-model = "vm.newSkill">
-              <input type="button" value="Add" ng-click="vm.addNewSkill(vm.newSkill);">
+              <div ng-if="vm.isMyProfile()">
+                <h4> Add new skill: {{vm.newSkill}}</h4>
+                <input type="text" placeholder="type skill here.." ng-model = "vm.newSkill">
+                <input type="button" value="Add" ng-click="vm.addNewSkill(vm.newSkill);">
+              </div>
 
             </div>
         </div>
@@ -73,7 +75,6 @@
    <!-- Angular and Angular-route libraries (v1.5.7) -->
    <script src="assets/lib/angular.min.js"></script>
    <script src="assets/lib/angular-route.min.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
 
 
    <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
