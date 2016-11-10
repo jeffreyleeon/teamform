@@ -35,7 +35,7 @@ function JoinTeamCtrl(currentUser, teamformDb) {
           var skills = data.child(skillsKey).val();
           vm.skillsString = skills.join();
         } else {
-          vm.skillsString = '';
+          vm.skillsString = (vm.currentUser.skills && vm.currentUser.skills.join()) || '';
         }
         if (data.child(introKey).val() != null) {
           vm.introduction = String(data.child(introKey).val());

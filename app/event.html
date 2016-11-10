@@ -70,7 +70,7 @@
                   </p>
                   <p><b>Members:</b></p>
                   <div ng-repeat="teamMemberID in team.teamMembers" ng-init="memberData = vm.getMemberData(teamMemberID)">
-                      <p><a>{{memberData.name}}</a></p>
+                      <p><a href='member.html?id={{memberData.$id}}'>{{memberData.name}}</a></p>
                   </div>
                   <!-- Manage team button -->
                   <!-- <div class="text-center" ng-if="vm.isMyTeam(team)">

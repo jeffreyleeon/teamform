@@ -51,7 +51,6 @@ function TeamformDb($firebaseObject, $firebaseArray) {
         'token': token,
         'refresh_token': refreshToken,
         'created_at': Date.now(),
-				'skills': ["skilltest",],
     };
     service.updateFirebase(refPath, data, callback);
   }
@@ -138,7 +137,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function updateFirebase(refPath, payload, callback) {
     var ref = firebase.database().ref(refPath);
-    ref.set(payload, callback);
+    ref.update(payload, callback);
   }
 
   function _getEventParamsPath(eventName) {
