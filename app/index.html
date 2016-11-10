@@ -7,30 +7,34 @@
       <meta name="keywords" content="teamform, team">
       <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>teamform - A real-time online team forming app</title>
-    
-      <!-- libraries and CSS    
-    JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)   
+
+      <!-- libraries and CSS
+    JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)
     Bootstrap: Library and CSS for bootstrap framework (v3.3.7 is used)
-    Font-awesome: More icons for the web development (v4.6.3 is used)   
-    site.css: A customized css for our web application. Not from any web framework. 
+    Font-awesome: More icons for the web development (v4.6.3 is used)
+    site.css: A customized css for our web application. Not from any web framework.
     -->
-          
+
       <script src="assets/lib/jquery.min.js"></script>
       <script src="assets/lib/bootstrap.min.js"></script>
-          
+
       <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
+<<<<<<< HEAD
+
+=======
       <link rel="stylesheet" href="assets/css/site.css">
-      
+
+>>>>>>> 1113pmoc/master
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
       <script src="assets/js/site.js"></script>
 
 
-        
+
    </head>
    <body ng-controller="MainCtrl as vm">
       <div class="navbar-wrapper">
-    
+
          <div class="container">
             <nav class="navbar navbar-static-top navbar-default">
                <div class="container">
@@ -56,20 +60,20 @@
                             <li><a href="#">TODO: Add menu items here... </a></li>
                          </ul>
                       </li>
-            
+
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coverage <span class="caret"></span></a>
-                    
+
                         <ul class="dropdown-menu">
                           <li>
                             <a href="coverage/index.html" target="_blank">Report</a>
                           </li>
                           <li role="separator" class="divider"></li>
-                          
+
                           <li>
                             <a href="unit_tests/test_site.js" target="_blank">test_site.js (sample)</a>
                           </li>
-                          
+
                           <li><a href="#">TODO: Add more test cases here... </a></li>
                         </ul>
                       </li>
@@ -96,7 +100,7 @@
             <div class="col-md-12">
                <div class="row">
                   <div class="col-md-12">
-                     
+
                      <div class="text-center">
                         <h1>teamform</h1>
                         <p>A real-time online team forming app for any event</p>
@@ -121,7 +125,7 @@
         <ul ng-repeat="user in vm.users">
           <li>
             <img ng-if="!!user.profile_pic_url" src="{{user.profile_pic_url}}" class="profile_img">
-            <a href='#?id={{user.$id}}'>{{user.display_name}}</a>
+            <a href='member.html?id={{user.$id}}'>{{user.display_name}}</a>
           </li>
         </ul>
       </div>
@@ -177,21 +181,21 @@
                   <br>
                   <span class="text-muted">[Your Team Name]</span>
                </h2>
-               
+
 
                <div class="row">
-            
-            
+
+
                  <div class="col-xs-6 col-md-3">
                   <div class="thumbnail text-center">
                     <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=member1&w=150&h=150" class="img-circle img-responsive">
                     <div class="caption">
                      <h4>[Your name]</h4>
                      <p>[ITSC email]</p>
-                     
+
                     </div>
                   </div>
-                 </div> 
+                 </div>
 
                  <div class="col-xs-6 col-md-3">
                   <div class="thumbnail text-center">
@@ -199,11 +203,11 @@
                     <div class="caption">
                      <h4>[Your name]</h4>
                      <p>[ITSC email]</p>
-                     
+
                     </div>
                   </div>
-                 </div> 
-              
+                 </div>
+
                </div>
 
              </div>
@@ -228,7 +232,7 @@
        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
        <!-- <script src="assets/lib/angular.min.js"></script> -->
        <script src="assets/lib/angular-route.min.js"></script>
-         
+
        <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
        <script src="assets/lib/firebase.js"></script>
        <script src="assets/lib/angularfire.min.js"></script>

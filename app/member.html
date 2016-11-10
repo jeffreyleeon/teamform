@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="teamform-app" ng-controller = "MemberCtrl as vm">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="keywords" content="teamform, team">
+      <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>Member Page - {{vm.user.display_name}}</title>
+
+      <script src="assets/lib/jquery.min.js"></script>
+      <script src="assets/lib/bootstrap.min.js"></script>
+
+     <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
+      <link rel="stylesheet" href="assets/css/site.css" >
+
+
+      <!-- Customized libraries shared by pages -->
+      <script src="config/env.js"></script>
+      <script src="assets/js/site.js"></script>
+
+   </head>
+   <body>
+
+   <a href="javascript:history.back()"
+   <button id="btn_admin" type="button" class="btn btn-primary" >Back</button></a>
+
+   <br>
+
+
+   <div class="container" style="margin:0">
+     <div class="row row-offcanvas row-offcanvas-left">
+       <!--SIDEBAR-->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
+          <img src="{{vm.user.profile_pic_url}}"  style="padding: 10px; width:180px; height:180px">
+          <div>
+            <!--<li>ID: {{vm.userID}}</li>-->
+            <p>NAME:  {{vm.user.display_name}}</p>
+            <p>EMAIL:  {{vm.user.email}}</p>
+            <p>DATE JOINED: {{vm.user.created_at | date:'shortDate'}} </p>
+          </div>
+
+        </div>
+
+
+        <!-- MAIN PAGE CONTENT-->
+        <div class="col-xs-12 col-sm-9">
+            <h2><u> {{vm.user.display_name}} </u></h2>
+            <br>
+            <br>
+
+            <!--SKILLS-->
+            <div>
+              <h3>SKILLS</h3>
+              <br>
+
+              <ul ng-repeat ="skill in vm.user.skills">
+                <li>{{skill}}</li>
+              </ul>
+
+              <br>
+              <h4> Add new skill: {{vm.newSkill}}</h4>
+              <input type="text" placeholder="type skill here.." ng-model = "vm.newSkill">
+              <input type="button" value="Add" ng-click="vm.addNewSkill(vm.newSkill);">
+
+            </div>
+
+<!--EVENTS
+            <div>
+                <h3>EVENTS</h3>
+                <div class="col-sm-6">
+                  <h4>ACTIVE</h4>
+                  <ul>
+                    <li>EVENTNAME</li>
+                    <li>EVENTNAME2</li>
+                  </ul>
+                </div>
+                <div class"col-sm-6">
+                  <h4>INACTIVE</h4>
+                  <ul>
+                    <li>EVENTNAME1</li>
+                    <li>EVENTNAME2</li>
+                    <li>EVENTNAME3</li>
+                  </ul>
+                </div>
+            </div>
+-->
+        </div>
+
+      </div>
+   </div>
+
+
+   <!-- Angular and Angular-route libraries (v1.5.7) -->
+   <script src="assets/lib/angular.min.js"></script>
+   <script src="assets/lib/angular-route.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+
+
+   <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
+   <script src="assets/lib/firebase.js"></script>
+   <script src="assets/lib/angularfire.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
+
+
+   <!-- JavaScript of this page -->
+   <script src="shared/teamform_db/teamformDb.js"></script>
+   <script src="shared/current_user/currentUser.js"></script>
+   <script src="components/mainApp.js"></script>
+   <script src="components/member/memberController.js"></script>
+   <!-- <script src="assets/js/member.js"></script> -->
+
+   </body>
+</html>

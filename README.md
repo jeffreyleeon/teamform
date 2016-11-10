@@ -1,5 +1,4 @@
 # teamform-seed
-## The seed project for the team forming web application
 
 ### Pre-requisites
 
@@ -13,6 +12,11 @@ git --version
 node -v
 npm -v
 ```
+Read the book - [Clean Code](http://ricardogeek.com/docs/clean_code.pdf)
+
+Read the [article](https://scotch.io/tutorials/angularjs-best-practices-directory-structure) about Angularjs file system best practice
+
+Read the [article](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) about Angularjs language style best practice
 
 #### Setup Firebase
 - In app/config/env.js, insert your firebase information to connect the application to your firebase project
@@ -80,6 +84,22 @@ app/                    --> all of the source files for the application
   unit_tests            --> The folder containing the unit test cases (Syntax: Jasmine/Karma)
      test_site.js       --> A sample test case
   
+```
+
+## APIs
+### Sending email
+```
+$http.post(
+      'https://software-engineering-server.herokuapp.com/',
+        {
+            email: 'colee@ust.hk',
+            subject: 'Hello jeffreyleeon',
+            text: 'Congratulations jeffreyleeon, you just sent an email with Mailgun!  You are truly awesome from POSTMAN!',
+        }
+    )
+    .then(function(response) {
+    // What ever you need to do
+    });
 ```
 
 ## Testing

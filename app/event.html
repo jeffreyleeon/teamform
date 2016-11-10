@@ -7,17 +7,17 @@
       <meta name="keywords" content="teamform, team">
       <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>Event Page - {{vm.eventName}}</title>
-          
-      <script src="assets/lib/jquery.min.js"></script>      
-      <script src="assets/lib/bootstrap.min.js"></script>      
-          
+
+      <script src="assets/lib/jquery.min.js"></script>
+      <script src="assets/lib/bootstrap.min.js"></script>
+
       <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
       <link rel="stylesheet" href="assets/css/site.css" >
 
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
       <script src="assets/js/site.js"></script>
-        
+
    </head>
    <body>
 
@@ -38,7 +38,7 @@
               <div class="panel panel-default">
                 <div class="panel-body">
                   <p>
-                    <b>Description: </b>
+                    <b>Description: </b>{{vm.event.eventDescription}}
                   </p>
                   <p>
                     <b>Maximum Team Size: </b>{{vm.event.maxTeamSize}}
@@ -46,6 +46,9 @@
                   <p>
                     <b>Minimum Team Size: </b>{{vm.event.minTeamSize}}
                   </p>
+                  <a
+                    ng-if="vm.isMyEvent(vm.event)"
+                    href="edit_event.html?q={{vm.eventName}}">Edit event</a>
                 </div>
               </div>
               <div class="text-center">
@@ -56,7 +59,9 @@
               </br>
               <div class="panel panel-primary" ng-repeat="team in vm.teams">
                 <div class="panel-heading">
-                  <h3 class="panel-title">{{team.$id}}</h3>
+                  <a href="team.html?q={{vm.eventName}}&team={{team.$id}}">
+                    <h3 class="panel-title" style="color:white;">{{team.$id}}</h3>
+                  </a>
                 </div>
                 <div class="panel-body">
                   <p>
@@ -64,11 +69,13 @@
                     <p>{{vm.displaySkills(team.skills)}}</p>
                   </p>
                   <p><b>Members:</b></p>
-                  <p>no op</p>
-                  <!-- Manage team button -->
-                  <div class="text-center" ng-if="vm.isMyTeam(team)">
-                    <a href="team.html?q={{vm.eventName}}&team={{team.$id}}"><button id="btn_member" type="button" class="btn btn-primary">Manage my team</button></a>
+                  <div ng-repeat="teamMemberID in team.teamMembers" ng-init="memberData = vm.getMemberData(teamMemberID)">
+                      <p><a>{{memberData.name}}</a></p>
                   </div>
+                  <!-- Manage team button -->
+                  <!-- <div class="text-center" ng-if="vm.isMyTeam(team)">
+                    <a href="team.html?q={{vm.eventName}}&team={{team.$id}}"><button id="btn_member" type="button" class="btn btn-primary">Manage my team</button></a>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -81,10 +88,10 @@
    <!-- Angular and Angular-route libraries (v1.5.7) -->
    <!-- <script src="assets/lib/angular.min.js"></script> -->
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-   <script src="assets/lib/angular-route.min.js"></script>        
-     
+   <script src="assets/lib/angular-route.min.js"></script>
+
    <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
-   <script src="assets/lib/firebase.js"></script>     
+   <script src="assets/lib/firebase.js"></script>
    <script src="assets/lib/angularfire.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
 
@@ -96,4 +103,3 @@
 
    </body>
 </html>
-

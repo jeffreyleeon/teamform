@@ -9,11 +9,12 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
     vm.currentUser = currentUser.getCurrentUser();
     vm.eventValid = false;
     vm.event = {
+        eventDescription: '',
         maxTeamSize: 10,
         minTeamSize: 1,
         eventOwner: vm.currentUser.$id || 'dummy',
     };
-    
+
     vm._checkIfEventExist = _checkIfEventExist;
 
     vm.onEventNameChanged = onEventNameChanged;
@@ -51,7 +52,7 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
             vm.event.maxTeamSize = newVal;
         }
     }
-    
+
     function saveFunc() {
         // vm.event.$save();
         // Finally, go back to the front-end

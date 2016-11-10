@@ -7,17 +7,17 @@
       <meta name="keywords" content="teamform, team">
       <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>teamform - team page</title>
-	  
-      <!-- libraries and CSS 	  
-		JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)		
+
+      <!-- libraries and CSS
+		JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)
 		Bootstrap: Library and CSS for bootstrap framework (v3.3.7 is used)
-		Font-awesome: More icons for the web development (v4.6.3 is used)		
-		site.css: A customized css for our web application. Not from any web framework. 
+		Font-awesome: More icons for the web development (v4.6.3 is used)
+		site.css: A customized css for our web application. Not from any web framework.
 	  -->
-	        
-      <script src="assets/lib/jquery.min.js"></script>      
-      <script src="assets/lib/bootstrap.min.js"></script>      
-      	  
+
+      <script src="assets/lib/jquery.min.js"></script>
+      <script src="assets/lib/bootstrap.min.js"></script>
+
 	  <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
       <link rel="stylesheet" href="assets/css/site.css" >
 
@@ -25,7 +25,7 @@
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
       <script src="assets/js/site.js"></script>
-	  	  
+
    </head>
    <body ng-controller="TeamCtrl as vm">
 
@@ -48,6 +48,32 @@
 
 
 				<div class="row">
+<<<<<<< HEAD
+                  <div class="col-sm-6">
+                     <h4>Team members</h4>
+                     <!-- TODO: Show the current team member list -->
+
+					 <div ng-repeat="teamMemberID in vm.param.teamMembers">
+						<button type="button" class="btn" ng-click="vm.removeMember(teamMemberID);">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{vm.getMemberName(teamMemberID)}}
+						</button>
+					 </div>
+
+                  </div>
+
+                  <div class="col-sm-6">
+                     <h4>Requests received:</h4>
+
+                     <!--TODO: Show the requests -->
+
+					 <div ng-repeat="requestMemberID in vm.requests">
+						<button type="button" class="btn" ng-click="vm.processRequest(requestMemberID);">
+							<span class="glyphicon glyphicon-backward" aria-hidden="true"></span> {{vm.getMemberName(requestMemberID)}}
+						</button>
+					 </div>
+
+                  </div>
+=======
           <div ng-class="vm.isTeamLeader() ? 'col-md-6' : 'col-md-12'">
             <h4>Team members</h4>
 					  <div ng-repeat="teamMemberID in vm.param.teamMembers" ng-init="teamMemberData = vm.getMemberData(teamMemberID)">
@@ -60,7 +86,8 @@
                   <p><b>Skills: </b>{{teamMemberData.skills.join()}}</p>
                   <a
                     class="btn btn-danger"
-                    ng-click="vm.removeMember(teamMemberID);">DELETE</a>
+                    ng-click="vm.removeMember(teamMemberID);"
+                    ng-if="vm.isTeamLeader()">DELETE</a>
                 </div>
               </div>
 					  </div>
@@ -83,8 +110,9 @@
 					  </div>
 					 
           </div>
+>>>>>>> 1113pmoc/master
 				</div>
-				  
+
             </div>
          </div>
        </div>
@@ -95,10 +123,10 @@
 
    <!-- Angular and Angular-route libraries (v1.5.7) -->
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-   <script src="assets/lib/angular-route.min.js"></script>        
-     
+   <script src="assets/lib/angular-route.min.js"></script>
+
    <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
-   <script src="assets/lib/firebase.js"></script>     
+   <script src="assets/lib/firebase.js"></script>
    <script src="assets/lib/angularfire.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
 
@@ -109,4 +137,3 @@
 
    </body>
 </html>
-

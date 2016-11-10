@@ -7,17 +7,17 @@
       <meta name="keywords" content="teamform, team">
       <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>teamform - team page</title>
-	  
-      <!-- libraries and CSS 	  
-		JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)		
+
+      <!-- libraries and CSS
+		JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)
 		Bootstrap: Library and CSS for bootstrap framework (v3.3.7 is used)
-		Font-awesome: More icons for the web development (v4.6.3 is used)		
-		site.css: A customized css for our web application. Not from any web framework. 
+		Font-awesome: More icons for the web development (v4.6.3 is used)
+		site.css: A customized css for our web application. Not from any web framework.
 	  -->
-	        
-      <script src="assets/lib/jquery.min.js"></script>      
-      <script src="assets/lib/bootstrap.min.js"></script>      
-      	  
+
+      <script src="assets/lib/jquery.min.js"></script>
+      <script src="assets/lib/bootstrap.min.js"></script>
+
 	  <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
       <link rel="stylesheet" href="assets/css/site.css" >
 
@@ -25,7 +25,7 @@
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
       <script src="assets/js/site.js"></script>
-	  	  
+
    </head>
    <body>
 
@@ -45,19 +45,19 @@
             <div class="col-md-2 col-xs-2"></div>
 
             <div class="col-md-8 col-xs-8 text-center panel">
-			
+
                <!-- Controls go here.. -->
                 <form class="form-horizontal text-center">
-				
+
                   <div class="form-group">
-				  
+
                      <label for="inputTeamName" class="control-label">Team Name</label>
 					 <br>
-					 
+
 					<div class="row">
 						<div class="col-md-2 col-xs-2"></div>
 						<div class="col-md-8 col-xs-8">
-							<input type="text" class="form-control" id="inputTeamName" placeholder="Enter your team name" ng-model="vm.param.teamName">													
+							<input type="text" class="form-control" id="inputTeamName" placeholder="Enter your team name" ng-model="vm.param.teamName">
 						</div>
 					<div class="col-md-2 col-xs-2"></div>
 					</div>
@@ -67,16 +67,16 @@
 			    <div class="row">
 					  <div class="col-md-2 col-xs-2"></div>
 						<div class="col-md-8 col-xs-8">
-						  <input type="text" class="form-control" id="inputTeamSkills" placeholder="Enter skill requirements" ng-model="vm.param.skills">		  
+						  <input type="text" class="form-control" id="inputTeamSkills" placeholder="Enter skill requirements" ng-model="vm.param.skills">
 						</div>
 						<div class="col-md-2 col-xs-2"></div>
 					  <span>
 					  </span>
 			    </div>
 			    </br>
-					<!-- Set team size --> 
+					<!-- Set team size -->
 				  <div class="row">
-					  <strong>Preferred Team Size: </strong> 					  
+					  <strong>Preferred Team Size: </strong>
 					  <span>
 						<span class="badge">
 						  {{vm.param.currentTeamSize}}
@@ -88,14 +88,14 @@
 			    </br>
         </div>
 
-          
+
 
 
 					</br>
 					<div>
 					   <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Add</button>
 					</div>
-				   
+
           </form>
 
             <div class="col-md-2 col-xs-2"></div>
@@ -107,13 +107,13 @@
 
 
    <!-- JavaScript of this page -->
-
+   
    <!-- Angular and Angular-route libraries (v1.5.7) -->
    <script src="assets/lib/angular.min.js"></script>
-   <script src="assets/lib/angular-route.min.js"></script>        
-     
+   <script src="assets/lib/angular-route.min.js"></script>
+
    <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
-   <script src="assets/lib/firebase.js"></script>     
+   <script src="assets/lib/firebase.js"></script>
    <script src="assets/lib/angularfire.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
 
@@ -124,4 +124,3 @@
 
    </body>
 </html>
-
