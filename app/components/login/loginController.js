@@ -1,12 +1,20 @@
 angular.module('teamform-login-app', ['teamform-db', 'current-user'])
 .controller('LoginCtrl', ['$scope', 'teamformDb', 'currentUser', LoginCtrl]);
 
-function LoginCtrl($scope, teamformDb, currentUser) {
+
+function LoginCtrl($scope, teamformDb, currentUser, $window) {
     var vm = this;
     vm.errorMsg = '';
     vm.login = login;
     vm.saveNewFBUser = saveNewFBUser;
     vm.setMessage = setMessage;
+    $scope.user = {
+      username: '',
+      email: '',
+      pass: '',
+      confirmpass: ''
+    };
+    $scope.newerrorMsg ='default';
     
     function login() {
         vm.errorMsg = '';
@@ -47,4 +55,22 @@ function LoginCtrl($scope, teamformDb, currentUser) {
     function setMessage(msg) {
       vm.errorMsg = msg;
     }
+
+    //angularjs version for register() with bugs
+    $scope.newregister = function(){
+      if($scope.user.pass==$scope.user.confirmpass && $scope.user.username!=''){
+        setTimeout(function() {
+            window.location.href= "registersuccessfu_page.html";
+          }, 1000);
+      }
+      
+    }
+
 }
+
+// function newregister ($username, $pass, $confirmpass){
+//       if($pass==$confirmpass && $username!=''){
+//         window.open('index.html','_self');        
+//       }
+      
+//     }
