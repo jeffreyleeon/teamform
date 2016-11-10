@@ -27,12 +27,9 @@ function EditEventCtrl(currentUser, teamformDb) {
     }
 
     function saveFunc() {
-        // vm.event.$save();
-        // Finally, go back to the front-end
-        // window.location.href= "index.html";
-        var callback = function() {
+        vm.event.$save();
+        setTimeout(function() {
             window.history.back();
-        };
-        // teamformDb.saveNewEvent(vm.eventName, vm.event, callback);
+        }, 100);
     }
 }
