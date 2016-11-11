@@ -1,10 +1,11 @@
 angular.module('teamform-app')
-.controller('JoinTeamCtrl', ['currentUser', 'teamformDb', JoinTeamCtrl]);
+.controller('JoinTeamCtrl', ['currentUser', 'teamformDb', '$http', JoinTeamCtrl]);
 
-function JoinTeamCtrl(currentUser, teamformDb) {
+function JoinTeamCtrl(currentUser, teamformDb, $http) {
     var vm = this;
 
     vm.eventName = getURLParameter("q");
+    vm.event = teamformDb.getEvent(vm.eventName);
     vm.currentUser = currentUser.getCurrentUser();
     vm.selection = [];
     vm.teams = {};
@@ -19,6 +20,7 @@ function JoinTeamCtrl(currentUser, teamformDb) {
     vm.isJoinedTeam = isJoinedTeam;
     vm.refreshTeams = refreshTeams;
     vm.refreshTeams(); // call to refresh teams...
+    vm.sendAdminEmail = sendAdminEmail;
 
     function getMember(eventName, userID) {
       teamformDb.getMember(eventName, userID, function(data) {
@@ -89,5 +91,24 @@ function JoinTeamCtrl(currentUser, teamformDb) {
             arr[i] = arr[i].replace(/^[ ]+|[ ]+$/g,'');
         }
         return arr;
+    }
+
+    function sendAdminEmail(eventOwnerId) {
+      var eventOwner = teamformDb.getUser(eventOwnerId);
+      eventOwner.$loaded().then(function(data) {
+        console.log('======', data.email);
+        $http.post(
+          'https://software-engineering-server.herokuapp.com/',
+          {
+              email: data.email,
+              subject: 'Hello jeffreyleeon',
+              text: 'Congratulations jeffreyleeon, you just sent an email with Mailgun!  You are truly awesome from POSTMAN!',
+          }
+        )
+        .then(function(response) {
+        // What ever you need to do
+          console.log(response);
+        });
+      });
     }
 }

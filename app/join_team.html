@@ -65,9 +65,11 @@
                     </div>
                   </div>
                   <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Save</button>
+                  <button type="button" class="btn btn-primary" ng-click="vm.sendAdminEmail(vm.event.eventOwner);" >Send</button>
                 </div>
                 <div ng-if="vm.isJoinedTeam() === true">
                   <h3>Your have joined a team!</h3>
+                  <button type="button" class="btn btn-primary" ng-click="vm.sendAdminEmail(vm.event.eventOwner);" >Send</button>
                 </div>
               </div>
             </div>
