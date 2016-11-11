@@ -62,7 +62,11 @@
               </br>
               <input type="text" class="form-control" placeholder="Search:"  ng-model="vm.searchText">
               </br>
-              <div class="panel panel-primary" ng-repeat="team in vm.teams | filter:vm.searchText">
+              <div
+                class="panel"
+                ng-init="recommendToUser = vm.doesUserContainsSkills(vm.currentUser, team.skills)"
+                ng-class="recommendToUser ? 'panel-success' : 'panel-primary'"
+                ng-repeat="team in vm.teams | filter:vm.searchText">
                 <div class="panel-heading">
                   <a href="team.html?q={{vm.eventName}}&team={{team.$id}}">
                     <h3 class="panel-title" style="color:white;">{{team.$id}}</h3>
