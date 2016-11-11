@@ -1,7 +1,7 @@
 angular.module('teamform-app')
-.controller('MemberCtrl', ['$scope', 'currentUser', 'teamformDb', MemberCtrl]);
+.controller('MemberCtrl', ['currentUser', 'teamformDb', MemberCtrl]);
 
-function MemberCtrl($scope, currentUser, teamformDb){
+function MemberCtrl(currentUser, teamformDb){
   var vm = this;
 
   vm.userID = getURLParameter("id");
