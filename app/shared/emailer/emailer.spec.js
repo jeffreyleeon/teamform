@@ -21,6 +21,8 @@ describe('emailer module', function() {
       expect(factory.sendEmailForJoiningEvent).toEqual(jasmine.any(Function));
       expect(factory.sendEmail).toBeDefined();
       expect(factory.sendEmail).toEqual(jasmine.any(Function));
+      expect(factory.sendEmailForBeingAcceptedByTeam).toBeDefined();
+      expect(factory.sendEmailForBeingAcceptedByTeam).toEqual(jasmine.any(Function));
 
       spyOn(factory, 'sendEmail');
       factory.sendEmailForJoiningEvent('testing@email.com', 'eventName', 'username', 'userEmail');
@@ -28,6 +30,13 @@ describe('emailer module', function() {
         'testing@email.com',
         'username' + '(' + 'userEmail' + ') is joining your event ' + 'eventName',
         'Congrats! ' + 'username' + '(' + 'userEmail' + ') is joining your event ' + 'eventName' + '!'
+        );
+
+      factory.sendEmailForBeingAcceptedByTeam('testing@email.com', 'eventName', 'teamName');
+      expect(factory.sendEmail).toHaveBeenCalledWith(
+        'testing@email.com',
+        'Congrats! You are accepted by team teamName!',
+        'Congrats! You are accepted by team teamName in event eventName!'
         );
     });
   });

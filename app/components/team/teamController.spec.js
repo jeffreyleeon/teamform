@@ -48,6 +48,16 @@ describe('teamform-app module', function() {
           },
         };
       };
+      var getUser = function(userId) {
+        return {
+          $loaded: function() {
+            return new Promise(
+              function(resolve, reject) {
+              }
+            );
+          }
+        };
+      };
       var getEventAdminData = function(eventName, callback) {
         callback({
           child: function() {
@@ -64,6 +74,7 @@ describe('teamform-app module', function() {
       }
       var teamformDb = {
         getEvent: getEvent,
+        getUser: getUser,
         getTeam: getTeam,
         getAllMembers: getAllMembers,
         getEventAdminData: getEventAdminData,
