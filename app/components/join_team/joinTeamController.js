@@ -60,9 +60,7 @@ function JoinTeamCtrl(currentUser, teamformDb, $http) {
               'skills': skills,
               'introduction': introduction,
           };
-          teamformDb.setMemberData(vm.eventName, userID, newData, function(){
-            window.history.back();
-          });
+          teamformDb.setMemberData(vm.eventName, userID, newData);
         }
     }
 
@@ -108,6 +106,7 @@ function JoinTeamCtrl(currentUser, teamformDb, $http) {
         .then(function(response) {
         // What ever you need to do
           console.log(response);
+          window.history.back();
         });
       });
     }
