@@ -42,7 +42,7 @@ function JoinTeamCtrl(currentUser, teamformDb, emailer) {
         if (data.child(introKey).val() != null) {
           vm.introduction = String(data.child(introKey).val());
         } else {
-          vm.introduction = '';
+          vm.introduction = vm.currentUser.description || '';
         }
         vm.joinedTeam = data.child(joinedTeamKey).val();
       });
