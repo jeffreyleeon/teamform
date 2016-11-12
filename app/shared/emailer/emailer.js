@@ -12,7 +12,7 @@ function Emailer($http) {
   function sendEmailForJoiningEvent(eventOwnerEmail, eventName, username, userEmail) {
     var subject = username + '(' + userEmail + ') is joining your event ' + eventName;
     var text = 'Congrats! ' + username + '(' + userEmail + ') is joining your event ' + eventName + '!';
-    return sendEmail(eventOwnerEmail, subject, text);
+    return service.sendEmail(eventOwnerEmail, subject, text);
   }
 
   function sendEmail(email, subject, text) {
