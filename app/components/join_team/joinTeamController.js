@@ -1,7 +1,7 @@
 angular.module('teamform-app')
-.controller('JoinTeamCtrl', ['currentUser', 'teamformDb', '$http', JoinTeamCtrl]);
+.controller('JoinTeamCtrl', ['currentUser', 'teamformDb', 'emailer', JoinTeamCtrl]);
 
-function JoinTeamCtrl(currentUser, teamformDb, $http) {
+function JoinTeamCtrl(currentUser, teamformDb, emailer) {
     var vm = this;
 
     vm.eventName = getURLParameter("q");
@@ -95,16 +95,8 @@ function JoinTeamCtrl(currentUser, teamformDb, $http) {
       var eventOwner = teamformDb.getUser(eventOwnerId);
       eventOwner.$loaded().then(function(data) {
         console.log('======', data.email);
-        $http.post(
-          'https://software-engineering-server.herokuapp.com/',
-          {
-              email: data.email,
-              subject: 'Hello jeffreyleeon',
-              text: 'Congratulations jeffreyleeon, you just sent an email with Mailgun!  You are truly awesome from POSTMAN!',
-          }
-        )
+        emailer.sendEmailForJoiningEvent(data.email, vm.eventName, vm.currentUser.display_name, vm.currentUser.email)
         .then(function(response) {
-        // What ever you need to do
           console.log(response);
           window.history.back();
         });
