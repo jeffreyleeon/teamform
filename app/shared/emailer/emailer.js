@@ -5,6 +5,7 @@ function Emailer($http) {
 
   var service = {
     sendEmailForJoiningEvent: sendEmailForJoiningEvent,
+    sendEmailForBeingAcceptedByTeam: sendEmailForBeingAcceptedByTeam,
     sendEmail: sendEmail,
   };
   return service;
@@ -13,6 +14,12 @@ function Emailer($http) {
     var subject = username + '(' + userEmail + ') is joining your event ' + eventName;
     var text = 'Congrats! ' + username + '(' + userEmail + ') is joining your event ' + eventName + '!';
     return service.sendEmail(eventOwnerEmail, subject, text);
+  }
+
+  function sendEmailForBeingAcceptedByTeam(memberEmail, eventName, teamName) {
+    var subject = 'Congrats! You are accepted by team ' + teamName + '!';
+    var text = 'Congrats! You are accepted by team ' + teamName + ' in event ' + eventName + '!';
+    return service.sendEmail(memberEmail, subject, text);
   }
 
   function sendEmail(email, subject, text) {

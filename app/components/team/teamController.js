@@ -1,7 +1,7 @@
 angular.module('teamform-app')
-.controller('TeamCtrl', ['$scope', 'currentUser', 'teamformDb', TeamCtrl]);
+.controller('TeamCtrl', ['$scope', 'currentUser', 'teamformDb', 'emailer', TeamCtrl]);
 
-function TeamCtrl($scope, currentUser, teamformDb) {
+function TeamCtrl($scope, currentUser, teamformDb, emailer) {
     var vm = this;
 
     vm.param = {
@@ -36,6 +36,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     vm.loadFunc = loadFunc;
     vm.saveFunc = saveFunc;
     vm.processRequest = processRequest;
+    vm.sendAcceptedEmailToUser = sendAcceptedEmailToUser;
     vm.removeMember = removeMember;
     vm.updateRemovedMember = updateRemovedMember;
     vm.getMemberData = getMemberData;
@@ -83,8 +84,17 @@ function TeamCtrl($scope, currentUser, teamformDb) {
             vm.param.teamMembers.length < vm.param.currentTeamSize) {
             // Not exists, and the current number of team member is less than the preferred team size
             vm.param.teamMembers.push(requestMemberID);
+            // Send email to the user
+            vm.sendAcceptedEmailToUser(requestMemberID);
             vm.saveFunc();
         }
+    }
+
+    function sendAcceptedEmailToUser(userID) {
+      var member = teamformDb.getUser(userID);
+      member.$loaded().then(function(data) {
+        emailer.sendEmailForBeingAcceptedByTeam(data.email, vm.param.eventName, vm.param.teamName);
+      });
     }
 
     function removeMember(teamMemberID) {
