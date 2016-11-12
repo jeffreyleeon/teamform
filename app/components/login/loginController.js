@@ -56,21 +56,4 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
       vm.errorMsg = msg;
     }
 
-    //angularjs version for register() with bugs
-    $scope.newregister = function(){
-      if($scope.user.pass==$scope.user.confirmpass && $scope.user.username!=''){
-        setTimeout(function() {
-            window.location.href= "registersuccessfu_page.html";
-          }, 1000);
-      }
-      
-    }
-
 }
-
-// function newregister ($username, $pass, $confirmpass){
-//       if($pass==$confirmpass && $username!=''){
-//         window.open('index.html','_self');        
-//       }
-      
-//     }
