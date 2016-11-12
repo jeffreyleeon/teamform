@@ -41,10 +41,13 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     vm.removeMember = removeMember;
     vm.updateRemovedMember = updateRemovedMember;
     vm.getMemberData = getMemberData;
+    vm.isTeamMember = isTeamMember;
     vm.isTeamLeader = isTeamLeader;
     vm.isLoggedIn = isLoggedIn;
     vm.containsRequiredSkills = containsRequiredSkills;
     vm.addTodo = addTodo;
+    vm.toggleTodoState = toggleTodoState;
+    vm.updateTodo = updateTodo;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -125,6 +128,13 @@ function TeamCtrl($scope, currentUser, teamformDb) {
       return payload;
     }
 
+    function isTeamMember() {
+      if (!vm.currentUser) {
+        return false;
+      }
+      return vm.param.teamMembers.indexOf(vm.currentUser.$id) > -1;
+    }
+
     function isTeamLeader() {
       if (!vm.isLoggedIn()) {
         console.log('1113project/teamController/isTeamLeader: You are not logged in');
@@ -159,6 +169,17 @@ function TeamCtrl($scope, currentUser, teamformDb) {
         name: todo,
         finished: false,
       });
+      updateTodo();
+    }
+
+    function toggleTodoState(index) {
+      if (index < 0 || index >= vm.param.todos.length) {
+        return;
+      }
+      updateTodo();
+    }
+
+    function updateTodo() {
       vm.team.todos = vm.param.todos;
       vm.team.$save();
     }
