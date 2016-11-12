@@ -15,6 +15,7 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
     vm.isMyTeam = isMyTeam;
     vm.isMyEvent = isMyEvent;
     vm.getMemberData = getMemberData;
+    vm.searchText = '';
 
     function displaySkills(skills) {
     	if (!skills) {

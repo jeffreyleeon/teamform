@@ -57,7 +57,9 @@
               </div>
               <!-- Display team info -->
               </br>
-              <div class="panel panel-primary" ng-repeat="team in vm.teams">
+              <input type="text" class="form-control" placeholder="Search by team name:"  ng-model="vm.searchText">
+              </br>
+              <div class="panel panel-primary" ng-repeat="team in vm.teams | filter:vm.searchText">
                 <div class="panel-heading">
                   <a href="team.html?q={{vm.eventName}}&team={{team.$id}}">
                     <h3 class="panel-title" style="color:white;">{{team.$id}}</h3>

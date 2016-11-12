@@ -42,7 +42,8 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
         var teamID = $.trim( vm.param.teamName );
         var skills = _parseSkills(vm.param.skills)
         if ( teamID !== '' ) {
-            var newData = {             
+            var newData = {
+                'teamName': teamID,
                 'size': vm.param.currentTeamSize,
                 'teamMembers': vm.param.teamMembers,
                 'skills': skills,
