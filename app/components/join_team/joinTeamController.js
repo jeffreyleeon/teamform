@@ -1,10 +1,11 @@
 angular.module('teamform-app')
-.controller('JoinTeamCtrl', ['currentUser', 'teamformDb', JoinTeamCtrl]);
+.controller('JoinTeamCtrl', ['currentUser', 'teamformDb', 'emailer', JoinTeamCtrl]);
 
-function JoinTeamCtrl(currentUser, teamformDb) {
+function JoinTeamCtrl(currentUser, teamformDb, emailer) {
     var vm = this;
 
     vm.eventName = getURLParameter("q");
+    vm.event = teamformDb.getEvent(vm.eventName);
     vm.currentUser = currentUser.getCurrentUser();
     vm.selection = [];
     vm.teams = {};
@@ -19,6 +20,7 @@ function JoinTeamCtrl(currentUser, teamformDb) {
     vm.isJoinedTeam = isJoinedTeam;
     vm.refreshTeams = refreshTeams;
     vm.refreshTeams(); // call to refresh teams...
+    vm.sendAdminEmail = sendAdminEmail;
 
     function getMember(eventName, userID) {
       teamformDb.getMember(eventName, userID, function(data) {
@@ -58,9 +60,7 @@ function JoinTeamCtrl(currentUser, teamformDb) {
               'skills': skills,
               'introduction': introduction,
           };
-          teamformDb.setMemberData(vm.eventName, userID, newData, function(){
-            window.history.back();
-          });
+          teamformDb.setMemberData(vm.eventName, userID, newData);
         }
     }
 
@@ -89,5 +89,17 @@ function JoinTeamCtrl(currentUser, teamformDb) {
             arr[i] = arr[i].replace(/^[ ]+|[ ]+$/g,'');
         }
         return arr;
+    }
+
+    function sendAdminEmail(eventOwnerId) {
+      var eventOwner = teamformDb.getUser(eventOwnerId);
+      eventOwner.$loaded().then(function(data) {
+        console.log('======', data.email);
+        emailer.sendEmailForJoiningEvent(data.email, vm.eventName, vm.currentUser.display_name, vm.currentUser.email)
+        .then(function(response) {
+          console.log(response);
+          window.history.back();
+        });
+      });
     }
 }

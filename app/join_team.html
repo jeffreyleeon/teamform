@@ -64,7 +64,7 @@
                       </label>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" >Save</button>
+                  <button type="button" class="btn btn-primary" ng-click="vm.sendAdminEmail(vm.event.eventOwner);vm.saveFunc();" >Save</button>
                 </div>
                 <div ng-if="vm.isJoinedTeam() === true">
                   <h3>Your have joined a team!</h3>
@@ -90,6 +90,7 @@
    <!-- JavaScript of this page -->
    <script src="shared/teamform_db/teamformDb.js"></script>
    <script src="shared/current_user/currentUser.js"></script>
+   <script src="shared/emailer/emailer.js"></script>
    <script src="components/mainApp.js"></script>
    <script src="components/join_team/joinTeamController.js"></script>
 
