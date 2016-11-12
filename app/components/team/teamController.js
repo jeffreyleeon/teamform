@@ -8,10 +8,12 @@ function TeamCtrl($scope, currentUser, teamformDb) {
       eventName: '',  
       teamName : '',
       currentTeamSize : 0,
-      teamMembers : []
+      teamMembers : [],
+      todos: [],
     };
     vm.param.teamName = getURLParameter("team"); 
     vm.param.eventName = getURLParameter("q");
+    vm.newTodo = '';
 
     teamformDb.getEventAdminData(vm.param.eventName, function(data) {    
         if ( data.child("param").val() != null ) {
@@ -42,6 +44,7 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     vm.isTeamLeader = isTeamLeader;
     vm.isLoggedIn = isLoggedIn;
     vm.containsRequiredSkills = containsRequiredSkills;
+    vm.addTodo = addTodo;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -61,6 +64,9 @@ function TeamCtrl($scope, currentUser, teamformDb) {
         }
         if (vm.team.teamMembers != null) {
           vm.param.teamMembers = vm.team.teamMembers;
+        }
+        if (vm.team.todos != null) {
+          vm.param.todos = vm.team.todos;
         }
     }
 
@@ -143,5 +149,17 @@ function TeamCtrl($scope, currentUser, teamformDb) {
         }
       }
       return false;
+    }
+
+    function addTodo(todo) {
+      if (!todo) {
+        return;
+      }
+      vm.param.todos.push({
+        name: todo,
+        finished: false,
+      });
+      vm.team.todos = vm.param.todos;
+      vm.team.$save();
     }
 }
