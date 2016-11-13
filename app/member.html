@@ -37,7 +37,6 @@
             <!--<li>ID: {{vm.userID}}</li>-->
             <p>NAME:  {{vm.user.display_name}}</p>
             <p>EMAIL:  {{vm.user.email}}</p>
-            <p>DATE JOINED: {{vm.user.created_at | date:'shortDate'}} </p>
           </div>
 
         </div>
@@ -55,11 +54,6 @@
                 {{vm.user.description}}
               </p>
               <br>
-              <div ng-if="vm.isMyProfile()">
-                <h4> Add new skill: {{vm.newSkill}}</h4>
-                <input type="text" placeholder="type skill(s) here" ng-model = "vm.newSkill">
-                <input type="button" value="Add" ng-click="vm.addNewSkill(vm.newSkill);">
-              </div>
 
             </div>
 
