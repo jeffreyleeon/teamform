@@ -12,6 +12,7 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
         eventDescription: '',
         maxTeamSize: 10,
         minTeamSize: 1,
+        numberOfLeaders: 1,
         eventOwner: vm.currentUser.$id || 'dummy',
     };
 
@@ -20,6 +21,7 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
     vm.onEventNameChanged = onEventNameChanged;
     vm.changeMinTeamSize = changeMinTeamSize;
     vm.changeMaxTeamSize = changeMaxTeamSize;
+    vm.changeNumOfTeamLeaders = changeNumOfTeamLeaders;
     vm.saveFunc = saveFunc;
 
     function onEventNameChanged() {
@@ -51,6 +53,13 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
         if (newVal >=1 && newVal >= vm.event.minTeamSize ) {
             vm.event.maxTeamSize = newVal;
         }
+    }
+
+    function changeNumOfTeamLeaders(delta) {
+      var newVal = vm.event.numberOfLeaders + delta;
+      if (newVal >= 1 && newVal <= vm.event.maxTeamSize) {
+        vm.event.numberOfLeaders = newVal;
+      }
     }
 
     function saveFunc() {
