@@ -232,5 +232,10 @@ describe('teamform-app module', function() {
       expect(controller.team.size).toEqual(101);
       expect(controller.team.teamMembers).toEqual([101]);
     });
+
+    it('should check if the member is me correctly', function() {
+      expect(controller.isMe('123')).toEqual(true);
+      expect(controller.isMe('345')).toEqual(false);
+    });
   });
 });

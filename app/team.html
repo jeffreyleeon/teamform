@@ -64,6 +64,10 @@
                     class="btn btn-danger"
                     ng-click="vm.removeMember(teamMemberID);"
                     ng-if="vm.isTeamLeader()">DELETE</a>
+                  <a
+                    class="btn btn-danger"
+                    ng-click="vm.removeMember(teamMemberID);"
+                    ng-if="!vm.isTeamLeader() && vm.isMe(teamMemberID)">QUIT TEAM</a>
                 </div>
               </div>
 					  </div>
