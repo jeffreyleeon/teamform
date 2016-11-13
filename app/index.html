@@ -195,12 +195,24 @@
                     <h3 class="panel-title">Users</h3>
                   </div>
                   <div class="panel-body">
-                    <ul ng-repeat="user in vm.users">
-                      <li>
-                        <img ng-if="!!user.profile_pic_url" src="{{user.profile_pic_url}}" class="profile_img">
-                        <a href='member.html?id={{user.$id}}'>{{user.display_name}}</a>
-                      </li>
-                    </ul>
+                    </br>
+                    <input type="text" class="form-control" placeholder="Search:"  ng-model="vm.userSearchText">
+                    </br>
+                    <div class="row panel-body-header">
+                      <div class="col-xs-1"><h5><b></b></h5></div>
+                      <div class="col-xs-2"><h5><b>Name</b></h5></div>
+                      <div class="col-xs-2"><h5><b>E-mail</b></h5></div>
+                      <div class="col-xs-4"><h5><b>Introduction</b></h5></div>
+                      <div class="col-xs-3"><h5><b>Skills</b></h5></div>
+                    </div>
+
+                    <div class="row" ng-repeat="user in vm.users | filter:vm.userSearchText">
+                      <div class="col-xs-1"><img ng-if="!!user.profile_pic_url" src="{{user.profile_pic_url}}" class="profile_img"></div>
+                      <div class="col-xs-2"><a href='member.html?id={{user.$id}}'>{{user.display_name}}</a></div>
+                      <div class="col-xs-2"><p>{{user.email}}</p></div>
+                      <div class="col-xs-4"><p>{{user.description}}</p></div>
+                      <div class="col-xs-3"><p>{{user.skills.join(", ")}}</p></div>
+                    </div>
                   </div>
                 </div>
               </div>
