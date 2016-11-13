@@ -137,7 +137,7 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   function updateFirebase(refPath, payload, callback) {
     var ref = firebase.database().ref(refPath);
-    ref.set(payload, callback);
+    ref.update(payload, callback);
   }
 
   function _getEventParamsPath(eventName) {

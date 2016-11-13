@@ -1,1 +1,1 @@
-angular.module('teamform-admin-app', ['current-user', 'teamform-db']);
+angular.module('teamform-admin-app', ['current-user', 'teamform-db', 'emailer']);

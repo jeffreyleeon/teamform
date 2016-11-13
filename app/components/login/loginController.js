@@ -1,12 +1,20 @@
 angular.module('teamform-login-app', ['teamform-db', 'current-user'])
 .controller('LoginCtrl', ['$scope', 'teamformDb', 'currentUser', LoginCtrl]);
 
-function LoginCtrl($scope, teamformDb, currentUser) {
+
+function LoginCtrl($scope, teamformDb, currentUser, $window) {
     var vm = this;
     vm.errorMsg = '';
     vm.login = login;
     vm.saveNewFBUser = saveNewFBUser;
     vm.setMessage = setMessage;
+    $scope.user = {
+      username: '',
+      email: '',
+      pass: '',
+      confirmpass: ''
+    };
+    $scope.newerrorMsg ='default';
     
     function login() {
         vm.errorMsg = '';
@@ -47,4 +55,5 @@ function LoginCtrl($scope, teamformDb, currentUser) {
     function setMessage(msg) {
       vm.errorMsg = msg;
     }
+
 }

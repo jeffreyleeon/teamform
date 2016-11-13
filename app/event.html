@@ -46,17 +46,24 @@
                   <p>
                     <b>Minimum Team Size: </b>{{vm.event.minTeamSize}}
                   </p>
+                  <a
+                    ng-if="vm.isMyEvent(vm.event)"
+                    href="edit_event.html?q={{vm.eventName}}">Edit event</a>
                 </div>
               </div>
               <div class="text-center">
                 <a href="create_team.html?q={{vm.eventName}}"><button id="btn_leader" type="button" class="btn btn-primary">Create a Team</button></a>
-                <a href="join_team.html?q={{vm.eventName}}"><button id="btn_member" type="button" class="btn btn-primary">Join a Team</button></a>
+                <a href="join_team.html?q={{vm.eventName}}"><button id="btn_member" type="button" class="btn btn-primary">Join Event</button></a>
               </div>
               <!-- Display team info -->
               </br>
-              <div class="panel panel-primary" ng-repeat="team in vm.teams">
+              <input type="text" class="form-control" placeholder="Search:"  ng-model="vm.searchText">
+              </br>
+              <div class="panel panel-primary" ng-repeat="team in vm.teams | filter:vm.searchText">
                 <div class="panel-heading">
-                  <h3 class="panel-title">{{team.$id}}</h3>
+                  <a href="team.html?q={{vm.eventName}}&team={{team.$id}}">
+                    <h3 class="panel-title" style="color:white;">{{team.$id}}</h3>
+                  </a>
                 </div>
                 <div class="panel-body">
                   <p>
@@ -64,11 +71,13 @@
                     <p>{{vm.displaySkills(team.skills)}}</p>
                   </p>
                   <p><b>Members:</b></p>
-                  <p>no op</p>
-                  <!-- Manage team button -->
-                  <div class="text-center" ng-if="vm.isMyTeam(team)">
-                    <a href="team.html?q={{vm.eventName}}&team={{team.$id}}"><button id="btn_member" type="button" class="btn btn-primary">Manage my team</button></a>
+                  <div ng-repeat="teamMemberID in team.teamMembers" ng-init="memberData = vm.getMemberData(teamMemberID)">
+                      <p><a href='member.html?id={{memberData.$id}}'>{{memberData.name}}</a></p>
                   </div>
+                  <!-- Manage team button -->
+                  <!-- <div class="text-center" ng-if="vm.isMyTeam(team)">
+                    <a href="team.html?q={{vm.eventName}}&team={{team.$id}}"><button id="btn_member" type="button" class="btn btn-primary">Manage my team</button></a>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -91,6 +100,7 @@
    <!-- JavaScript of this page -->
    <script src="shared/teamform_db/teamformDb.js"></script>
    <script src="shared/current_user/currentUser.js"></script>
+   <script src="shared/emailer/emailer.js"></script>
    <script src="components/mainApp.js"></script>
    <script src="components/show_event/showEventController.js"></script>
 

@@ -7,17 +7,17 @@
       <meta name="keywords" content="teamform, team">
       <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>teamform - team page</title>
-	  
-      <!-- libraries and CSS 	  
-		JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)		
+
+      <!-- libraries and CSS
+		JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)
 		Bootstrap: Library and CSS for bootstrap framework (v3.3.7 is used)
-		Font-awesome: More icons for the web development (v4.6.3 is used)		
-		site.css: A customized css for our web application. Not from any web framework. 
+		Font-awesome: More icons for the web development (v4.6.3 is used)
+		site.css: A customized css for our web application. Not from any web framework.
 	  -->
-	        
-      <script src="assets/lib/jquery.min.js"></script>      
-      <script src="assets/lib/bootstrap.min.js"></script>      
-      	  
+
+      <script src="assets/lib/jquery.min.js"></script>
+      <script src="assets/lib/bootstrap.min.js"></script>
+
 	  <link rel="stylesheet" href="assets/css/dependencies.css" type="text/css">
       <link rel="stylesheet" href="assets/css/site.css" >
 
@@ -25,7 +25,7 @@
       <!-- Customized libraries shared by pages -->
       <script src="config/env.js"></script>
       <script src="assets/js/site.js"></script>
-	  	  
+
    </head>
    <body ng-controller="TeamCtrl as vm">
 
@@ -53,14 +53,17 @@
 					  <div ng-repeat="teamMemberID in vm.param.teamMembers" ng-init="teamMemberData = vm.getMemberData(teamMemberID)">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">{{teamMemberData.name}}</h3>
+                  <h3 class="panel-title">
+                    <a href='member.html?id={{teamMemberID}}'>{{teamMemberData.name}}</a>
+                  </h3>
                 </div>
                 <div class="panel-body">
                   <p><b>Introduction: </b>{{teamMemberData.introduction}}</p>
                   <p><b>Skills: </b>{{teamMemberData.skills.join()}}</p>
                   <a
                     class="btn btn-danger"
-                    ng-click="vm.removeMember(teamMemberID);">DELETE</a>
+                    ng-click="vm.removeMember(teamMemberID);"
+                    ng-if="vm.isTeamLeader()">DELETE</a>
                 </div>
               </div>
 					  </div>
@@ -70,7 +73,9 @@
 					  <div ng-repeat="requestMemberID in vm.requests" ng-init="requestMemberData = vm.getMemberData(requestMemberID)">
               <div class="panel" ng-class="vm.containsRequiredSkills(requestMemberData.skills) ? 'panel-success' : 'panel-danger'">
                 <div class="panel-heading">
-                  <h3 class="panel-title">{{requestMemberData.name}}</h3>
+                  <h3 class="panel-title">
+                    <a href='member.html?id={{requestMemberID}}'>{{requestMemberData.name}}</a>
+                  </h3>
                 </div>
                 <div class="panel-body">
                   <p><b>Introduction: </b>{{requestMemberData.introduction}}</p>
@@ -84,7 +89,7 @@
 					 
           </div>
 				</div>
-				  
+
             </div>
          </div>
        </div>
@@ -95,18 +100,18 @@
 
    <!-- Angular and Angular-route libraries (v1.5.7) -->
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-   <script src="assets/lib/angular-route.min.js"></script>        
-     
+   <script src="assets/lib/angular-route.min.js"></script>
+
    <!-- Firebase (v3.0.3) and AngularFire (v2.0.0) (after angular library is loaded) -->
-   <script src="assets/lib/firebase.js"></script>     
+   <script src="assets/lib/firebase.js"></script>
    <script src="assets/lib/angularfire.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.js"></script>
 
    <script src="shared/teamform_db/teamformDb.js"></script>
    <script src="shared/current_user/currentUser.js"></script>
+   <script src="shared/emailer/emailer.js"></script>
    <script src="components/mainApp.js"></script>
    <script src="components/team/teamController.js"></script>
 
    </body>
 </html>
-

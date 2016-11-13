@@ -35,10 +35,12 @@ describe('teamform-app module', function() {
       var getAllTeams = function(eventName) {
         return {};
       };
+      var getEvent = function() {};
       var setMemberData = function() {};
       var teamformDb = {
         getMember: getMember,
         getAllTeams: getAllTeams,
+        getEvent: getEvent,
         setMemberData: setMemberData,
       };
 
