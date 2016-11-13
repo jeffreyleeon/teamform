@@ -10,12 +10,13 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
 
     vm.teams = teamformDb.getAllTeams(vm.eventName);
     vm.members = teamformDb.getAllMembers(vm.eventName);
+    vm.searchText = '';
 
     vm.displaySkills = displaySkills;
     vm.isMyTeam = isMyTeam;
     vm.isMyEvent = isMyEvent;
     vm.getMemberData = getMemberData;
-    vm.searchText = '';
+    vm.doesUserContainsSkills = doesUserContainsSkills;
 
     function displaySkills(skills) {
     	if (!skills) {
@@ -47,5 +48,18 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
         }
       }
       return payload;
+    }
+
+    function doesUserContainsSkills(user, skills) {
+      if (!(user && user.skills) || !skills) {
+        return false;
+      }
+      for (var i = 0; i < user.skills.length; i++) {
+        var userSkill = user.skills[i];
+        if (skills.indexOf(userSkill) > -1) {
+          return true;
+        }
+      }
+      return false;
     }
 }
