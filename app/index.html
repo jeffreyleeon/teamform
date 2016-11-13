@@ -171,10 +171,16 @@
                   <div class="panel-heading">
                     <h3 class="panel-title">Events</h3>
                   </div>
+
                   <div class="panel-body">
-                    <ul ng-repeat="e in vm.events">
-                      <li><a href='event.html?id={{e.$id}}'>{{e.$id}}</a></li>
-                    </ul>
+                    <div class="row panel-body-header">
+                      <div class="col-xs-3"><h5><b>Event Name</b></h5></div>
+                      <div class="col-xs-9"><h5><b>Event Description</b></h5></div>
+                    </div>
+                    <div class="row" ng-repeat="e in vm.events">
+                      <div class="col-xs-3"><p><a href='event.html?id={{e.$id}}'>{{e.$id}}</a></p></div>
+                      <div class="col-xs-9"><p>{{e.admin.param.eventDescription}}</p></div>
+                    </div>
                   </div>
                 </div>
               </div>
