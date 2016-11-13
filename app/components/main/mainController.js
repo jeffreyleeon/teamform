@@ -13,6 +13,9 @@ function MainCtrl(currentUser, teamformDb) {
     vm.email = vm.currentUser.email;
     vm.users = teamformDb.getAllUsers();
 
+    vm.eventSearchText = '';
+    vm.userSearchText = '';
+
     function isLoggedIn() {
     	return currentUser.isLoggedIn();
     }

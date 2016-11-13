@@ -32,7 +32,7 @@
       <div class="navbar-wrapper">
 
          <div class="container">
-            <nav class="navbar navbar-static-top navbar-default">
+            <nav class="navbar navbar-static-top navbar-default" id="teamform-nav-bar">
                <div class="container">
                   <div class="navbar-header">
                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -92,6 +92,9 @@
       </div>
       <!-- A sample login page -->
       <div class="container" id="page_home">
+        <div>
+          <img alt="Banner" src="assets/img/splash_screen.jpeg" class="banner">
+        </div>
          <div class="row">
             <div class="col-md-12">
                <div class="row">
@@ -104,71 +107,125 @@
                      <br >
                   </div>
                </div>
-               <hr >
+               <!-- features -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-6 thumbnail">
+                      <img src="assets/img/create_event.png" style="height: 180px;">
+                      <div class="caption">
+                        <h4 class="text-center">Create events</h4>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6 thumbnail">
+                      <img src="assets/img/create_team.jpg" style="height: 180px;">
+                      <div class="caption">
+                        <h4 class="text-center">Form team and work together for the same goal</h4>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col-sm-6 thumbnail">
+                      <img src="assets/img/profile.png" style="height: 180px;">
+                      <div class="caption">
+                        <h4 class="text-center">Decorate your own profile</h4>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6 thumbnail">
+                      <img src="assets/img/facebook.png" style="height: 180px;">
+                      <div class="caption">
+                        <h4 class="text-center">Connect with Facebook account</h4>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col-sm-6 thumbnail">
+                      <img src="assets/img/suggest_user.png" style="height: 180px;">
+                      <div class="caption">
+                        <h4 class="text-center">Matching members to team</h4>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6 thumbnail">
+                      <img src="assets/img/email.png" style="height: 180px;">
+                      <div class="caption">
+                        <h4 class="text-center">Sending and receiving email</h4>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+               <!-- End of features -->
+              <!-- Events -->
+              <div class="row">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Events</h3>
+                  </div>
+
+                  <div class="panel-body">
+                    </br>
+                    <input type="text" class="form-control" placeholder="Search:"  ng-model="vm.eventSearchText">
+                    </br>
+                    <div class="row panel-body-header">
+                      <div class="col-xs-3"><h5><b>Event Name</b></h5></div>
+                      <div class="col-xs-9"><h5><b>Event Description</b></h5></div>
+                    </div>
+                    <div class="row" ng-repeat="e in vm.events | filter:vm.eventSearchText">
+                      <div class="col-xs-3"><p><a href='event.html?id={{e.$id}}'>{{e.admin.param.eventName}}</a></p></div>
+                      <div class="col-xs-9"><p>{{e.admin.param.eventDescription}}</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End of events -->
+              <!-- Users -->
+              <div class="row">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Users</h3>
+                  </div>
+                  <div class="panel-body">
+                    </br>
+                    <input type="text" class="form-control" placeholder="Search:"  ng-model="vm.userSearchText">
+                    </br>
+                    <div class="row panel-body-header">
+                      <div class="col-xs-1"><h5><b></b></h5></div>
+                      <div class="col-xs-2"><h5><b>Name</b></h5></div>
+                      <div class="col-xs-2"><h5><b>E-mail</b></h5></div>
+                      <div class="col-xs-4"><h5><b>Introduction</b></h5></div>
+                      <div class="col-xs-3"><h5><b>Skills</b></h5></div>
+                    </div>
+
+                    <div class="row" ng-repeat="user in vm.users | filter:vm.userSearchText">
+                      <div class="col-xs-1"><img ng-if="!!user.profile_pic_url" src="{{user.profile_pic_url}}" class="profile_img"></div>
+                      <div class="col-xs-2"><a href='member.html?id={{user.$id}}'>{{user.display_name}}</a></div>
+                      <div class="col-xs-2"><p>{{user.email}}</p></div>
+                      <div class="col-xs-4"><p>{{user.description}}</p></div>
+                      <div class="col-xs-3"><p>{{user.skills.join(", ")}}</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End of users -->
             </div>
          </div>
       </div>
 
-      <div>
-        <h3>Events</h3>
-        <ul ng-repeat="e in vm.events">
-          <li><a href='event.html?id={{e.$id}}'>{{e.$id}}</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3>Users</h3>
-        <ul ng-repeat="user in vm.users">
-          <li>
-            <img ng-if="!!user.profile_pic_url" src="{{user.profile_pic_url}}" class="profile_img">
-            <a href='member.html?id={{user.$id}}'>{{user.display_name}}</a>
-          </li>
-        </ul>
-      </div>
+      
       <!-- Marketing messaging and featurettes
          ================================================== -->
       <!-- Wrap the rest of the page in another container to center all the content. -->
       <div class="container marketing">
-
-
-         <!-- START THE FEATURETTES -->
-         <div class="row featurette" id="page_about">
-            <div class="col-md-12">
-               <h2 class="featurette-heading">What is teamform?
-                  <br>
-                  <span class="text-muted">A real-time online team forming app</span>
-               </h2>
-               <p class="lead"> The following roles are supported in teamform:
-               </p>
-
-               <div class="row">
-                  <div class="col-md-4">
-                     <h3 class="text-center">Administrator</h3>
-                     <ul>
-                        <li>Be responsible for creating an event for team forming (e.g. COMP3111, COMP3111H, hackUST)</li>
-            <li>Be able to set the minimum and maximum team size for the event (e.g. 5..7 team members in COMP3111 and 5..8 team members in COMP3111H)</li>
-                     </ul>
-                  </div>
-
-                  <div class="col-md-4">
-                     <h3 class="text-center">Team</h3>
-                     <ul>
-                        <li>Be able to add and remove requests made by members</li>
-            <li>Once a member joins the team, all his/her requests will be deleted</li>
-                     </ul>
-                  </div>
-
-                  <div class="col-md-4">
-                     <h3 class="text-center">Member</h3>
-                     <ul>
-                        <li>Be able to request to join multiple teams</li>
-                     </ul>
-                  </div>
-               </div>
-
-            </div>
-         </div>
-         <hr class="featurette-divider">
 
           <!-- START THE FEATURETTES -->
          <div class="row featurette" id="page_team">
