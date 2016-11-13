@@ -86,6 +86,17 @@
 
             <br><br>
 
+            <strong>Leaders Per Team: </strong>
+
+              <span class="badge">
+                {{vm.event.numberOfLeaders}}</span>
+
+              <button><span class="glyphicon glyphicon-plus" ng-click="vm.changeNumOfTeamLeaders(1);"></span></button>
+
+               <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeNumOfTeamLeaders(-1);"></span></button>
+
+           <br><br>
+
              <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();" ng-if="vm.eventValid === true" >Create event</button>
 
 

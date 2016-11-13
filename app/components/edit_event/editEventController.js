@@ -10,6 +10,7 @@ function EditEventCtrl(currentUser, teamformDb) {
 
     vm.changeMinTeamSize = changeMinTeamSize;
     vm.changeMaxTeamSize = changeMaxTeamSize;
+    vm.changeNumOfTeamLeaders = changeNumOfTeamLeaders;
     vm.saveFunc = saveFunc;
 
     function changeMinTeamSize(delta) {
@@ -24,6 +25,13 @@ function EditEventCtrl(currentUser, teamformDb) {
         if (newVal >=1 && newVal >= vm.event.minTeamSize ) {
             vm.event.maxTeamSize = newVal;
         }
+    }
+
+    function changeNumOfTeamLeaders(delta) {
+      var newVal = vm.event.numberOfLeaders + delta;
+      if (newVal >= 1 && newVal <= vm.event.maxTeamSize) {
+        vm.event.numberOfLeaders = newVal;
+      }
     }
 
     function saveFunc() {
