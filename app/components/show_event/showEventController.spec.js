@@ -128,5 +128,27 @@ describe('teamform-app module', function() {
         skills: [],
       });
     });
+
+    it('should check if user has the skills correctly', function() {
+      var user = null;
+      var skills = null;
+      expect(controller.doesUserContainsSkills(user, skills)).toEqual(false);
+      user = {
+        'skills': [
+          'aaa',
+        ]
+      };
+      skills = [
+        'bbb',
+      ];
+      expect(controller.doesUserContainsSkills(user, skills)).toEqual(false);
+      user = {
+        skills: [
+          'aaa',
+          'bbb'
+        ],
+      };
+      expect(controller.doesUserContainsSkills(user, skills)).toEqual(true);
+    });
   });
 });
