@@ -191,7 +191,7 @@ function TeamCtrl($scope, currentUser, teamformDb, emailer) {
       if (index < 0 || index >= vm.param.todos.length) {
         return;
       }
-      updateTodo();
+      vm.updateTodo();
     }
 
     function updateTodo() {

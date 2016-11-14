@@ -248,5 +248,50 @@ describe('teamform-app module', function() {
       expect(controller.isMe('123')).toEqual(true);
       expect(controller.isMe('345')).toEqual(false);
     });
+
+    it('should add todo correctly', function() {
+      controller.team.$save = function() {};
+      controller.param.todos = [];
+      controller.addTodo(null);
+      expect(controller.param.todos).toEqual([]);
+      controller.addTodo('new todo');
+      expect(controller.param.todos).toEqual([
+        {
+          name: 'new todo',
+          finished: false,
+        },
+      ]);
+      expect(controller.team.todos).toEqual([
+        {
+          name: 'new todo',
+          finished: false,
+        },
+      ]);
+    });
+
+    it('should check if a member is team member correctly', function() {
+      controller.param.teamMembers = ['123'];
+      controller.currentUser = null;
+      expect(controller.isTeamMember()).toEqual(false);
+      controller.currentUser = {
+        '$id' :'123'
+      };
+      expect(controller.isTeamMember()).toEqual(true);
+      controller.currentUser = {
+        '$id' :'456'
+      };
+      expect(controller.isTeamMember()).toEqual(false);
+    });
+
+    it('should toggle todo correctly', function() {
+      spyOn(controller, 'updateTodo');
+      controller.param.todos = ['123', '234', '345'];
+      controller.toggleTodoState(-1);
+      expect(controller.updateTodo).not.toHaveBeenCalled();
+      controller.toggleTodoState(100);
+      expect(controller.updateTodo).not.toHaveBeenCalled();
+      controller.toggleTodoState(1);
+      expect(controller.updateTodo).toHaveBeenCalled();
+    });
   });
 });
