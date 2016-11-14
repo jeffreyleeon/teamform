@@ -69,6 +69,7 @@ function CreateEventCtrl($scope, currentUser, teamformDb) {
         var callback = function() {
             window.location.href= "index.html";
         };
+        vm.event.eventName = vm.eventName;
         teamformDb.saveNewEvent(vm.eventName, vm.event, callback);
     }
 }

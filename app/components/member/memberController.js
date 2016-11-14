@@ -10,6 +10,8 @@ function MemberCtrl(currentUser, teamformDb){
 
   vm.newSkill = "";
   vm.addNewSkill = addNewSkill;
+  vm.saveChanges = vm.saveChanges;
+  vm.updateCurrentUser = updateCurrentUser;
   vm.isMyProfile = isMyProfile;
   vm._parseSkills = _parseSkills;
 
@@ -24,8 +26,19 @@ function MemberCtrl(currentUser, teamformDb){
       vm.user.skills = arr;
     }
     vm.newSkill = '';
-    vm.user.$save();
+    saveChanges();
 	}
+
+  function saveChanges() {
+    vm.user.$save().then(function() {
+      vm.updateCurrentUser();
+    });
+  }
+
+  function updateCurrentUser() {
+    var savedUser = teamformDb.getUser(vm.userID);
+    currentUser.setCurrentUser(savedUser);
+  }
 
   function isMyProfile() {
     return vm.userID === vm.currentUser.$id;
@@ -38,5 +51,4 @@ function MemberCtrl(currentUser, teamformDb){
     }
     return arr;
   }
-
 }

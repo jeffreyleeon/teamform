@@ -64,6 +64,10 @@
                     class="btn btn-danger"
                     ng-click="vm.removeMember(teamMemberID);"
                     ng-if="vm.isTeamLeader()">DELETE</a>
+                  <a
+                    class="btn btn-danger"
+                    ng-click="vm.removeMember(teamMemberID);"
+                    ng-if="!vm.isTeamLeader() && vm.isMe(teamMemberID)">QUIT TEAM</a>
                 </div>
               </div>
 					  </div>
@@ -89,7 +93,27 @@
 					 
           </div>
 				</div>
-
+        <!-- Todo list -->
+        <div class="row" ng-if="vm.isTeamLeader() || vm.isTeamMember()">
+          <div class="col-md-12">
+            <h2>Todo list:</h2>
+            <div ng-repeat="todo in vm.param.todos track by $index">
+              <div>
+                <input
+                  type="checkbox"
+                  ng-model="todo.finished"
+                  ng-change="vm.toggleTodoState($index)">
+                <span>{{todo.name}}</span>
+              </div>
+            </div>
+            <div>
+              <h4> Add new todo:</h4>
+              <input type="text" class="form-control" placeholder="Enter new todo here" ng-model = "vm.newTodo"></br>
+              <a class="btn btn-primary" ng-click="vm.addTodo(vm.newTodo);">Add todo</a>
+            </div>
+          </div>
+        </div>
+        <!-- End of Todo list -->
             </div>
          </div>
        </div>

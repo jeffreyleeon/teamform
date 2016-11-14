@@ -8,10 +8,12 @@ function TeamCtrl($scope, currentUser, teamformDb) {
       eventName: '',  
       teamName : '',
       currentTeamSize : 0,
-      teamMembers : []
+      teamMembers : [],
+      todos: [],
     };
     vm.param.teamName = getURLParameter("team"); 
     vm.param.eventName = getURLParameter("q");
+    vm.newTodo = '';
 
     teamformDb.getEventAdminData(vm.param.eventName, function(data) {    
         if ( data.child("param").val() != null ) {
@@ -39,9 +41,14 @@ function TeamCtrl($scope, currentUser, teamformDb) {
     vm.removeMember = removeMember;
     vm.updateRemovedMember = updateRemovedMember;
     vm.getMemberData = getMemberData;
+    vm.isTeamMember = isTeamMember;
     vm.isTeamLeader = isTeamLeader;
     vm.isLoggedIn = isLoggedIn;
+    vm.isMe = isMe;
     vm.containsRequiredSkills = containsRequiredSkills;
+    vm.addTodo = addTodo;
+    vm.toggleTodoState = toggleTodoState;
+    vm.updateTodo = updateTodo;
 
     function refreshViewRequestsReceived() {
         vm.requests = [];
@@ -61,6 +68,9 @@ function TeamCtrl($scope, currentUser, teamformDb) {
         }
         if (vm.team.teamMembers != null) {
           vm.param.teamMembers = vm.team.teamMembers;
+        }
+        if (vm.team.todos != null) {
+          vm.param.todos = vm.team.todos;
         }
     }
 
@@ -119,6 +129,13 @@ function TeamCtrl($scope, currentUser, teamformDb) {
       return payload;
     }
 
+    function isTeamMember() {
+      if (!vm.currentUser) {
+        return false;
+      }
+      return vm.param.teamMembers.indexOf(vm.currentUser.$id) > -1;
+    }
+
     function isTeamLeader() {
       if (!vm.isLoggedIn()) {
         console.log('1113project/teamController/isTeamLeader: You are not logged in');
@@ -129,6 +146,10 @@ function TeamCtrl($scope, currentUser, teamformDb) {
 
     function isLoggedIn() {
       return currentUser.isLoggedIn();
+    }
+
+    function isMe(memberID) {
+      return vm.currentUser.$id === memberID;
     }
 
     function containsRequiredSkills(skills) {
@@ -143,5 +164,28 @@ function TeamCtrl($scope, currentUser, teamformDb) {
         }
       }
       return false;
+    }
+
+    function addTodo(todo) {
+      if (!todo) {
+        return;
+      }
+      vm.param.todos.push({
+        name: todo,
+        finished: false,
+      });
+      updateTodo();
+    }
+
+    function toggleTodoState(index) {
+      if (index < 0 || index >= vm.param.todos.length) {
+        return;
+      }
+      updateTodo();
+    }
+
+    function updateTodo() {
+      vm.team.todos = vm.param.todos;
+      vm.team.$save();
     }
 }

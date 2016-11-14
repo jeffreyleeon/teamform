@@ -15,7 +15,11 @@ describe('teamform-app module', function() {
 
   describe('MemberCtrl', function() {
     var controller;
-    var dummyFunc = function() {};
+    var dummyFunc = function() {
+      return {
+        then: function() {},
+      };
+    };
 
     beforeEach(function() {
       var getUser = function(eventName) {

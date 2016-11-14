@@ -37,7 +37,6 @@
             <!--<li>ID: {{vm.userID}}</li>-->
             <p>NAME:  {{vm.user.display_name}}</p>
             <p>EMAIL:  {{vm.user.email}}</p>
-            <p>DATE JOINED: {{vm.user.created_at | date:'shortDate'}} </p>
           </div>
 
         </div>
@@ -47,13 +46,20 @@
         <div class="col-xs-12 col-sm-9">
             <h2><u> {{vm.user.display_name}} </u></h2>
             <br>
-            <br>
+            <div>
+              <h3>DESCRIPTION</h3>
+              <textarea ng-if="vm.isMyProfile()" ng-model="vm.user.description" ng-change="vm.user.$save()" class="form-control" rows="5">
+              </textarea>
+              <p ng-if="!vm.isMyProfile()">
+                {{vm.user.description}}
+              </p>
+              <br>
+
+            </div>
 
             <!--SKILLS-->
             <div>
               <h3>SKILLS</h3>
-              <br>
-
               <ul ng-repeat ="skill in vm.user.skills">
                 <li>{{skill}}</li>
               </ul>
