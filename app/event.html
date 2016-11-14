@@ -49,6 +49,9 @@
                   <p>
                     <b>Leaders Per Team: </b>{{vm.event.numberOfLeaders}}
                   </p>
+                  <p>
+                    <b>Number of Teams: </b>{{vm.teams.length}}
+                  </p>
                   <a
                     ng-if="vm.isMyEvent(vm.event)"
                     href="edit_event.html?q={{vm.eventName}}">Edit event</a>
