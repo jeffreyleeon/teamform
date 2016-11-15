@@ -21,6 +21,11 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
     vm.newUserName = '';
     vm.newUserEmail = '';
     vm.newPassword = '';
+    // Login specific
+    vm.loginUserName = '';
+    vm.loginPassword = '';
+    vm.loginErrorMsg = '';
+    vm.users = teamformDb.getAllUsers();
     
     function login() {
         vm.errorMsg = '';
@@ -67,6 +72,23 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
             window.location.href= "index.html";
           }, 1000);
       });
+    }
+
+    function login(username, password) {
+      var saltedPassword = teamformDb._saltedPassword(password);
+      for (var i = 0; i < vm.users.length; i++) {
+        var targetUser = vm.users[i];
+        console.log('========targetUser.password ', targetUser.password);
+        console.log('========saltedPassword ', saltedPassword);
+        if (targetUser.display_name === username && targetUser.password === saltedPassword) {
+          currentUser.setCurrentUser(targetUser);
+          setTimeout(function() {
+            window.location.href= "index.html";
+          }, 1000);
+          return;
+        }
+      };
+      vm.loginErrorMsg = 'Wrong username or password';
     }
 
     function setMessage(msg) {

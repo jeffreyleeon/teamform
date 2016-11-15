@@ -71,14 +71,17 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     service.updateFirebase(refPath, data, callback);
   }
 
-  function _saltedPassword(password, encrypt=true) {
+  function _saltedPassword(password) {
     var saltedPassword = '';
-    var factor = encrypt === true ? 1 : -1;
     for (var i = 0; i < password.length; i++) {
       pwChar = password[i];
-      saltChar = passwordSalt[i % passwordSalt.length] ;
-      saltedPassword += String.fromCharCode(pwChar.charCodeAt(0) + saltChar.charCodeAt(0) * factor);
+      // saltChar = 'a';
+      saltChar = passwordSalt[i % passwordSalt.length];
+      var calculatedAsciiValue = pwChar.charCodeAt(0) + saltChar.charCodeAt(0);
+      var newChar = String.fromCharCode(calculatedAsciiValue % 255);
+      saltedPassword += newChar;
     }
+    console.log('==========password is ', saltedPassword);
     return saltedPassword;
   }
 
