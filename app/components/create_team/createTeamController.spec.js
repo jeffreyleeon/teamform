@@ -55,6 +55,8 @@ describe('teamform-app module', function() {
 
     it('should initialize with correct default values', function() {
       expect(controller.skills).toEqual('');
+      expect(controller.slogan).toEqual('');
+      expect(controller.description).toEqual('');
       expect(controller.currentUser).toEqual({
         user: 'user1',
         $id: '123',
