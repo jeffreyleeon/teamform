@@ -15,6 +15,12 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
       confirmpass: ''
     };
     $scope.newerrorMsg ='default';
+
+    // New registered user specific
+    vm.register = register;
+    vm.newUserName = '';
+    vm.newUserEmail = '';
+    vm.newPassword = '';
     
     function login() {
         vm.errorMsg = '';
@@ -50,6 +56,17 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
           }, 1000);
         }
         );
+    }
+
+    function register(username, email, password) {
+      var randomId = Math.random().toString(36).slice(2);
+      teamformDb.saveNewUser(randomId, username, email, password, function() {
+          var savedUser = teamformDb.getUser(randomId);
+          currentUser.setCurrentUser(savedUser);
+          setTimeout(function() {
+            window.location.href= "index.html";
+          }, 1000);
+      });
     }
 
     function setMessage(msg) {

@@ -6,10 +6,13 @@ function TeamformDb($firebaseObject, $firebaseArray) {
 
   var eventScope = 'events/';
   var userScope = 'user/';
+  var passwordSalt = 'comp3111';
 
   var service = {
     loginWithFacebook: loginWithFacebook,
     saveNewFBUser: saveNewFBUser,
+    saveNewUser: saveNewUser,
+    _saltedPassword: _saltedPassword,
     getUser: getUser,
     saveNewEvent: saveNewEvent,
     getEvent: getEvent,
@@ -53,6 +56,30 @@ function TeamformDb($firebaseObject, $firebaseArray) {
         'created_at': Date.now(),
     };
     service.updateFirebase(refPath, data, callback);
+  }
+
+  function saveNewUser(hashId, username, email, password, callback) {
+    var refPath = "user/" + hashId;
+    var saltedPassword = service._saltedPassword(password);
+    console.log('=======salted ', saltedPassword);
+    var data = {
+        'display_name': username,
+        'email': email,
+        'password': saltedPassword,
+        'created_at': Date.now(),
+    };
+    service.updateFirebase(refPath, data, callback);
+  }
+
+  function _saltedPassword(password, encrypt=true) {
+    var saltedPassword = '';
+    var factor = encrypt === true ? 1 : -1;
+    for (var i = 0; i < password.length; i++) {
+      pwChar = password[i];
+      saltChar = passwordSalt[i % passwordSalt.length] ;
+      saltedPassword += String.fromCharCode(pwChar.charCodeAt(0) + saltChar.charCodeAt(0) * factor);
+    }
+    return saltedPassword;
   }
 
   function getUser(userID) {
