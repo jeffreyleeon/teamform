@@ -51,11 +51,13 @@ function JoinTeamCtrl(currentUser, teamformDb, emailer) {
     function saveFunc() {
         var userID = vm.currentUser.$id;
         var userName = vm.currentUser.display_name;
+        var email = vm.currentUser.email;
         var skills = vm._parseSkills(vm.skillsString);
         var introduction = vm.introduction;
         if ( userID !== '' && userName !== '' ) {
           var newData = {             
               'name': userName,
+              'email': email,
               'selection': vm.selection,
               'skills': skills,
               'introduction': introduction,

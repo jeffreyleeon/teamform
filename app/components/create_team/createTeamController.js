@@ -61,6 +61,7 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
             teamformDb.setTeamData(eventName, teamID, newData, function(){
                 var leaderData = {
                     'name': vm.currentUser.display_name,
+                    'email': vm.currentUser.email,
                     'skills': vm.currentUser.skills,
                     'introduction': vm.currentUser.description,
                     'isTeamLeader': true,

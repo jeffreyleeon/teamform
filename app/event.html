@@ -61,6 +61,31 @@
                 <a href="create_team.html?q={{vm.eventName}}"><button id="btn_leader" type="button" class="btn btn-primary">Create a Team</button></a>
                 <a href="join_team.html?q={{vm.eventName}}"><button id="btn_member" type="button" class="btn btn-primary">Join Event</button></a>
               </div>
+              </br>
+              <!-- Display user info -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Members</h3>
+                </div>
+                <div class="panel-body">
+                  </br>
+                  <input type="text" class="form-control" placeholder="Search:"  ng-model="vm.userSearchText">
+                  </br>
+                  <div class="row panel-body-header">
+                    <div class="col-xs-2"><h5><b>Name</b></h5></div>
+                    <div class="col-xs-2"><h5><b>Email</b></h5></div>
+                    <div class="col-xs-4"><h5><b>Introduction</b></h5></div>
+                    <div class="col-xs-4"><h5><b>Skills</b></h5></div>
+                  </div>
+
+                  <div class="row" ng-repeat="user in vm.members | filter:vm.userSearchText">
+                    <div class="col-xs-2"><a href='member.html?id={{user.$id}}'>{{user.name}}</a></div>
+                    <div class="col-xs-2">{{user.email}}</div>
+                    <div class="col-xs-4"><p>{{user.introduction}}</p></div>
+                    <div class="col-xs-3"><p>{{user.skills.join(", ")}}</p></div>
+                  </div>
+                </div>
+              </div>
               <!-- Display team info -->
               </br>
               <input type="text" class="form-control" placeholder="Search:"  ng-model="vm.searchText">

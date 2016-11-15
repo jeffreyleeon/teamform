@@ -11,6 +11,7 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
     vm.teams = teamformDb.getAllTeams(vm.eventName);
     vm.members = teamformDb.getAllMembers(vm.eventName);
     vm.searchText = '';
+    vm.userSearchText = '';
 
     vm.displaySkills = displaySkills;
     vm.isMyTeam = isMyTeam;
