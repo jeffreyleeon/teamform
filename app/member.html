@@ -48,7 +48,7 @@
             <br>
             <div>
               <h3>DESCRIPTION</h3>
-              <textarea ng-if="vm.isMyProfile()" ng-model="vm.user.description" ng-change="vm.user.$save()" class="form-control" rows="5">
+              <textarea ng-if="vm.isMyProfile()" ng-model="vm.user.description" ng-change="vm.updateDescription()" class="form-control" rows="5">
               </textarea>
               <p ng-if="!vm.isMyProfile()">
                 {{vm.user.description}}

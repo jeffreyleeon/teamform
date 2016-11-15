@@ -12,6 +12,7 @@ function MemberCtrl(currentUser, teamformDb){
   vm.addNewSkill = addNewSkill;
   vm.saveChanges = vm.saveChanges;
   vm.updateCurrentUser = updateCurrentUser;
+  vm.updateDescription = updateDescription;
   vm.isMyProfile = isMyProfile;
   vm._parseSkills = _parseSkills;
 
@@ -38,6 +39,12 @@ function MemberCtrl(currentUser, teamformDb){
   function updateCurrentUser() {
     var savedUser = teamformDb.getUser(vm.userID);
     currentUser.setCurrentUser(savedUser);
+  }
+
+  function updateDescription() {
+    vm.user.$save().then(function() {
+      vm.updateCurrentUser();
+    });
   }
 
   function isMyProfile() {
