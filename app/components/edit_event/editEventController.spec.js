@@ -76,5 +76,19 @@ describe('teamform-admin-app module', function() {
       controller.changeMaxTeamSize(-8);
       expect(controller.event.maxTeamSize).toEqual(7);
     });
+
+    it('change number of team leader correctly', function() {
+      controller.event.minTeamSize = 1;
+      controller.event.maxTeamSize = 10;
+      controller.event.numberOfLeaders = 1;
+      controller.changeNumOfTeamLeaders(-1);
+      expect(controller.event.numberOfLeaders).toEqual(1);
+      controller.changeNumOfTeamLeaders(2);
+      expect(controller.event.numberOfLeaders).toEqual(3);
+      controller.changeNumOfTeamLeaders(10);
+      expect(controller.event.numberOfLeaders).toEqual(3);
+      controller.changeNumOfTeamLeaders(7);
+      expect(controller.event.numberOfLeaders).toEqual(10);
+    });
   });
 });
