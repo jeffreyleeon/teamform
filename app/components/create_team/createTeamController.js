@@ -58,8 +58,23 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
                 vm.member.$save(rec);
             });
             teamformDb.setTeamData(eventName, teamID, newData, function(){
-                // console.log("Success..");
-                window.history.back();
+                var leaderData = {
+                    'name': vm.currentUser.display_name,
+                    'skills': vm.currentUser.skills,
+                    'introduction': vm.currentUser.description,
+                    'isTeamLeader': true,
+                };
+                console.log('============leaderData ', leaderData);
+                console.log('============vm.currentUser.$id ', vm.currentUser.$id);
+                teamformDb.setMemberData(
+                    eventName,
+                    vm.currentUser.$id,
+                    leaderData,
+                    function () {
+                        console.log("Success..");
+                        window.history.back();
+                    }
+                );
             });
         }
     }
