@@ -22,6 +22,7 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
     vm.newUserEmail = '';
     vm.newPassword = '';
     // Login specific
+    vm.customLogin = customLogin;
     vm.loginUserName = '';
     vm.loginPassword = '';
     vm.loginErrorMsg = '';
@@ -74,13 +75,14 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
       });
     }
 
-    function login(username, password) {
+    function customLogin(username, password) {
       var saltedPassword = teamformDb._saltedPassword(password);
       for (var i = 0; i < vm.users.length; i++) {
         var targetUser = vm.users[i];
         console.log('========targetUser.password ', targetUser.password);
         console.log('========saltedPassword ', saltedPassword);
         if (targetUser.display_name === username && targetUser.password === saltedPassword) {
+          vm.loginErrorMsg = '';
           currentUser.setCurrentUser(targetUser);
           setTimeout(function() {
             window.location.href= "index.html";
