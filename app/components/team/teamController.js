@@ -185,6 +185,7 @@ function TeamCtrl($scope, currentUser, teamformDb, emailer) {
         finished: false,
       });
       updateTodo();
+      vm.newTodo = '';
     }
 
     function toggleTodoState(index) {
