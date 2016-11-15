@@ -80,10 +80,10 @@
                   <div class="form-group">
                     <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
                   </div>
-                  <div class="form-group text-center">
+                  <!-- <div class="form-group text-center">
                     <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                     <label for="remember"> Remember Me</label>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-6 col-sm-offset-3">
@@ -91,7 +91,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="text-center">
@@ -99,7 +99,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                             </br>
           <div class="col-md-12 social-buttons" id="login_page_controller" >
@@ -123,20 +123,20 @@
                   <div class="form-group">
                     <input type="password" id="pass" class="form-control" placeholder="Password">
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <input type="password" id="confirmpass" class="form-control" placeholder="Confirm Password">
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-6 col-sm-offset-3">
                         <input type="submit" class="form-control btn btn-register" onclick="register();" value="Register Now">
                       </div>
                       <script>
-                        function register(){
-                          if(pass.value == confirmpass.value && username.value!=''){
-                            window.open('email_confirmation.html','_self');
-                          }
-                        }
+                        // function register(){
+                        //   if(pass.value == confirmpass.value && username.value!=''){
+                        //     window.open('email_confirmation.html','_self');
+                        //   }
+                        // }
                         //set an email confirmation on email_confirmation.html
                         //set a redirect button in the email to registersuccessful_page.html
                         //value are decided to pass to firebase on registersuccessful_page.html
@@ -144,11 +144,6 @@
                       </script>
                     </div>
                   </div>
-                  <h4 class="error_msg">{{newerrorMsg}}</h4>
-                  <pre>{{user.username}}</pre>
-                  <pre>{{user.email}}</pre>
-                  <pre>{{user.pass}}</pre>
-                  <pre>{{user.confirmpass}}</pre>
                 </form>
                 
               </div>
