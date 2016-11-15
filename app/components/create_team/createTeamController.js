@@ -48,6 +48,7 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
                 'teamMembers': vm.param.teamMembers,
                 'skills': skills,
                 'teamOwner': vm.currentUser.$id || 'dummy',
+                'teamOwnerName': vm.currentUser.display_name || 'dummy',
             };
             var eventName = getURLParameter("q");
             // for each team members, clear the selection in /[eventName]/team/
