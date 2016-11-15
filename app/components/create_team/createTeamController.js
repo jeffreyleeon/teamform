@@ -8,6 +8,8 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
     var eventName = getURLParameter("q");
 
     vm.skills = '';
+    vm.slogan = '';
+    vm.description = '';
     vm.currentUser = currentUser.getCurrentUser();
 
     vm.param = {
@@ -49,6 +51,8 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
                 'skills': skills,
                 'teamOwner': vm.currentUser.$id || 'dummy',
                 'teamOwnerName': vm.currentUser.display_name || 'dummy',
+                'slogan': vm.slogan,
+                'description': vm.description,
             };
             var eventName = getURLParameter("q");
             // for each team members, clear the selection in /[eventName]/team/
