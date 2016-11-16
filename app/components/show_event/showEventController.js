@@ -7,6 +7,7 @@ function ShowEventCtrl($scope, currentUser, teamformDb) {
     vm.eventName = getURLParameter("id");
     vm.event = teamformDb.getEvent(vm.eventName);
     vm.currentUser = currentUser.getCurrentUser();
+    vm.allAnnouncement = teamformDb.getAllTeamAnnouncement(vm.eventName);
 
     vm.teams = teamformDb.getAllTeams(vm.eventName);
     vm.members = teamformDb.getAllMembers(vm.eventName);
