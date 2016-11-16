@@ -37,6 +37,9 @@ describe('teamform-app module', function() {
           members: 'member1'
         };
       };
+      var getAllTeamAnnouncement = function() {
+        return [];
+      }
       var saveNewEvent = function() {};
       var teamformDb = {
         isEventExist: isEventExist,
@@ -44,6 +47,7 @@ describe('teamform-app module', function() {
         getAllTeams: getAllTeams,
         getAllMembers: getAllMembers,
         saveNewEvent: saveNewEvent,
+        getAllTeamAnnouncement: getAllTeamAnnouncement,
       };
 
       var currentUser = {

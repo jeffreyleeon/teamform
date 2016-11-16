@@ -23,9 +23,13 @@ describe('teamform-admin-app module', function() {
         };
       }
       var saveNewEvent = function() {};
+      var getAllTeamAnnouncement = function() {
+        return [];
+      }
       var teamformDb = {
         getEvent: getEvent,
         saveNewEvent: saveNewEvent,
+        getAllTeamAnnouncement: getAllTeamAnnouncement,
       };
 
       var currentUser = {
