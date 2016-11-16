@@ -29,7 +29,7 @@
    </head>
    <body>
 
-   <a href="javascript:history.back()"
+   <a href="index.html"
    <button id="btn_admin" type="button" class="btn btn-primary" >
    <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
    Back</button></a>
@@ -95,6 +95,27 @@
                <button><span class="glyphicon glyphicon-minus" ng-click="vm.changeNumOfTeamLeaders(-1);"></span></button>
 
            <br><br>
+                <div class="form-group">
+                  <label>Make Announcement</label>
+                  <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-click = "vm.announcementUrgency = true"> Urgent Announcement
+                  </label>
+                  </div>
+                  <textarea class="form-control" placeholder="Input content of the announcement" ng-model="vm.announcementContent">
+                  </textarea>
+                </div>
+
+            <br><br>
+
+                <strong>Current Announcement: </strong>
+                <form name="myForm" ng-repeat="announcement in vm.allAnnouncement" >
+                <label>{{announcement.announcementContent}},urgency:{{announcement.urgency}}
+                  <button type="button" class="btn btn-warning" ng-model = "thisAnnouncementId = announcement.announcementId" ng-click = "vm.deleteAnnouncement(thisAnnouncementId)">Delete</button>
+                </label>
+                </form>
+                
+            <br><br>
 
              <button type="button" class="btn btn-primary" ng-click="vm.saveFunc();">Update event</button>
 
