@@ -15,6 +15,18 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
       confirmpass: ''
     };
     $scope.newerrorMsg ='default';
+
+    // New registered user specific
+    vm.register = register;
+    vm.newUserName = '';
+    vm.newUserEmail = '';
+    vm.newPassword = '';
+    // Login specific
+    vm.customLogin = customLogin;
+    vm.loginUserName = '';
+    vm.loginPassword = '';
+    vm.loginErrorMsg = '';
+    vm.users = teamformDb.getAllUsers();
     
     function login() {
         vm.errorMsg = '';
@@ -50,6 +62,35 @@ function LoginCtrl($scope, teamformDb, currentUser, $window) {
           }, 1000);
         }
         );
+    }
+
+    function register(username, email, password) {
+      var randomId = Math.random().toString(36).slice(2);
+      teamformDb.saveNewUser(randomId, username, email, password, function() {
+          var savedUser = teamformDb.getUser(randomId);
+          currentUser.setCurrentUser(savedUser);
+          setTimeout(function() {
+            window.location.href= "index.html";
+          }, 1000);
+      });
+    }
+
+    function customLogin(username, password) {
+      var saltedPassword = teamformDb._saltedPassword(password);
+      for (var i = 0; i < vm.users.length; i++) {
+        var targetUser = vm.users[i];
+        console.log('========targetUser.password ', targetUser.password);
+        console.log('========saltedPassword ', saltedPassword);
+        if (targetUser.display_name === username && targetUser.password === saltedPassword) {
+          vm.loginErrorMsg = '';
+          currentUser.setCurrentUser(targetUser);
+          setTimeout(function() {
+            window.location.href= "index.html";
+          }, 1000);
+          return;
+        }
+      };
+      vm.loginErrorMsg = 'Wrong username or password';
     }
 
     function setMessage(msg) {

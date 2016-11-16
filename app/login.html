@@ -75,23 +75,25 @@
               <div class="col-lg-12">
                 <form id="login-form" style="display: block;">
                   <div class="form-group">
-                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" ng-model="vm.loginUserName">
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" ng-model="vm.loginPassword">
                   </div>
-                  <div class="form-group text-center">
+                  <!-- <div class="form-group text-center">
                     <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                     <label for="remember"> Remember Me</label>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In"
+                          ng-click="vm.customLogin(vm.loginUserName, vm.loginPassword)">
+                        <p class="error_msg">{{vm.loginErrorMsg}}</p>
                       </div>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="text-center">
@@ -99,7 +101,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                             </br>
           <div class="col-md-12 social-buttons" id="login_page_controller" >
@@ -115,40 +117,38 @@
               <div id="login_page_controller">
                 <form id="register-form"  method="post" role="form" style="display: none;">
                   <div class="form-group">
-                    <input type="text" id="username" class="form-control" placeholder="Username" >
+                    <input type="text" id="username" class="form-control" placeholder="Username" ng-model="vm.newUserName">
                   </div>
                   <div class="form-group">
-                    <input type="email" id="email" class="form-control" placeholder="Email Address" >
+                    <input type="email" id="email" class="form-control" placeholder="Email Address" ng-model="vm.newUserEmail">
                   </div>
                   <div class="form-group">
-                    <input type="password" id="pass" class="form-control" placeholder="Password">
+                    <input type="password" id="pass" class="form-control" placeholder="Password" ng-model="vm.newPassword">
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <input type="password" id="confirmpass" class="form-control" placeholder="Confirm Password">
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-6 col-sm-offset-3">
-                        <input type="submit" class="form-control btn btn-register" onclick="register();" value="Register Now">
+                        <input
+                          type="submit"
+                          class="form-control btn btn-register"
+                          ng-click="vm.register(vm.newUserName, vm.newUserEmail, vm.newPassword);"
+                          value="Register Now">
                       </div>
                       <script>
-                        function register(){
-                          if(pass.value == confirmpass.value && username.value!=''){
-                            window.open('email_confirmation.html','_self');
-                          }
-                        }
+                        // function register(){
+                        //   if(pass.value == confirmpass.value && username.value!=''){
+                        //     window.open('email_confirmation.html','_self');
+                        //   }
+                        // }
                         //set an email confirmation on email_confirmation.html
                         //set a redirect button in the email to registersuccessful_page.html
                         //value are decided to pass to firebase on registersuccessful_page.html
-
                       </script>
                     </div>
                   </div>
-                  <h4 class="error_msg">{{newerrorMsg}}</h4>
-                  <pre>{{user.username}}</pre>
-                  <pre>{{user.email}}</pre>
-                  <pre>{{user.pass}}</pre>
-                  <pre>{{user.confirmpass}}</pre>
                 </form>
                 
               </div>

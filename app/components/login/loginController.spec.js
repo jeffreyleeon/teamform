@@ -35,10 +35,27 @@ describe('teamform-login-app module', function() {
       var getUser = function() {
         return {};
       };
+      var getAllUsers = function() {
+        return [
+          {
+            display_name: 'alice',
+            password: 'alicepass',
+          },
+          {
+            display_name: 'bob',
+            password: 'bobpass',
+          },
+        ];
+      };
+      var _saltedPassword = function(_password) {
+        return _password;
+      };
       var teamformDb = {
         loginWithFacebook: loginWithFacebook,
         saveNewFBUser: saveNewFBUser,
         getUser: getUser,
+        getAllUsers: getAllUsers,
+        _saltedPassword: _saltedPassword,
       };
 
       var currentUser = {
@@ -71,6 +88,12 @@ describe('teamform-login-app module', function() {
       controller.errorMsg = 'before edit';
       controller.setMessage('after edit');
       expect(controller.errorMsg).toEqual('after edit');
+    });
+
+    it('should check custom login correctly', function() {
+      controller.customLogin('alice', 'wrongpass');
+      expect(controller.loginErrorMsg).toEqual('Wrong username or password');
+
     });
   });
 });
