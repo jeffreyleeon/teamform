@@ -107,6 +107,12 @@
                     <b>Required skills:</b>
                     <p>{{vm.displaySkills(team.skills)}}</p>
                   </p>
+                  <p>
+                    <p><b>Slogan: </b>{{team.slogan}}</p>
+                  </p>
+                  <p>
+                    <p><b>Description: </b>{{team.description}}</p>
+                  </p>
                   <p><b>Members:</b></p>
                   <div ng-repeat="teamMemberID in team.teamMembers" ng-init="memberData = vm.getMemberData(teamMemberID)">
                       <p><a href='member.html?id={{memberData.$id}}'>{{memberData.name}}</a></p>
