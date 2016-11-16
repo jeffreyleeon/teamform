@@ -7,9 +7,14 @@ function EditEventCtrl(currentUser, teamformDb) {
     vm.eventName = getURLParameter("q");
     vm.event = teamformDb.getEvent(vm.eventName);
     vm.currentUser = currentUser.getCurrentUser();
+    vm.announcementUrgency = false;
+    vm.announcementContent = "";
+    vm.allAnnouncement = teamformDb.getAllTeamAnnouncement(vm.eventName);
 
     vm.changeMinTeamSize = changeMinTeamSize;
     vm.changeMaxTeamSize = changeMaxTeamSize;
+    vm.addNewAnnouncement = addNewAnnouncement;
+    vm.deleteAnnouncement = deleteAnnouncement;
     vm.changeNumOfTeamLeaders = changeNumOfTeamLeaders;
     vm.saveFunc = saveFunc;
 
@@ -27,6 +32,14 @@ function EditEventCtrl(currentUser, teamformDb) {
         }
     }
 
+    function addNewAnnouncement(){
+        teamformDb.addTeamAnnouncement(vm.eventName,vm.announcementUrgency,vm.announcementContent);
+    }
+
+    function deleteAnnouncement(announcementId){
+        teamformDb.deleteTeamAnnouncement(vm.eventName,announcementId);
+    }
+
     function changeNumOfTeamLeaders(delta) {
       var newVal = vm.event.numberOfLeaders + delta;
       if (newVal >= 1 && newVal <= vm.event.maxTeamSize) {
@@ -36,6 +49,9 @@ function EditEventCtrl(currentUser, teamformDb) {
 
     function saveFunc() {
         vm.event.$save();
+        if(vm.announcementContent !== ""){
+            vm.addNewAnnouncement();
+        }        
         setTimeout(function() {
             window.history.back();
         }, 100);
