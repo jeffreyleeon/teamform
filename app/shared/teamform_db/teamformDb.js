@@ -22,6 +22,9 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     getAllTeams: getAllTeams,
     getTeam: getTeam,
     setTeamData: setTeamData,
+    addTeamAnnouncement: addTeamAnnouncement,
+    deleteTeamAnnouncement: deleteTeamAnnouncement,
+    getAllTeamAnnouncement: getAllTeamAnnouncement,
     getAllMembers: getAllMembers,
     getMember: getMember,
     setMemberData: setMemberData,
@@ -143,6 +146,30 @@ function TeamformDb($firebaseObject, $firebaseArray) {
     var refPath = eventScope + eventName + "/team/" + teamID;
     service.updateFirebase(refPath, data, callback);
   };
+
+  function addTeamAnnouncement(eventName,urgency,content){    
+    var randomId = Math.floor((Math.random() * 100000000000));
+    var refPath = eventScope + eventName + "/announcement/" + randomId;
+    var data = {
+      'announcementId': randomId,
+      'urgency': urgency,
+      'announcementContent': content,
+    };
+
+    service.updateFirebase(refPath,data,function(){
+        console.log("Success!");
+    });
+  }
+
+  function deleteTeamAnnouncement(eventName,announcementId){
+    var refPath = eventScope + eventName + "/announcement/" + announcementId;
+    firebase.database().ref(refPath).remove();
+  }
+
+  function getAllTeamAnnouncement(eventName){
+      var refPath = eventScope + eventName + "/announcement";
+      return $firebaseArray(firebase.database().ref(refPath));
+  }
 
   function getAllMembers(eventName) {
   	var refPath = eventScope + eventName + "/member";
