@@ -72,6 +72,8 @@ describe('teamform-db module', function() {
       factory.setMemberData('eventName', 'userID', null, null);
       expect(factory.updateFirebase).toHaveBeenCalledWith('events/eventName/member/userID', null, null);
 
+      expect(factory._saltedPassword('a')).toEqual('Ä');
+
     });
   });
 });

@@ -26,10 +26,14 @@ describe('teamform-admin-app module', function() {
       var getAllTeamAnnouncement = function() {
         return [];
       }
+      var addTeamAnnouncement = function() {};
+      var deleteTeamAnnouncement = function() {};
       var teamformDb = {
         getEvent: getEvent,
         saveNewEvent: saveNewEvent,
         getAllTeamAnnouncement: getAllTeamAnnouncement,
+        addTeamAnnouncement: addTeamAnnouncement,
+        deleteTeamAnnouncement: deleteTeamAnnouncement,
       };
 
       var currentUser = {
@@ -93,6 +97,11 @@ describe('teamform-admin-app module', function() {
       expect(controller.event.numberOfLeaders).toEqual(3);
       controller.changeNumOfTeamLeaders(7);
       expect(controller.event.numberOfLeaders).toEqual(10);
+    });
+
+    it('should add and remove event announcement correctly', function() {
+      controller.addNewAnnouncement();
+      controller.deleteAnnouncement();
     });
   });
 });
