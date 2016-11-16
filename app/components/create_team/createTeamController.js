@@ -51,8 +51,8 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
                 'skills': skills,
                 'teamOwner': vm.currentUser.$id || 'dummy',
                 'teamOwnerName': vm.currentUser.display_name || 'dummy',
-                'slogan': vm.slogan,
-                'description': vm.description,
+                'slogan': vm.slogan || '',
+                'description': vm.description || '',
             };
             var eventName = getURLParameter("q");
             // for each team members, clear the selection in /[eventName]/team/
@@ -63,11 +63,14 @@ function CreateTeamCtrl($scope, currentUser, teamformDb) {
                 vm.member.$save(rec);
             });
             teamformDb.setTeamData(eventName, teamID, newData, function(){
+                setTimeout(function() {
+                    window.history.back();
+                }, 2500);
                 var leaderData = {
                     'name': vm.currentUser.display_name,
                     'email': vm.currentUser.email,
-                    'skills': vm.currentUser.skills,
-                    'introduction': vm.currentUser.description,
+                    'skills': vm.currentUser.skills || [],
+                    'introduction': vm.currentUser.description || '',
                     'isTeamLeader': true,
                 };
                 console.log('============leaderData ', leaderData);
